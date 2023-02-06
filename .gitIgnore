@@ -1,0 +1,10 @@
+# dependencies
+/node_modules
+
+# production
+/dist
+
+# misc
+/.idea
+yarn-debug.log*
+yarn-error.log*
