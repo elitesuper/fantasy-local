@@ -1,3 +1,27 @@
+@import "variables";
+
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
+  scrollbar-color: transparent transparent;
+  scrollbar-width: 0;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  width: 0;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: transparent;
+  border: none;
+}
+
+body {
+  font-family: InterFace, sans-serif;
 }

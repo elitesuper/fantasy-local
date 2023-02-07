@@ -5,20 +5,18 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Login from './pages/Login';
 import Register from "./pages/Register";
-import Dashboard from "./pages/Dashboard";
 import PhoneVerify from "./pages/PhoneVerify";
 import Rules from './pages/Rules';
-import styles from './app.module'
 
 const App = () => {
     return (
         <>
             <Routes>
-                <Route path="/" element={<Home />} />
+                <Route path="/" element={<Login />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="phone/verify" element={<PhoneVerify />} />
+                <Route path="/dashboard" element={<Home />} />
+                <Route path="/phoneVerify" element={<PhoneVerify />} />
                 {/*<Route path="/contact" element={<Contact />} />*/}
                 <Route path="/about" element={<About />} />
                 <Route path="/rules" element={<Rules />} />

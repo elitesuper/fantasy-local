@@ -1,0 +1,32 @@
+@import "./src/variables";
+
+.containerWrap {
+  background: $background-default;
+  min-height: 100vh;
+  position: relative;
+
+  &::before {
+    position: absolute;
+    content: '';
+    width: 100%;
+    left: 0;
+    top: 0;
+    height: 80px;
+    background: $header-default;
+  }
+}
+
+.container {
+  max-width: $desktop-width;
+  overflow: hidden;
+  margin: auto;
+
+
+  @include mobile {
+    max-width: $mobile-width;
+  }
+
+  @include tablet {
+    max-width: $tablet-width;
+  }
+}

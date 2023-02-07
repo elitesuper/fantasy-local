@@ -1,73 +1,78 @@
 import React, {useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 
 import styles from "./user.module";
+import Select from "react-select";
 
 const Signup = () => {
-    const [email, setEmail] = useState("");
-    const [username, setUsername] = useState("");
     const [tel, setTel] = useState("");
     const [password, setPassword] = useState("");
-    const navigate = useNavigate();
+    const [confirmPassword, setConfirmPassword] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log({email, username, tel, password});
-        setEmail("");
         setTel("");
-        setUsername("");
         setPassword("");
+        setConfirmPassword("");
     };
-    const gotoLoginPage = () => navigate("/login");
+
+    const [selectedOption, setSelectedOption] = useState(null);
+    const options = [
+        {value: 'chocolate', label: 'Chocolate'},
+        {value: 'strawberry', label: 'Strawberry'},
+        {value: 'vanilla', label: 'Vanilla'},
+    ];
 
     return (
-        <div className={styles.signupContainer}>
-            <h2>Sign up </h2>
-            <form className={styles.signupForm} onSubmit={handleSubmit}>
-                <label htmlFor='email'>Email Address</label>
-                <input
-                    type='email'
-                    name='email'
-                    id='email'
-                    value={email}
-                    required
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-                <label htmlFor='username'>Username</label>
-                <input
-                    type='text'
-                    id='username'
-                    name='username'
-                    value={username}
-                    required
-                    onChange={(e) => setUsername(e.target.value)}
-                />
-                <label htmlFor='tel'>Phone Number</label>
-                <input
-                    type='tel'
-                    name='tel'
-                    id='tel'
-                    value={tel}
-                    required
-                    onChange={(e) => setTel(e.target.value)}
-                />
-                <label htmlFor='tel'>Password</label>
-                <input
-                    type='password'
-                    name='password'
-                    id='password'
-                    minLength={8}
-                    required
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                <button className={styles.signupBtn}>SIGN UP</button>
-                <p>
+        <div className={styles.loginContainer}>
+            <h2 className={styles.title}>Sign Up</h2>
+            <form className={styles.loginForm} onSubmit={handleSubmit}>
+                <div className={styles.fields}>
+                    <Select
+                        defaultValue={selectedOption}
+                        onChange={setSelectedOption}
+                        options={options}
+                        styles={{
+                            control: (baseStyles, state) => ({
+                                ...baseStyles,
+                                placeholder: 'asdf',
+                            }),
+                        }}
+                    />
+                    <input
+                        type='tel'
+                        id='tel'
+                        name='tel'
+                        value={tel}
+                        placeholder='Phone number'
+                        required
+                        onChange={(e) => setTel(e.target.value)}
+                    />
+                    <input
+                        type='password'
+                        name='password'
+                        id='password'
+                        minLength={8}
+                        required
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <input
+                        type='password'
+                        name='confirmPassword'
+                        id='confirmPassword'
+                        minLength={8}
+                        required
+                        placeholder='Confirm Password'
+                        value={password}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                    />
+                </div>
+                <NavLink to="/phoneVerify" className={styles.loginBtn}>Sign Up</NavLink>
+                <div className={styles.signup}>
                     Already have an account?{" "}
-                    <span className={styles.link} onClick={gotoLoginPage}>
-                        Login
-                    </span>
-                </p>
+                    <NavLink to="/login" className={styles.link}>Login</NavLink>
+                </div>
             </form>
         </div>
     );

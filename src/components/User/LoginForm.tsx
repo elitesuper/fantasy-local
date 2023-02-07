@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {NavLink, useNavigate} from "react-router-dom";
+import Select from 'react-select';
 
 import styles from "./user.module"
 
@@ -15,39 +16,61 @@ const LoginForm = () => {
         setTel("");
     };
 
-    const gotoSignUpPage = () => navigate("/register");
+    const [selectedOption, setSelectedOption] = useState(null);
+    const options = [
+        {value: 'chocolate', label: 'Chocolate'},
+        {value: 'strawberry', label: 'Strawberry'},
+        {value: 'vanilla', label: 'Vanilla'},
+    ];
 
     return (
         <div className={styles.loginContainer}>
-            <h2>Login </h2>
+            <h2 className={styles.title}>Welcome to<br/><strong>FantasyWay</strong></h2>
             <form className={styles.loginForm} onSubmit={handleSubmit}>
-                <label htmlFor='tel'>Email</label>
-                <input
-                    type='tel'
-                    id='tel'
-                    name='tel'
-                    value={tel}
-                    required
-                    onChange={(e) => setTel(e.target.value)}
-                />
-                <label htmlFor='password'>Password</label>
-                <input
-                    type='password'
-                    name='password'
-                    id='password'
-                    minLength={8}
-                    required
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                <button className={styles.loginBtn}>SIGN IN</button>
-                <p>
+                <div className={styles.intro}>
+                    <img src="" alt="Login Details"/>
+                    Enter your login details
+                </div>
+                <div className={styles.fields}>
+                    <Select
+                        defaultValue={selectedOption}
+                        onChange={setSelectedOption}
+                        options={options}
+                        styles={{
+                            control: (baseStyles, state) => ({
+                                ...baseStyles,
+                                placeholder: 'asdf',
+                            }),
+                        }}
+                    />
+                    <input
+                        type='tel'
+                        id='tel'
+                        name='tel'
+                        value={tel}
+                        required
+                        placeholder='Phone number'
+                        onChange={(e) => setTel(e.target.value)}
+                    />
+                    <input
+                        type='password'
+                        name='password'
+                        id='password'
+                        minLength={8}
+                        required
+                        placeholder='Password'
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                </div>
+                <button className={styles.loginBtn}>Log In</button>
+                <NavLink className={styles.link} to="/forgotPassword">Forgot password?</NavLink>
+                <div className={styles.signup}>
                     Don't have an account?{" "}
-                    <span className={styles.link} onClick={gotoSignUpPage}>
+                    <NavLink to="/register" className={styles.link}>
                         Sign up
-                    </span>
-                </p>
-                <NavLink to="/forgotPassword">Forgot Password?</NavLink>
+                    </NavLink>
+                </div>
             </form>
         </div>
     );

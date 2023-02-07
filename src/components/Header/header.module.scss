@@ -1,6 +1,13 @@
+@import './src/variables';
+
 .container {
-  background: black;
-  color: white;
   display: flex;
   align-items: center;
+  height: 80px;
+  justify-content: center;
+}
+
+.logo {
+  display: block;
+  z-index: 10;
 }

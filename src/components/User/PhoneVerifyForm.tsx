@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
+import VerificationInput from "react-verification-input";
 
 import styles from "./user.module";
 
@@ -14,22 +15,23 @@ const PhoneVerifyForm = () => {
         navigate("/dashboard");
     };
     return (
-        <div className={styles.verify}>
-            <h2 style={{marginBottom: "30px"}}>Verify your Phone number</h2>
-            <form className={styles.verifyForm} onSubmit={handleSubmit}>
-                <label htmlFor='code' style={{marginBottom: "10px"}}>
-                    A code has been sent your phone
-                </label>
-                <input
-                    type='text'
-                    name='code'
-                    id='code'
-                    className={styles.code}
-                    value={code}
-                    onChange={(e) => setCode(e.target.value)}
-                    required
-                />
-                <button className={styles.codeBtn}>AUTHENTICATE</button>
+        <div className={styles.loginContainer}>
+            <h2 className={styles.title}>Verify Code</h2>
+            <form className={styles.loginForm} onSubmit={handleSubmit}>
+                <div className={styles.fields}>
+                    <div>Please enter the code we've sent you via SMS to continue</div>
+                    <VerificationInput
+                        length={5}
+                        placeholder=''
+                        classNames={{
+                            container: styles.verContainer,
+                            character: styles.verChar,
+                            characterInactive: styles.verCharInactive,
+                            characterSelected: styles.verCharActive,
+                        }}
+                    />
+                    <button className={styles.loginBtn}>AUTHENTICATE</button>
+                </div>
             </form>
         </div>
     );
