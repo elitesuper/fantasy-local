@@ -1,14 +1,12 @@
 import React, {useState} from "react";
 import {NavLink, useNavigate} from "react-router-dom";
 import Select from 'react-select';
-
-import styles from "./user.module"
-
+import styles from "./user.module";
+import countries from "./countries";
 const LoginForm = () => {
     const [tel, setTel] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
-
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log({tel, password});
@@ -17,12 +15,17 @@ const LoginForm = () => {
     };
 
     const [selectedOption, setSelectedOption] = useState(null);
-    const options = [
-        {value: 'chocolate', label: 'Chocolate'},
-        {value: 'strawberry', label: 'Strawberry'},
-        {value: 'vanilla', label: 'Vanilla'},
-    ];
 
+    const reactCountries = countries.map(
+        ({
+             name,
+             dial_code,
+             code,
+             png
+         }) => (
+            {value: name, label: <div className={styles.country}><div className={styles.country}><img className={styles.logo} src={png} />{name}</div>  <span>{dial_code}</span></div>}
+        )
+    )
     return (
         <div className={styles.loginContainer}>
             <h2 className={styles.title}>Welcome to<br/><strong>FantasyWay</strong></h2>
@@ -35,7 +38,7 @@ const LoginForm = () => {
                     <Select
                         defaultValue={selectedOption}
                         onChange={setSelectedOption}
-                        options={options}
+                        options={reactCountries}
                         styles={{
                             control: (baseStyles, state) => ({
                                 ...baseStyles,

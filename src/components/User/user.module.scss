@@ -76,3 +76,16 @@ input {
   border-radius: 6px;
   flex: 0 50px;
 }
+
+.country {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  height: 20px;
+  width: 20px;
+  border-radius: 20px;
+  margin-right: 10px;
+}
