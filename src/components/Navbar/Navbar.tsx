@@ -1,24 +1,41 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+
+import { Challenges } from '../../images/Challenges';
+import { Trophy } from '../../images/Trophy';
+import { Friends } from '../../images/Friends';
+import { Chat } from '../../images/Chat';
+import { Bars } from '../../images/Bars';
+import { Magnifier } from '../../images/Magnifier';
+import styles from './navbar.module'
 
 const NavBar = () => {
     return (
-        <nav>
-            <ul>
-                <li>
-                    <NavLink to="/">challenges</NavLink>
-                </li>
-                <li>
-                    <NavLink to="/about">live sports</NavLink>
-                </li>
-                <li>
-                    <NavLink to="/feed">feed</NavLink>
-                </li>
-                <li>
-                    <NavLink to="/">play for real</NavLink>
-                </li>
-            </ul>
-        </nav>
+        <div className={styles.nav}>
+            <div className={styles.item}>
+                <Challenges/>
+                Challenges
+            </div>
+            <div className={styles.item}>
+                <Trophy/>
+                Leaderboard
+            </div>
+            <div className={styles.item}>
+                <Friends/>
+                Friends
+            </div>
+            <div className={styles.item}>
+                <Chat/>
+                Chat
+            </div>
+            <div className={styles.item}>
+                <Bars/>
+                Top and Flop
+            </div>
+            <div className={styles.item}>
+                <Magnifier/>
+                Find Challenges
+            </div>
+        </div>
     );
 };
 

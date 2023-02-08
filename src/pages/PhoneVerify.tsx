@@ -6,7 +6,7 @@ import Header from "../components/Header/Header";
 const PhoneVerify = () => {
     return (
         <Layout>
-            <Header/>
+            <Header position='center'/>
             <PhoneVerifyForm/>
         </Layout>
     );

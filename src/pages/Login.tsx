@@ -6,7 +6,7 @@ import Layout from "../components/Layout/Layout";
 const Login = () => {
     return (
         <Layout>
-            <Header/>
+            <Header position='center'/>
             <LoginForm/>
         </Layout>
     );

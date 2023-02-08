@@ -1,6 +1,7 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const isDevelopment = process.env.NODE_ENV !== 'production'
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
+const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin')
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
@@ -18,7 +19,11 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(png|jpe?g|svg)$/i,
+                test: /\.svg$/,
+                use: ['@svgr/webpack'],
+            },
+            {
+                test: /\.(png|jpe?g)$/i,
                 use: [
                     'file-loader',
                     {
@@ -37,7 +42,9 @@ module.exports = {
                             },
                             webp: {
                                 quality: [75]
-                            }
+                            },
+                            bypassOnDebug: true,
+                            disable: true
                         }
                     }
                 ]
@@ -100,6 +107,7 @@ module.exports = {
         extensions: [".js", ".jsx", ".ts", ".tsx", ".json", "css", ".scss", ".png", ".jpg", ".svg"],
     },
     plugins: [
+        isDevelopment && new ReactRefreshPlugin(),
         new CleanWebpackPlugin({
             cleanOnceBeforeBuildPatterns: [path.join(__dirname, "dist/**/*")],
         }),

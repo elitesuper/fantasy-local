@@ -1,3 +1,15 @@
-.red {
-  color: red;
+@import './src/variables';
+
+.nav {
+  z-index: 10;
+  display: flex;
+}
+
+.item {
+  color: $text-default;
+
+  svg {
+    width: 20px;
+    fill: $text-default;
+  }
 }

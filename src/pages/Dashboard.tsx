@@ -1,14 +1,13 @@
 import React from "react";
 import Header from "../components/Header/Header";
 import DashboardForm from "../components/User/DashboardForm";
+import Layout from "../components/Layout/Layout";
 
-const Dashboard = () => {
+export default function Dashboard() {
     return (
-        <>
-           <Header/>
-           <DashboardForm />
-        </>
+        <Layout>
+            <Header hasMenu />
+            <DashboardForm/>
+        </Layout>
     );
 };
-
-export default Dashboard;

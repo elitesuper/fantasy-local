@@ -4,7 +4,10 @@
   display: flex;
   align-items: center;
   height: 80px;
-  justify-content: center;
+
+  &.center {
+    justify-content: center;
+  }
 }
 
 .logo {

@@ -6,7 +6,7 @@ import Header from "../components/Header/Header";
 const Register = () => {
     return (
         <Layout>
-            <Header/>
+            <Header position='center'/>
             <RegisterForm/>
         </Layout>
     );

@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import VerificationInput from "react-verification-input";
 
 import styles from "./user.module";
@@ -30,7 +30,7 @@ const PhoneVerifyForm = () => {
                             characterSelected: styles.verCharActive,
                         }}
                     />
-                    <button className={styles.loginBtn}>AUTHENTICATE</button>
+                    <NavLink to={"/dashboard"} className={styles.loginBtn}>AUTHENTICATE</NavLink>
                 </div>
             </form>
         </div>

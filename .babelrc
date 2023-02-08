@@ -6,13 +6,13 @@
   ],
   "plugins": [
     [
-      "react-hot-loader/babel"
-    ],
-    [
       "@babel/plugin-transform-react-jsx",
       {
         "runtime": "automatic"
       }
+    ],
+    [
+      "react-refresh/babel"
     ]
   ]
 }

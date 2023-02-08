@@ -1,10 +1,10 @@
 import React, {useState} from "react";
 import {NavLink, useNavigate} from "react-router-dom";
-
-import styles from "./user.module";
 import Select from "react-select";
 
-const Signup = () => {
+import styles from "./user.module";
+
+const RegisterForm = () => {
     const [tel, setTel] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -78,4 +78,4 @@ const Signup = () => {
     );
 };
 
-export default Signup;
+export default RegisterForm;

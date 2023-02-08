@@ -3,6 +3,7 @@ import {NavLink, useNavigate} from "react-router-dom";
 import Select from 'react-select';
 
 import styles from "./user.module"
+import countries from "./countries";
 
 const LoginForm = () => {
     const [tel, setTel] = useState("");
@@ -17,11 +18,16 @@ const LoginForm = () => {
     };
 
     const [selectedOption, setSelectedOption] = useState(null);
-    const options = [
-        {value: 'chocolate', label: 'Chocolate'},
-        {value: 'strawberry', label: 'Strawberry'},
-        {value: 'vanilla', label: 'Vanilla'},
-    ];
+    const reactCountries = countries.map(
+        ({
+             name,
+             dial_code,
+             code,
+             png
+         }) => (
+            {value: name, label: <div className={styles.country}><div className={styles.country}><img className={styles.logo} src={png} />{name}</div>  <span>{dial_code}</span></div>}
+        )
+    )
 
     return (
         <div className={styles.loginContainer}>
@@ -35,7 +41,7 @@ const LoginForm = () => {
                     <Select
                         defaultValue={selectedOption}
                         onChange={setSelectedOption}
-                        options={options}
+                        options={reactCountries}
                         styles={{
                             control: (baseStyles, state) => ({
                                 ...baseStyles,

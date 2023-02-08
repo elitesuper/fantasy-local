@@ -1,12 +1,26 @@
 import React from "react";
-import logo from "../../../public/images/logo";
-import styles from "./header.module";
+import classNames from "classnames";
+import NavBar from "../Navbar/Navbar";
+import {NavLink} from "react-router-dom";
 
-const Header = () => {
+import { Logo } from '../../images/Logo';
+import styles from './header.module';
+
+interface HeaderProps {
+    position?: string;
+    hasMenu?: boolean;
+}
+
+const Header = (props: HeaderProps) => {
     return (
         <>
-            <div className={styles.container}>
-                <img className={styles.logo} src={logo} alt="fantasy way"/>
+            <div className={classNames(styles.container, `${styles[props.position]}`)}>
+                <NavLink to="/" className={styles.logo}>
+                    <Logo/>
+                </NavLink>
+                {props.hasMenu && (
+                    <NavBar/>
+                )}
             </div>
         </>
     );

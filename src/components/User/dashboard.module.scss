@@ -1,0 +1,33 @@
+@import './src/variables';
+
+.leftColumn {
+  width: 400px;
+}
+
+.profile {
+  background: $background-light;
+  border-radius: 10px;
+
+  .title {
+    padding: 15px;
+    border-bottom: solid 1px #ccc;
+  }
+}
+
+.user {
+  padding: 15px;
+  display: flex;
+
+  .avatar {
+    flex: 1;
+
+    img {
+      border-radius: 100%;
+    }
+  }
+
+  .info {
+    flex: 1;
+  }
+}
+

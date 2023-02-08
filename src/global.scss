@@ -25,3 +25,16 @@
 body {
   font-family: InterFace, sans-serif;
 }
+
+.button {
+  background: $confirm;
+  border-radius: 6px;
+  color: #fff;
+  border: none;
+  padding: 10px;
+
+  & svg {
+    fill: #fff;
+    width: 15px;
+  }
+}
