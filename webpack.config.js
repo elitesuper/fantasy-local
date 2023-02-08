@@ -37,7 +37,9 @@ module.exports = {
                             },
                             webp: {
                                 quality: [75]
-                            }
+                            },
+                            bypassOnDebug: true,
+                            disable: true
                         }
                     }
                 ]
