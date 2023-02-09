@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {NavLink, useNavigate} from "react-router-dom";
-import Select from 'react-select';
+import Select, { IndicatorSeparatorProps } from 'react-select';
 
 import styles from "./user.module"
 import countries from "./countries";
@@ -25,9 +25,39 @@ const LoginForm = () => {
              code,
              png
          }) => (
-            {value: name, label: <div className={styles.country}><div className={styles.country}><img className={styles.logo} src={png} />{name}</div>  <span>{dial_code}</span></div>}
+            {
+                value: name,
+                label:
+                    <div className={styles.country}>
+                        <div className={styles.country}>
+                            <img className={styles.logo} src={png}/>
+                            {name}
+                        </div>
+                        <span>{dial_code}</span>
+                    </div>
+            }
         )
     )
+
+    const customStyles = {
+        control: (baseStyles, state) => ({
+            ...baseStyles,
+            margin: "0px"
+            // background: "#023950",
+            // Overwrittes the different states of border
+            // borderColor: state.isFocused ? "yellow" : "green",
+            // Removes weird border around container
+            // boxShadow: state.isFocused ? null : null,
+            // "&:hover": {
+            // Overwrittes the different states of border
+            // borderColor: state.isFocused ? "red" : "blue"
+            // }
+        })
+    };
+
+    const IndicatorSeparator = ({innerProps}: IndicatorSeparatorProps<false>) => {
+        return <span {...innerProps} />;
+    };
 
     return (
         <div className={styles.loginContainer}>
@@ -41,13 +71,9 @@ const LoginForm = () => {
                     <Select
                         defaultValue={selectedOption}
                         onChange={setSelectedOption}
+                        components={{IndicatorSeparator}}
                         options={reactCountries}
-                        styles={{
-                            control: (baseStyles, state) => ({
-                                ...baseStyles,
-                                placeholder: 'asdf',
-                            }),
-                        }}
+                        styles={customStyles}
                     />
                     <input
                         type='tel'
