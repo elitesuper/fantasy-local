@@ -7,34 +7,37 @@ import { Chat } from '../../images/Chat';
 import { Bars } from '../../images/Bars';
 import { Magnifier } from '../../images/Magnifier';
 import styles from './navbar.module'
-
-const NavBar = () => {
+import {NavLink} from "react-router-dom";
+interface HeaderProps {
+    page?: string;
+}
+const NavBar = (props: HeaderProps) => {
     return (
         <div className={styles.nav}>
-            <div className={styles.item}>
+            <NavLink className={props.page === 'challenge' ? styles.active : styles.item} to="/dashboard">
                 <Challenges/>
                 Challenges
-            </div>
-            <div className={styles.item}>
+            </NavLink>
+            <NavLink className={props.page === 'leaderboard' ? styles.active : styles.item} to="/leaderboard">
                 <Trophy/>
                 Leaderboard
-            </div>
-            <div className={styles.item}>
+            </NavLink>
+            <NavLink className={props.page === 'friends' ? styles.active : styles.item} to="/friends">
                 <Friends/>
                 Friends
-            </div>
-            <div className={styles.item}>
+            </NavLink>
+            <NavLink className={props.page === 'chat' ? styles.active : styles.item} to="/chat">
                 <Chat/>
                 Chat
-            </div>
-            <div className={styles.item}>
+            </NavLink>
+            <NavLink className={props.page === 'topAndFlop' ? styles.active : styles.item} to="/topAndFlop">
                 <Bars/>
                 Top and Flop
-            </div>
-            <div className={styles.item}>
+            </NavLink>
+            <NavLink className={props.page === 'findChallenges' ? styles.active : styles.item} to="/findChallenges">
                 <Magnifier/>
                 Find Challenges
-            </div>
+            </NavLink>
         </div>
     );
 };

@@ -14,7 +14,12 @@ const App = () => {
                 <Route path="/" element={<Login />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/dashboard" element={<Dashboard page={'challenge'} />} />
+                <Route path="/leaderboard" element={<Dashboard page={'leaderboard'} />} />
+                <Route path="/friends" element={<Dashboard page={'friends'} />} />
+                <Route path="/chat" element={<Dashboard page={'chat'} />} />
+                <Route path="/topAndFlop" element={<Dashboard page={'topAndFlop'} />} />
+                <Route path="/findChallenges" element={<Dashboard page={'findChallenges'} />} />
                 <Route path="/phoneVerify" element={<PhoneVerify />} />
                 {/*<Route path="/contact" element={<Contact />} />*/}
                 <Route path="/about" element={<About />} />
