@@ -9,8 +9,8 @@ interface HeaderProps {
 export default function Dashboard(props: HeaderProps) {
     return (
         <Layout>
-            <Header pageData={props.page} hasMenu />
-            <DashboardForm pageData={props.page}/>
+            <Header page={props.page} hasMenu />
+            <DashboardForm page={props.page}/>
         </Layout>
     );
 };

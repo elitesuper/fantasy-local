@@ -16,11 +16,11 @@ const Header = (props: HeaderProps) => {
     return (
         <>
             <div className={classNames(styles.container, `${styles[props.position]}`)}>
-                <NavLink to="/" className={styles.logo}>
+                <NavLink to="/" className={styles.logo} style={props.hasMenu ? {width: '400px', marginTop: '15px'} : {}}>
                     <Logo/>
                 </NavLink>
                 {props.hasMenu && (
-                    <NavBar pageData={props.page}/>
+                    <NavBar page={props.page}/>
                 )}
             </div>
         </>

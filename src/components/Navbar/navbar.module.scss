@@ -3,13 +3,36 @@
 .nav {
   z-index: 10;
   display: flex;
+  margin-top: 29px;
 }
 
 .item {
   color: $text-default;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  margin-right: 30px;
+  padding-bottom: 10px;
 
   svg {
     width: 20px;
+    margin-right: 10px;
     fill: $text-default;
+  }
+}
+
+.active {
+  color: white;
+  text-decoration: none;
+  border-bottom: solid 6px #42B649;
+  display: flex;
+  align-items: center;
+  margin-right: 30px;
+  padding: 0 5px 5px;
+
+  svg {
+    width: 20px;
+    fill: white;
+    margin-right: 10px;
   }
 }
