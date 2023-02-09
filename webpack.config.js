@@ -11,6 +11,9 @@ module.exports = {
     entry: {
         main: "./src/index.tsx",
     },
+    devServer: {
+        historyApiFallback: true,
+    },
     mode: isDevelopment ? 'development' : 'production',
     output: {
         filename: isDevelopment ? '[name].js' : '[name].[hash].js',
