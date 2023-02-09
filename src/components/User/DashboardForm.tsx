@@ -3,8 +3,12 @@ import {useNavigate} from "react-router-dom";
 
 import styles from './dashboard.module';
 import {Trophy} from "../../images/Trophy";
+import Field from "../Challenge/Field";
 
-const DashboardForm = () => {
+interface HeaderProps {
+    page?: string;
+}
+const DashboardForm = (props: HeaderProps) => {
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -34,7 +38,10 @@ const DashboardForm = () => {
                     </div>
                 </div>
             </div>
-            <div className={styles.container}>
+            <div className={styles.body}>
+                <Field />
+            </div>
+            <div className={styles.rightColumn}>
                 <div className={styles.box}>
                     Top and Flop
                 </div>

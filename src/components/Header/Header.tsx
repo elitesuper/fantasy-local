@@ -9,6 +9,7 @@ import styles from './header.module';
 interface HeaderProps {
     position?: string;
     hasMenu?: boolean;
+    page?: string;
 }
 
 const Header = (props: HeaderProps) => {
@@ -19,7 +20,7 @@ const Header = (props: HeaderProps) => {
                     <Logo/>
                 </NavLink>
                 {props.hasMenu && (
-                    <NavBar/>
+                    <NavBar pageData={props.page}/>
                 )}
             </div>
         </>

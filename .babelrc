@@ -13,6 +13,9 @@
     ],
     [
       "react-refresh/babel"
+    ],
+    [
+      "react-html-attrs"
     ]
   ]
 }

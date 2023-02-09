@@ -7,14 +7,15 @@ import { Chat } from '../../images/Chat';
 import { Bars } from '../../images/Bars';
 import { Magnifier } from '../../images/Magnifier';
 import styles from './navbar.module'
+import {NavLink} from "react-router-dom";
 
 const NavBar = () => {
     return (
         <div className={styles.nav}>
-            <div className={styles.item}>
+            <NavLink className={styles.item} to="/dashboard" page={'challenges'}>
                 <Challenges/>
                 Challenges
-            </div>
+            </NavLink>
             <div className={styles.item}>
                 <Trophy/>
                 Leaderboard
