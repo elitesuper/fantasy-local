@@ -8,7 +8,7 @@ import Chat from "../Chat/Chat";
 import TopAndFlop from "../TopAndFlop/TopAndFlop";
 import FindChallenges from "../FindChallenges/FindChallenges";
 import About from "../StaticPages/About";
-import Rules from "../Rules/Rules";
+import Rules from "../StaticPages/Rules";
 import Terms from "../StaticPages/Terms";
 import Profile from "../User/Profile";
 
@@ -24,23 +24,23 @@ const DashboardForm = (props: HeaderProps) => {
     return (
         <div className={styles.dashboard}>
             <div className={styles.leftColumn}>
-                <div className={styles.profile}>
-                    <div className={styles.title}>My profile</div>
-                    <div className={styles.user}>
+                <div className={classNames(`box`, styles.profile)}>
+                    <div className="boxTitle">My profile</div>
+                    <div className={classNames(`boxContainer`, styles.user)}>
                         <div className={styles.avatar}>
-                            <img src="/public/images/user.png" alt=""/>
+                            <img src="/images/user.png" alt=""/>
                         </div>
                         <div className={styles.info}>
                             <div className={styles.name}>Christian Andersen</div>
                             <div className={styles.email}>christian.andersen@sport.cc</div>
                             <button className="button"><Trophy/> 10</button>
-                            <button className="button button-secondary"><Trophy/> 0</button>
+                            <button className="button buttonSecondary"><Trophy/> 0</button>
                         </div>
                     </div>
                 </div>
-                <div className={styles.menu}>
-                    <div className={styles.menuTitle}>Menu</div>
-                    <div className={styles.menuLinks}>
+                <div className={classNames(`box`, styles.menu)}>
+                    <div className="boxTitle">Menu</div>
+                    <div className={classNames(`boxContent`, styles.menuLinks)}>
                         <NavLink className={classNames(styles.item, props.page === 'dashboard' ? styles.active : "")} to="/dashboard">
                             Home
                         </NavLink>

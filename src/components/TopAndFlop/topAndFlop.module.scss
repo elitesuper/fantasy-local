@@ -1,23 +1,20 @@
 @import './src/variables';
 
-.header {
-  background: $background-light;
-  border-radius: 10px;
-  font-weight: bold;
-}
-
-.title {
-  border-bottom: solid 1px #000;
-  padding: 16px;
-}
-
 .tabs {
   display: flex;
-  padding: 15px;
-  font-weight: bold;
+  padding: 10px 15px;
+  font-size: 20px;
 
   > div {
     flex: 1;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .active {
+    font-family: Interface-bold, sans-serif;
+    font-weight: bold;
+    color: $brand-color;
   }
 }
 

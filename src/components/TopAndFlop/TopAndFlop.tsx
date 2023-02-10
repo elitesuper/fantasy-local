@@ -5,8 +5,8 @@ import styles from './topAndFlop.module';
 const TopAndFlop = () => {
     return (
         <>
-            <div className={styles.header}>
-                <div className={styles.title}>Top and Flop</div>
+            <div className="box">
+                <div className="boxTitle">Top and Flop</div>
                 <div className={styles.tabs}>
                     <div>WK</div>
                     <div>BW</div>
@@ -17,7 +17,7 @@ const TopAndFlop = () => {
             <div className={styles.list}>
                 <div className={styles.item}>
                     <div className={styles.shirt}>
-                        <img src="images/asf.png" alt=""/>
+                        <img src="/images/shirt.png" alt=""/>
                     </div>
                     <div className={styles.info}>
                         <div className={styles.name}>Chris Jordan</div>
@@ -30,7 +30,7 @@ const TopAndFlop = () => {
                 </div>
                 <div className={styles.item}>
                     <div className={styles.shirt}>
-                        <img src="images/asf.png" alt=""/>
+                        <img src="/images/shirt.png" alt=""/>
                     </div>
                     <div className={styles.info}>
                         <div className={styles.name}>Chris Jordan</div>
@@ -43,7 +43,7 @@ const TopAndFlop = () => {
                 </div>
                 <div className={styles.item}>
                     <div className={styles.shirt}>
-                        <img src="images/asf.png" alt=""/>
+                        <img src="/images/shirt.png" alt=""/>
                     </div>
                     <div className={styles.info}>
                         <div className={styles.name}>Chris Jordan</div>

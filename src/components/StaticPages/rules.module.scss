@@ -1,0 +1,27 @@
+@import './src/variables';
+
+.columns {
+  display: grid;
+  grid-template-columns: 384px 384px;
+  grid-gap: 10px 20px;
+}
+
+.rule {
+  padding: 10px 15px;
+  border-bottom: solid 1px $border-default;
+  font-size: 18px;
+  display: flex;
+}
+
+.ruleText {
+  flex: 1;
+
+  span {
+    display: block;
+    color: $text-secondary;
+  }
+}
+
+.ruleValue {
+  color: $brand-color;
+}

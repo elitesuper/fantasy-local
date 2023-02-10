@@ -1,38 +1,64 @@
 @import './src/variables';
 
 .profile, .menu {
-  background: $background-light;
-  border-radius: 15px;
-  margin-bottom: 10px;
+  width: 373px;
+}
 
-  .title, .menuTitle {
-    padding: 15px 25px;
-    border-bottom: solid 1px $border-default;
-    font-family: Interface-bold, sans-serif;
-    font-size: 24px;
-  }
+.menu {
+  margin-top: 10px;
 }
 
 .user {
   padding: 15px 25px;
   display: flex;
+  flex-wrap: wrap;
 
   .avatar {
-    flex: 1;
+    flex-basis: 140px;
+    position: relative;
+    cursor: pointer;
+
+    &::before {
+      position: absolute;
+      content: '';
+      width: 40px;
+      height: 40px;
+      bottom: 10px;
+      left: 80px;
+      background: #5383D6;
+      border-radius: 100%;
+    }
 
     img {
       border-radius: 100%;
+      width: 120px;
     }
   }
 
   .info {
-    flex: 1;
+    min-width: 0;
+    flex-basis: 182px;
+    padding-top: 25px;
+
+    .name {
+      font-family: Interface-bold, sans-serif;
+      font-size: 20px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .email {
+      font-size: 14px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 29px;
+    }
   }
 }
 
 .menuLinks {
-  padding: 15px 25px;
-
   .item {
     text-decoration: none;
     font-size: 20px;
