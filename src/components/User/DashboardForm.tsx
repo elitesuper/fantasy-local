@@ -1,5 +1,5 @@
-import React, {useEffect} from "react";
-import {NavLink, useNavigate} from "react-router-dom";
+import React from "react";
+import {NavLink} from "react-router-dom";
 
 import Field from "../Challenge/Field";
 import Leaderboard from "../Leaderboard/Leaderboard";
@@ -7,14 +7,14 @@ import Friends from "../Friends/Friends";
 import Chat from "../Chat/Chat";
 import TopAndFlop from "../TopAndFlop/TopAndFlop";
 import FindChallenges from "../FindChallenges/FindChallenges";
-import About from "../About/About";
+import About from "../StaticPages/About";
 import Rules from "../Rules/Rules";
-import Terms from "../Terms/Terms";
+import Terms from "../StaticPages/Terms";
 import Profile from "../User/Profile";
 
 import {Trophy} from "../../images/Trophy";
-import {Challenges} from "../../images/Challenges";
 import styles from './dashboard.module';
+import classNames from "classnames";
 
 interface HeaderProps {
     page?: string;
@@ -28,7 +28,7 @@ const DashboardForm = (props: HeaderProps) => {
                     <div className={styles.title}>My profile</div>
                     <div className={styles.user}>
                         <div className={styles.avatar}>
-                            <img src="./public/images/avatar.jpg" alt=""/>
+                            <img src="/public/images/user.png" alt=""/>
                         </div>
                         <div className={styles.info}>
                             <div className={styles.name}>Christian Andersen</div>
@@ -38,21 +38,26 @@ const DashboardForm = (props: HeaderProps) => {
                         </div>
                     </div>
                 </div>
-                <NavLink className={props.page === 'dashboard' ? styles.active : styles.item} to="/dashboard">
-                    Home
-                </NavLink>
-                <NavLink className={props.page === 'profile' ? styles.active : styles.item} to="/profile">
-                    My profile
-                </NavLink>
-                <NavLink className={props.page === 'rules' ? styles.active : styles.item} to="/rules">
-                    Point system
-                </NavLink>
-                <NavLink className={props.page === 'about' ? styles.active : styles.item} to="/about">
-                    About
-                </NavLink>
-                <NavLink className={props.page === 'terms' ? styles.active : styles.item} to="/terms">
-                    Terms & Conditions
-                </NavLink>
+                <div className={styles.menu}>
+                    <div className={styles.menuTitle}>Menu</div>
+                    <div className={styles.menuLinks}>
+                        <NavLink className={classNames(styles.item, props.page === 'dashboard' ? styles.active : "")} to="/dashboard">
+                            Home
+                        </NavLink>
+                        <NavLink className={classNames(styles.item, props.page === 'profile' ? styles.active : "")} to="/profile">
+                            My profile
+                        </NavLink>
+                        <NavLink className={classNames(styles.item, props.page === 'rules' ? styles.active : "")} to="/rules">
+                            Point system
+                        </NavLink>
+                        <NavLink className={classNames(styles.item, props.page === 'about' ? styles.active : "")} to="/about">
+                            About
+                        </NavLink>
+                        <NavLink className={classNames(styles.item, props.page === 'terms' ? styles.active : "")} to="/terms">
+                            Terms & Conditions
+                        </NavLink>
+                    </div>
+                </div>
             </div>
             <div className={styles.body}>
                 {props.page === 'profile' && <Profile/>}
@@ -68,7 +73,7 @@ const DashboardForm = (props: HeaderProps) => {
             </div>
             <div className={styles.rightColumn}>
                 <div className={styles.box}>
-                    Top and Flop
+                    <TopAndFlop />
                 </div>
             </div>
         </div>

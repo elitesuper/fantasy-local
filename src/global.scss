@@ -27,14 +27,14 @@ body {
 }
 
 .button {
-  background: $confirm;
+  background: $brand-color;
   border-radius: 6px;
-  color: #fff;
+  color: $text-light;
   border: none;
   padding: 10px;
 
   & svg {
-    fill: #fff;
+    fill: $text-light;
     width: 15px;
   }
 }

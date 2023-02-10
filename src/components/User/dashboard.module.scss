@@ -1,17 +1,20 @@
 @import './src/variables';
 
-.profile {
+.profile, .menu {
   background: $background-light;
-  border-radius: 10px;
+  border-radius: 15px;
+  margin-bottom: 10px;
 
-  .title {
-    padding: 15px;
-    border-bottom: solid 1px #ccc;
+  .title, .menuTitle {
+    padding: 15px 25px;
+    border-bottom: solid 1px $border-default;
+    font-family: Interface-bold, sans-serif;
+    font-size: 24px;
   }
 }
 
 .user {
-  padding: 15px;
+  padding: 15px 25px;
   display: flex;
 
   .avatar {
@@ -27,22 +30,43 @@
   }
 }
 
+.menuLinks {
+  padding: 15px 25px;
+
+  .item {
+    text-decoration: none;
+    font-size: 20px;
+    color: $text-default;
+    display: block;
+    margin-bottom: 15px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &.active {
+      font-family: Interface-bold, sans-serif;
+      color: $brand-color;
+    }
+  }
+}
+
 .dashboard {
   display: flex;
   justify-content: space-around;
-  padding: 30px 0;
+  padding: 60px 0;
+}
 
-  .body {
-    width: 640px;
-  }
+.body {
+  flex: 1;
+}
 
-  .rightColumn {
-    width: 400px;
-    padding-left: 30px;
-  }
+.rightColumn {
+  flex: 0 385px;
+  padding-left: 25px;
+}
 
-  .leftColumn {
-    width: 400px;
-    padding-right: 30px;
-  }
+.leftColumn {
+  flex: 0 373px;
+  padding-right: 25px;
 }

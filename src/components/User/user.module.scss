@@ -47,7 +47,7 @@ input {
   width: 100%;
   display: block;
   text-decoration: none;
-  background: $confirm;
+  background: $brand-color;
   outline: none;
   border: none;
   padding: 15px;
@@ -60,7 +60,7 @@ input {
 }
 
 .link {
-  color: $confirm;
+  color: $brand-color;
   text-decoration: none;
 }
 

@@ -3,36 +3,36 @@
 .nav {
   z-index: 10;
   display: flex;
-  margin-top: 29px;
+  align-items: self-end;
+  height: 90px;
+  width: 100%;
 }
 
 .item {
-  color: $text-default;
+  color: $text-secondary;
   text-decoration: none;
   display: flex;
   align-items: center;
-  margin-right: 30px;
-  padding-bottom: 10px;
+  font-size: 20px;
+  border-bottom: solid 7px transparent;
+  justify-content: center;
+  padding: 20px 0;
+  flex: 1;
 
   svg {
-    width: 20px;
     margin-right: 10px;
-    fill: $text-default;
+    fill: $text-secondary;
+    stroke: $text-secondary;
   }
 }
 
 .active {
-  color: white;
-  text-decoration: none;
-  border-bottom: solid 6px #42B649;
-  display: flex;
-  align-items: center;
-  margin-right: 30px;
-  padding: 0 5px 5px;
+  border-bottom-color: $brand-color;
+  color: $text-light;
+  font-family: Interface-bold, sans-serif;
 
   svg {
-    width: 20px;
-    fill: white;
-    margin-right: 10px;
+    fill: $text-light;
+    stroke: $text-light;
   }
 }
