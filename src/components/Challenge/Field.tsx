@@ -1,20 +1,24 @@
-import React from "react";
+import React, {useState} from "react";
 import Player from "./Player";
 import classNames from "classnames";
 
 import styles from './challenge.module';
 
-const teamSize = 'team4';
-
 const Challenge = () => {
+    const [teamSize, setTeamSize] = useState('team4');
+    const handleClick = (e) => {
+        const value = e.currentTarget.getAttribute("value");
+        setTeamSize(value)
+    };
+
     return (
         <div className={styles.fieldContainer}>
             <div className={styles.tabs}>
-                <div className={styles.tab}>4</div>
-                <div className={styles.tab}>8</div>
-                <div className={styles.tab}>11</div>
+                <button className={styles.tab} value="team4" onClick={handleClick}>4</button>
+                <button className={styles.tab} value="team8" onClick={handleClick}>8</button>
+                <button className={styles.tab} value="team11" onClick={handleClick}>11</button>
             </div>
-            <div className={classNames(styles.field, styles.team11)}>
+            <div className={classNames(styles.field, `${styles[teamSize]}`)}>
                 <div className={styles.playerPos}>
                     <Player position="WK"/>
                 </div>

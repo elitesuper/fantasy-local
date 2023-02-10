@@ -1,10 +1,12 @@
 import React from "react";
 
+import styles from './rules.module';
+
 const Rules = () => {
     return (
-        <>
-            asdfasdf
-        </>
+        <div>
+            rules
+        </div>
     );
 };
 

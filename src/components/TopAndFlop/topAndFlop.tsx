@@ -1,11 +1,11 @@
 import React from "react";
 
-import styles from './topAndFlop.module';
+import styles from './terms.module';
 
 const TopAndFlop = () => {
     return (
         <div>
-            top and flop
+            terms
         </div>
     );
 };
