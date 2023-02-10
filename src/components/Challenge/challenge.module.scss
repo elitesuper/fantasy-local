@@ -1,16 +1,6 @@
 @import './src/variables';
 
-.fieldContainer {
-  background: url("/public/images/field.svg") green no-repeat;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  height: 100vh;
-}
-
 .field {
-  background: url("/public/images/fieldLines.svg") sandybrown no-repeat;
   width: 90px;
   height: 230px;
   position: relative;
