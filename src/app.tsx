@@ -4,6 +4,8 @@ import Login from './pages/Login';
 import Register from "./pages/Register";
 import PhoneVerify from './pages/PhoneVerify';
 import Dashboard from "./pages/Dashboard";
+import RecoverPassword from "./pages/RecoverPassword";
+import CreatePassword from "./pages/CreatePassword";
 
 const App = () => {
     return (
@@ -12,6 +14,8 @@ const App = () => {
                 <Route path="/" element={<Login />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/recoverPassword" element={<RecoverPassword />} />
+                <Route path="/createPassword" element={<CreatePassword />} />
                 <Route path="/dashboard" element={<Dashboard page={'challenge'} />} />
                 <Route path="/leaderboard" element={<Dashboard page={'leaderboard'} />} />
                 <Route path="/friends" element={<Dashboard page={'friends'} />} />

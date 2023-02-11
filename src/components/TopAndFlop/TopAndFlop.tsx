@@ -1,8 +1,24 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 
 import styles from './topAndFlop.module';
 
 const TopAndFlop = () => {
+    const apiKey = process.env.REACT_APP_COMMON_BASE_URL
+
+    const AsyncAwait = () => {
+        const [users, setUsers] = useState([])
+
+        const fetchData = async () => {
+            const response = await fetch(apiKey + "/api/cricketmatches/top-and-flop")
+            const data = await response.json()
+            setUsers(data)
+
+        }
+        useEffect(() => {
+            fetchData()
+        }, [])
+    }
+
     return (
         <>
             <div className="box">

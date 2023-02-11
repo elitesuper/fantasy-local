@@ -1,1 +1,22 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="255" height="415" viewBox="61 208 255 415"><g data-name="CompositeLayer"><path d="M128.5 0h0A128.5 128.5 0 0 1 257 128.5v160A128.5 128.5 0 0 1 128.5 417h0A128.5 128.5 0 0 1 0 288.5v-160A128.5 128.5 0 0 1 128.5 0z" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#fff" fill="transparent" transform="matrix(.99222 0 0 .9952 61 208)" data-name="Rectangle 20"/><g data-name="Group 74"><g data-name="Rectangle 23"><path d="M144 297h88v236h-88V297z" fill="#fedd76"/><path d="M0 0h88v236h0H0h0V0h0z" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#fff" fill="transparent" transform="matrix(.97727 0 0 .99153 145 298)"/></g><path d="M231 497h-86" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#fff" fill="transparent" data-name="Line 58"/><path d="M145 334h87" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#fff" fill="transparent" data-name="Line 54"/><path d="M219 515h-62" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#fff" fill="transparent" data-name="Line 61"/><path d="M219 316h-62" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#fff" fill="transparent" data-name="Line 55"/><path d="M219 533v-36" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#fff" fill="transparent" data-name="Line 59"/><path d="M157 299v35" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#fff" fill="transparent" data-name="Line 57"/><path d="M157 533v-36" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#fff" fill="transparent" data-name="Line 60"/><path d="M219 299v35" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#fff" fill="transparent" data-name="Line 56"/></g></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="257" height="417" viewBox="0 0 257 417">
+  <g id="Group_16144" transform="translate(-0.433 -14)">
+    <g id="Rectangle_20" transform="translate(0.433 14)" fill="none" stroke="#fff" stroke-width="2">
+      <rect width="257" height="417" rx="128.5" stroke="none"/>
+      <rect x="1" y="1" width="255" height="415" rx="127.5" fill="none"/>
+    </g>
+    <g id="Group_74" transform="translate(84 104)">
+      <g id="Rectangle_23" transform="translate(0.433 0)" fill="#fedd76" stroke="#fff" stroke-width="2">
+        <rect width="88" height="236" stroke="none"/>
+        <rect x="1" y="1" width="86" height="234" fill="none"/>
+      </g>
+      <line id="Line_58" x1="86" transform="translate(1.433 200)" fill="none" stroke="#fff" stroke-width="2"/>
+      <line id="Line_54" x2="87" transform="translate(1.433 37)" fill="none" stroke="#fff" stroke-width="2"/>
+      <line id="Line_61" x1="62" transform="translate(13.433 218)" fill="none" stroke="#fff" stroke-width="2"/>
+      <line id="Line_55" x1="62" transform="translate(13.433 19)" fill="none" stroke="#fff" stroke-width="2"/>
+      <line id="Line_59" y1="36" transform="translate(75.433 200)" fill="none" stroke="#fff" stroke-width="2"/>
+      <line id="Line_57" y2="35" transform="translate(13.433 2)" fill="none" stroke="#fff" stroke-width="2"/>
+      <line id="Line_60" y1="36" transform="translate(13.433 200)" fill="none" stroke="#fff" stroke-width="2"/>
+      <line id="Line_56" y2="35" transform="translate(75.433 2)" fill="none" stroke="#fff" stroke-width="2"/>
+    </g>
+  </g>
+</svg>

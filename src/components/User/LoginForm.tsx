@@ -1,18 +1,20 @@
 import React, {useState} from "react";
-import {NavLink, useNavigate} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import Select, { IndicatorSeparatorProps } from 'react-select';
 
+import countries from "./Countries";
+import {Arrow} from "../../images/Arrow";
+import {Lock} from "../../images/Lock";
+import {Phone} from "../../images/Phone";
 import styles from "./user.module"
-import countries from "./countries";
+import classNames from "classnames";
 
 const LoginForm = () => {
     const [tel, setTel] = useState("");
     const [password, setPassword] = useState("");
-    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log({tel, password});
         setPassword("");
         setTel("");
     };
@@ -42,16 +44,9 @@ const LoginForm = () => {
     const customStyles = {
         control: (baseStyles, state) => ({
             ...baseStyles,
-            margin: "0px"
-            // background: "#023950",
-            // Overwrittes the different states of border
-            // borderColor: state.isFocused ? "yellow" : "green",
-            // Removes weird border around container
-            // boxShadow: state.isFocused ? null : null,
-            // "&:hover": {
-            // Overwrittes the different states of border
-            // borderColor: state.isFocused ? "red" : "blue"
-            // }
+            marginBottom: "10px",
+            height: "60px",
+            borderRadius: "10px"
         })
     };
 
@@ -64,17 +59,18 @@ const LoginForm = () => {
             <h2 className={styles.title}>Welcome to<br/><strong>FantasyWay</strong></h2>
             <form className={styles.loginForm} onSubmit={handleSubmit}>
                 <div className={styles.intro}>
-                    <img src="" alt="Login Details"/>
+                    <Arrow />
                     Enter your login details
                 </div>
-                <div className={styles.fields}>
-                    <Select
-                        defaultValue={selectedOption}
-                        onChange={setSelectedOption}
-                        components={{IndicatorSeparator}}
-                        options={reactCountries}
-                        styles={customStyles}
-                    />
+                <Select
+                    defaultValue={selectedOption}
+                    onChange={setSelectedOption}
+                    components={{IndicatorSeparator}}
+                    options={reactCountries}
+                    styles={customStyles}
+                />
+                <div className="inputIcons">
+                    <i><Phone /></i>
                     <input
                         type='tel'
                         id='tel'
@@ -84,6 +80,9 @@ const LoginForm = () => {
                         placeholder='Phone number'
                         onChange={(e) => setTel(e.target.value)}
                     />
+                </div>
+                <div className="inputIcons">
+                    <i><Lock /></i>
                     <input
                         type='password'
                         name='password'
@@ -95,7 +94,7 @@ const LoginForm = () => {
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </div>
-                <button className={styles.loginBtn}>Log In</button>
+                <button disabled={true} className={classNames("button large", styles.loginBtn)}>Log In</button>
                 <NavLink className={styles.link} to="/forgotPassword">Forgot password?</NavLink>
                 <div className={styles.signup}>
                     Don't have an account?{" "}

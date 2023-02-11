@@ -24,10 +24,11 @@ $brand-color: #00A826;
 $text-default: #1A1818;
 $text-secondary: #999;
 $text-light: #fff;
-$background-default: #f4f4f4;
+$background-default: #323232;
 $background-light: #fff;
 $header-default: #000;
 $border-default: #DBDBDB;
+$input-icons: #D2D2D2;
 
  @mixin font($font-family, $font-weight, $font-file) {
    @font-face {

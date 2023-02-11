@@ -5,7 +5,8 @@ const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin')
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
-const path = require("path");
+const path = require('path');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
     entry: {
@@ -125,6 +126,7 @@ module.exports = {
         new StyleLintPlugin({
             files: ['**/*.{css,scss,sass}'],
         }),
-        new ESLintPlugin()
+        new ESLintPlugin(),
+        new Dotenv()
     ],
 };

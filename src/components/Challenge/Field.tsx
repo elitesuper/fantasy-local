@@ -5,7 +5,7 @@ import styles from './challenge.module';
 
 const jssStyle = {
     fieldContainer: {
-        background: 'url("/images/field.svg") green',
+        background: 'url("/images/field.svg")',
         textAlign: 'center',
         display: 'flex',
         alignItems: 'center',
@@ -18,17 +18,18 @@ const jssStyle = {
 }
 const Challenge = () => {
     const [teamSize, setTeamSize] = useState('team4');
+
     const handleClick = (e) => {
         const value = e.currentTarget.getAttribute("value");
-        setTeamSize(value)
+        setTeamSize(value);
     };
 
     return (
         <div style={jssStyle.fieldContainer}>
             <div className={styles.tabs}>
-                <button className={styles.tab} value="team4" onClick={handleClick}>4</button>
-                <button className={styles.tab} value="team8" onClick={handleClick}>8</button>
-                <button className={styles.tab} value="team11" onClick={handleClick}>11</button>
+                <button className={classNames(styles.tab, teamSize === "team4" ? styles.active : "")} value="team4" onClick={handleClick}>4</button>
+                <button className={classNames(styles.tab, teamSize === "team8" ? styles.active : "")} value="team8" onClick={handleClick}>8</button>
+                <button className={classNames(styles.tab, teamSize === "team11" ? styles.active : "")} value="team11" onClick={handleClick}>11</button>
             </div>
             <div className={classNames(styles.field, `${styles[teamSize]}`)} style={jssStyle.fieldLines}>
                 <div className={styles.playerPos}>

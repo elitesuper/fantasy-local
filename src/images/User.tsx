@@ -1,0 +1,12 @@
+import React from "react";
+
+export const User = () => {
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" width="16.273" height="19" viewBox="0 0 16.273 19">
+            <g id="user" transform="translate(0 1)">
+                <path id="Path_1133" d="M12.136,16A8.138,8.138,0,0,0,4,24.136a2.71,2.71,0,0,0,2.712,2.712H17.561a2.71,2.71,0,0,0,2.712-2.712A8.138,8.138,0,0,0,12.136,16Z" transform="translate(-4 -8.848)" fill="#d2d2d2"/>
+                <circle id="Ellipse_414" cx="5.5" cy="5.5" r="5.5" transform="translate(3.136)" fill="#d2d2d2" stroke="#fff" stroke-width="2"/>
+            </g>
+        </svg>
+    )
+}

@@ -3,6 +3,7 @@ import {NavLink, useNavigate} from "react-router-dom";
 import VerificationInput from "react-verification-input";
 
 import styles from "./user.module";
+import classNames from "classnames";
 
 const PhoneVerifyForm = () => {
     const [code, setCode] = useState("");
@@ -16,22 +17,21 @@ const PhoneVerifyForm = () => {
     };
     return (
         <div className={styles.loginContainer}>
-            <h2 className={styles.title}>Verify Code</h2>
+            <h2 className={styles.title}><strong>Verify Code</strong></h2>
             <form className={styles.loginForm} onSubmit={handleSubmit}>
-                <div className={styles.fields}>
-                    <div>Please enter the code we've sent you via SMS to continue</div>
-                    <VerificationInput
-                        length={5}
-                        placeholder=''
-                        classNames={{
-                            container: styles.verContainer,
-                            character: styles.verChar,
-                            characterInactive: styles.verCharInactive,
-                            characterSelected: styles.verCharActive,
-                        }}
-                    />
-                    <NavLink to={"/dashboard"} className={styles.loginBtn}>AUTHENTICATE</NavLink>
-                </div>
+                <div className={styles.introLight}>Please enter the code we've sent you via SMS to continue</div>
+                <VerificationInput
+                    length={5}
+                    placeholder=''
+                    validChars= '0-9'
+                    classNames={{
+                        container: styles.verContainer,
+                        character: styles.verChar,
+                        characterInactive: styles.verCharInactive,
+                        characterSelected: styles.verCharActive,
+                    }}
+                />
+                <button disabled={true} className={classNames("button large", styles.loginBtn)}>Authenticate</button>
             </form>
         </div>
     );

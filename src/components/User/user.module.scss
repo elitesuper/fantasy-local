@@ -1,80 +1,92 @@
 @import "src/variables";
 
 .loginContainer {
-  width: 600px;
-  height: 600px;
+  width: 500px;
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
   text-align: center;
+  margin: 90px auto auto;
+  max-width: 100%;
+  max-height: 100%;
+  overflow: auto;
+  padding: 80px 0 20px;
 
   .title {
-    margin-bottom: 30px;
+    margin-bottom: 60px;
+    font-size: 45px;
+    font-weight: normal;
+    line-height: 48px;
+
+    strong {
+      font-family: Interface-bold, sans-serif;
+    }
   }
 }
 
 .loginForm {
   background: $background-light;
-  border-radius: 20px;
-  padding: 40px 20px;
+  border-radius: 15px;
+  padding: 40px 25px 50px;
 }
 
 .intro {
-  font-weight: bold;
-  margin-bottom: 30px;
-}
+  font-size: 25px;
+  font-family: Interface-bold, sans-serif;
+  margin-bottom: 40px;
 
-input {
-  height: 50px;
-  display: block;
-  width: 100%;
-  border: solid 1px gray;
-  padding: 10px 15px;
-  margin-bottom: 15px;
-  border-radius: 6px;
-}
-
-.fields {
-  text-align: left;
-
-  input {
-    margin-top: 10px;
+  svg {
+    margin-right: 15px;
+    vertical-align: middle;
   }
+}
+
+.introLight {
+  font-size: 24px;
+  opacity: 0.5;
+  margin-bottom: 40px;
 }
 
 .loginBtn {
   width: 100%;
-  display: block;
-  text-decoration: none;
-  background: $brand-color;
-  outline: none;
-  border: none;
-  padding: 15px;
-  cursor: pointer;
-  font-size: 16px;
-  border-radius: 6px;
-  margin: 30px 0 20px;
-  color: $text-light;
-  font-weight: bold;
+  margin: 20px 0;
 }
 
 .link {
   color: $brand-color;
   text-decoration: none;
+  font-size: 20px;
 }
 
 .signup {
-  margin-top: 40px;
+  margin-top: 50px;
+  font-size: 20px;
+
+  a {
+    font-family: Interface-bold, sans-serif;
+  }
 }
 
 .verContainer {
-  margin-top: 20px;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  height: 92px;
+  line-height: 92px;
+  font-size: 48px; 
+  width: 450px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-column-gap: 17px;
 }
 
 .verChar {
-  border-radius: 6px;
-  flex: 0 50px;
+  border-radius: 10px;
+  height: 92px;
+  border-color: $border-default;
+  border-width: 1.5px;
+  background-color: $background-light;
 }
 
 .country {
@@ -88,4 +100,11 @@ input {
   width: 20px;
   border-radius: 20px;
   margin-right: 10px;
+}
+
+.terms {
+  font-size: 14px;
+  margin-top: 20px;
+  text-align: center;
+  color: $text-secondary;
 }

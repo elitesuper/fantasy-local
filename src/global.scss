@@ -41,6 +41,17 @@ body {
     fill: $text-light;
     height: 15px;
   }
+
+  &.large {
+    font-size: 24px;
+    height: 60px;
+    border-radius: 10px;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
 }
 
 .buttonSecondary {
@@ -64,5 +75,32 @@ body {
 
   .boxContent {
     padding: 15px 25px;
+  }
+}
+
+
+.inputIcons {
+  position: relative;
+  margin-bottom: 10px;
+
+  i {
+    position: absolute;
+    left: 16px;
+    top: 20px;
+
+    svg {
+      fill: $input-icons;
+    }
+  }
+
+  input {
+    width: 100%;
+    padding: 18px 20px 18px 45px;
+    font-size: 18px;
+    border: solid 1px #ccc;
+    height: 60px;
+    border-radius: 10px;
+    outline: none;
+    font-family: InterFace, sans-serif;
   }
 }
