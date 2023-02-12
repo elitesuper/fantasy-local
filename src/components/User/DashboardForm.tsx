@@ -15,6 +15,7 @@ import Profile from "../User/Profile";
 import {Trophy} from "../../images/Trophy";
 import styles from './dashboard.module';
 import classNames from "classnames";
+import Ads from "../Ads/Ads";
 
 interface HeaderProps {
     page?: string;
@@ -58,6 +59,8 @@ const DashboardForm = (props: HeaderProps) => {
                         </NavLink>
                     </div>
                 </div>
+
+                {props.page === 'chat' &&  <Ads/>}
             </div>
             <div className={styles.body}>
                 {props.page === 'profile' && <Profile/>}
@@ -70,6 +73,8 @@ const DashboardForm = (props: HeaderProps) => {
                 {props.page === 'chat' && <Chat/>}
                 {props.page === 'topAndFlop' && <TopAndFlop/>}
                 {props.page === 'findChallenges' && <FindChallenges/>}
+
+                {props.page !== 'chat' &&  <Ads/>}
             </div>
             <div className={styles.rightColumn}>
                 <div className={styles.box}>

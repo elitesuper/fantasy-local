@@ -1,6 +1,6 @@
 $mobile-width: 600px;
 $tablet-width: 1024px;
-$desktop-width: 1710px;
+$desktop-width: 1680px;
 
 @mixin mobile {
   @media (max-width: #{$mobile-width}) {
@@ -29,6 +29,7 @@ $background-light: #fff;
 $header-default: #000;
 $border-default: #DBDBDB;
 $input-icons: #D2D2D2;
+$brand-error: #ED1C24;
 
  @mixin font($font-family, $font-weight, $font-file) {
    @font-face {

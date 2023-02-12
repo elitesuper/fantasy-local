@@ -1,9 +1,18 @@
 @import './src/variables';
 
 .columns {
-  display: grid;
-  grid-template-columns: 384px 384px;
-  grid-gap: 10px 20px;
+  column-count: 2;
+  column-gap: 20px;
+  column-fill: balance;
+
+  .boxCustom {
+    display: inline-block;
+    margin-bottom: 10px;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    width: 100%;
+  }
 }
 
 .rule {
@@ -19,9 +28,14 @@
   span {
     display: block;
     color: $text-secondary;
+    font-size: 16px;
   }
 }
 
 .ruleValue {
   color: $brand-color;
+}
+
+.ruleNeg {
+  color: $brand-error;
 }

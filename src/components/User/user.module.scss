@@ -49,6 +49,10 @@
   margin-bottom: 40px;
 }
 
+.column {
+  width: 40%;
+}
+
 .loginBtn {
   width: 100%;
   margin: 20px 0;
@@ -74,7 +78,7 @@
   margin-bottom: 60px;
   height: 92px;
   line-height: 92px;
-  font-size: 48px; 
+  font-size: 48px;
   width: 450px;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
