@@ -11,7 +11,7 @@ const Player = (props: PlayerProps) => {
     return (
         <>
             <div className={styles.player}>
-                +<br/>{props.position}
+                <div className={styles.plus}>+</div>{props.position}
             </div>
             <div className={styles.playerName}>
                 {props.name}

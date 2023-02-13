@@ -1,9 +1,19 @@
 @import './src/variables';
 
+.fieldContainer {
+  text-align: center;
+  display: flex;
+  height: 692px;
+  border-radius: 15px;
+  padding: 100px 20px 20px;
+}
+
 .field {
   width: 257px;
-  height: 444px;
+  height: 417px;
   position: relative;
+  display: flex;
+  margin: 0 auto;
 
   .playerPos {
     position: absolute;
@@ -11,133 +21,134 @@
 
     &:first-child {
       display: block;
-      top: -40px;
+      top: -14px;
+      left: 96px;
     }
   }
 
   &.team4 {
     .playerPos:nth-child(2) {
       display: block;
-      left: -50px;
-      top: 20px;
+      left: 96px;
+      top: 113px;
     }
 
     .playerPos:nth-child(6) {
       display: block;
-      left: -50px;
-      top: 120px;
+      left: 96px;
+      top: 241px;
     }
 
     .playerPos:nth-child(10) {
       display: block;
-      left: -50px;
-      top: 220px;
+      left: 96px;
+      top: 364px;
     }
   }
 
   &.team8 {
     .playerPos:nth-child(2) {
       display: block;
-      left: -50px;
-      top: 20px;
+      left: 33px;
+      top: 115px;
     }
 
     .playerPos:nth-child(3) {
       display: block;
-      left: 150px;
-      top: 20px;
+      left: 157px;
+      top: 115px;
     }
 
     .playerPos:nth-child(6) {
       display: block;
-      left: -50px;
-      top: 120px;
+      left: 33px;
+      top: 241px;
     }
 
     .playerPos:nth-child(7) {
       display: block;
-      left: 150px;
-      top: 120px;
+      left: 157px;
+      top: 241px;
     }
 
     .playerPos:nth-child(10) {
       display: block;
-      left: -100px;
-      top: 220px;
+      left: -7px;
+      top: 367px;
     }
 
     .playerPos:nth-child(11) {
       display: block;
-      left: 0;
-      top: 220px;
+      left: 96px;
+      top: 367px;
     }
 
     .playerPos:nth-child(12) {
       display: block;
-      left: 150px;
-      top: 220px;
+      left: 199px;
+      top: 367px;
     }
   }
 
   &.team11 {
     .playerPos:nth-child(2) {
       display: block;
-      left: -100px;
-      top: 20px;
+      left: -36px;
+      top: 118px;
     }
 
     .playerPos:nth-child(3) {
       display: block;
-      left: 0;
-      top: 20px;
+      left: 53px;
+      top: 118px;
     }
 
     .playerPos:nth-child(4) {
       display: block;
-      left: 100px;
-      top: 20px;
+      left: 142px;
+      top: 118px;
     }
 
     .playerPos:nth-child(5) {
       display: block;
-      left: 200px;
-      top: 20px;
+      left: 230px;
+      top: 118px;
     }
 
     .playerPos:nth-child(6) {
       display: block;
-      left: -100px;
-      top: 120px;
+      left: -36px;
+      top: 220px;
     }
 
     .playerPos:nth-child(7) {
       display: block;
-      left: 0;
-      top: 120px;
+      left: 53px;
+      top: 220px;
     }
 
     .playerPos:nth-child(8) {
       display: block;
-      left: 100px;
-      top: 120px;
+      left: 142px;
+      top: 220px;
     }
 
     .playerPos:nth-child(9) {
       display: block;
-      left: 200px;
-      top: 120px;
+      left: 230px;
+      top: 220px;
     }
 
     .playerPos:nth-child(10) {
       display: block;
-      left: -50px;
-      top: 220px;
+      left: 35px;
+      top: 367px;
     }
 
     .playerPos:nth-child(11) {
       display: block;
-      left: 150px;
-      top: 220px;
+      left: 159px;
+      top: 367px;
     }
   }
 }
@@ -148,6 +159,15 @@
   text-align: center;
   background: $background-light;
   border-radius: 100%;
+  font-size: 14px;
+  font-family: Interface-bold, sans-serif;
+  padding-top: 14px;
+  cursor: pointer;
+
+  .plus {
+    font-size: 26px;
+    line-height: 17px;
+  }
 }
 
 .playerName {
@@ -163,18 +183,21 @@
 
 .tabs {
   display: flex;
-  margin: 20px;
+  flex-direction: column;
 
   .tab {
-    width: 100px;
-    padding: 15px;
-    color: #fff;
+    width: 88px;
+    height: 88px;
+    line-height: 88px;
+    color: $text-light;
     background: $background-default;
     border: none;
-    margin-right: 10px;
-    border-radius: 6px;
+    border-radius: 5px;
     text-align: center;
     cursor: pointer;
+    font-size: 14px;
+    font-family: Interface-bold, sans-serif;
+    margin-bottom: 12px;
 
     &.active {
       background: $background-light;

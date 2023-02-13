@@ -6,11 +6,6 @@ import styles from './challenge.module';
 const jssStyle = {
     fieldContainer: {
         background: 'url("/images/field.svg")',
-        textAlign: 'center',
-        display: 'flex',
-        alignItems: 'center',
-        flexDirection: 'column',
-        height: '100vh',
     },
     fieldLines: {
         background: 'url("/images/fieldLines.svg") no-repeat'
@@ -25,7 +20,7 @@ const Challenge = () => {
     };
 
     return (
-        <div style={jssStyle.fieldContainer}>
+        <div className={styles.fieldContainer} style={jssStyle.fieldContainer}>
             <div className={styles.tabs}>
                 <button className={classNames(styles.tab, teamSize === "team4" ? styles.active : "")} value="team4" onClick={handleClick}>4</button>
                 <button className={classNames(styles.tab, teamSize === "team8" ? styles.active : "")} value="team8" onClick={handleClick}>8</button>
@@ -69,6 +64,7 @@ const Challenge = () => {
                     <Player position="AR"/>
                 </div>
             </div>
+            {/*<button className="button">Auto fill players</button>*/}
         </div>
     );
 };
