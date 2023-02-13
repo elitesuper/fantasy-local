@@ -1,7 +1,6 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
 
-import Field from "../Challenge/Field";
 import Leaderboard from "../Leaderboard/Leaderboard";
 import Friends from "../Friends/Friends";
 import Chat from "../Chat/Chat";
@@ -16,6 +15,9 @@ import {Trophy} from "../../images/Trophy";
 import styles from './dashboard.module';
 import classNames from "classnames";
 import Ads from "../Ads/Ads";
+import Challenge from "../Challenge/Challenge";
+import CreateChallenge from "../CreateChallenge/CreateChallenge";
+import PickPlayers from "../Challenge/PickPlayers";
 
 interface HeaderProps {
     page?: string;
@@ -60,6 +62,9 @@ const DashboardForm = (props: HeaderProps) => {
                     </div>
                 </div>
 
+                {props.page === 'findChallenges' &&  (
+                    <NavLink to="/createChallenge" className="button large">+ Create a Challenge</NavLink>
+                )}
                 {props.page === 'chat' &&  <Ads/>}
             </div>
             <div className={styles.body}>
@@ -67,12 +72,14 @@ const DashboardForm = (props: HeaderProps) => {
                 {props.page === 'about' && <About/>}
                 {props.page === 'rules' && <Rules/>}
                 {props.page === 'terms' && <Terms/>}
-                {props.page === 'challenge' && <Field/>}
+                {props.page === 'challenge' && <Challenge/>}
                 {props.page === 'leaderboard' && <Leaderboard/>}
                 {props.page === 'friends' && <Friends/>}
                 {props.page === 'chat' && <Chat/>}
                 {props.page === 'topAndFlop' && <TopAndFlop/>}
                 {props.page === 'findChallenges' && <FindChallenges/>}
+                {props.page === 'createChallenge' && <CreateChallenge/>}
+                {props.page === 'pickPlayers' && <PickPlayers />}
 
                 {props.page !== 'chat' &&  <Ads/>}
             </div>

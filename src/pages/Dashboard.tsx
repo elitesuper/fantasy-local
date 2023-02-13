@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../components/Header/Header";
-import DashboardForm from "../components/User/DashboardForm";
+import ChallengesForm from "../components/User/DashboardForm";
 import Layout from "../components/Layout/Layout";
 
 interface HeaderProps {
@@ -10,7 +10,7 @@ export default function Dashboard(props: HeaderProps) {
     return (
         <Layout>
             <Header page={props.page} hasMenu />
-            <DashboardForm page={props.page}/>
+            <ChallengesForm page={props.page}/>
         </Layout>
     );
 };
