@@ -1,6 +1,6 @@
 import React from "react";
 
-import styles from './challenge.module';
+import styles from './challengeField.module';
 
 interface PlayerProps {
     position: string;

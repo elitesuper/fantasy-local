@@ -1,6 +1,6 @@
 import React from "react";
 
-import styles from './createChallenge.module';
+import styles from './challenges.module';
 import classNames from "classnames";
 import {NavLink} from "react-router-dom";
 

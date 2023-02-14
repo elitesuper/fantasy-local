@@ -5,19 +5,19 @@ import Leaderboard from "../Leaderboard/Leaderboard";
 import Friends from "../Friends/Friends";
 import Chat from "../Chat/Chat";
 import TopAndFlop from "../TopAndFlop/TopAndFlop";
-import FindChallenges from "../FindChallenges/FindChallenges";
+import FindChallenges from "../Challenge/FindChallenges";
 import About from "../StaticPages/About";
 import Rules from "../StaticPages/Rules";
 import Terms from "../StaticPages/Terms";
 import Profile from "../User/Profile";
+import Challenge from "../Challenge/Challenge";
+import CreateChallenge from "../Challenge/CreateChallenge";
+import PickPlayers from "../Challenge/PickPlayers";
+import Ads from "../Ads/Ads";
 
 import {Trophy} from "../../images/Trophy";
-import styles from './dashboard.module';
 import classNames from "classnames";
-import Ads from "../Ads/Ads";
-import Challenge from "../Challenge/Challenge";
-import CreateChallenge from "../CreateChallenge/CreateChallenge";
-import PickPlayers from "../Challenge/PickPlayers";
+import styles from './dashboard.module';
 
 interface HeaderProps {
     page?: string;
