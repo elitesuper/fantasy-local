@@ -28,7 +28,7 @@ const RecoverPasswordForm = () => {
                         characterSelected: styles.verCharActive,
                     }}
                 />
-                <button disabled={true} className={classNames("button large", styles.loginBtn)}>Continue</button>
+                <button disabled={false} className={classNames("button large", styles.loginBtn)}>Continue</button>
                 <div className={styles.signup}>
                     Didn't get the code?{" "}
                     <NavLink to="/" className={styles.link}>

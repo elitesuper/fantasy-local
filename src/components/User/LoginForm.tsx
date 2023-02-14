@@ -1,25 +1,45 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {NavLink} from "react-router-dom";
 import Select, { IndicatorSeparatorProps } from 'react-select';
-
+import { useNavigate } from "react-router-dom";
 import countries from "./Countries";
 import {Arrow} from "../../images/Arrow";
 import {Lock} from "../../images/Lock";
 import {Phone} from "../../images/Phone";
 import styles from "./user.module"
 import classNames from "classnames";
+import {AuthService} from "../../services/auth.service";
+import getDeviceId from "../../lib/getDeviceId";
 
 const LoginForm = () => {
-    const [tel, setTel] = useState("");
+    const navigate = useNavigate();
+    const [countryCode, setCountryCode] = useState(null);
     const [password, setPassword] = useState("");
+    const [tel, setTel] = useState("");
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        setPassword("");
-        setTel("");
+        setPassword(password || "");
+        setTel(tel || "");
+        setCountryCode(countryCode || null);
+        if (tel && password && countryCode ) {
+            const dialCode = countries.find(country => country.name === countryCode?.value)?.dial_code;
+            AuthService.shared.logIn({mobileNumber: tel, password: password, countryCode: Number(dialCode), deviceToken: getDeviceId()}).then(
+                response => {
+                    if (response?.data?.data) {
+                        AuthService.shared.setUser(response.data.data);
+                        navigate("/dashboard");
+                    } else {
+                        console.log(response.data);
+                    }
+                },
+                error => {
+                    console.log(error);
+                }
+            );
+        }
     };
 
-    const [selectedOption, setSelectedOption] = useState(null);
     const reactCountries = countries.map(
         ({
              name,
@@ -63,11 +83,12 @@ const LoginForm = () => {
                     Enter your login details
                 </div>
                 <Select
-                    defaultValue={selectedOption}
-                    onChange={setSelectedOption}
+                    defaultValue={countryCode}
+                    onChange={setCountryCode}
                     components={{IndicatorSeparator}}
                     options={reactCountries}
                     styles={customStyles}
+                    id={countryCode}
                 />
                 <div className="inputIcons">
                     <i><Phone /></i>
@@ -94,7 +115,11 @@ const LoginForm = () => {
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </div>
-                <button disabled={true} className={classNames("button large", styles.loginBtn)}>Log In</button>
+                <button
+                    disabled={!password || !tel || !countryCode}
+                    className={classNames("button large", styles.loginBtn)}>
+                    Log In
+                </button>
                 <NavLink className={styles.link} to="/forgotPassword">Forgot password?</NavLink>
                 <div className={styles.signup}>
                     Don't have an account?{" "}
