@@ -7,20 +7,38 @@ import {Phone} from "../../images/Phone";
 import {Lock} from "../../images/Lock";
 import styles from "./user.module";
 import classNames from "classnames";
+import {AuthService} from "../../services/auth.service";
+import getDeviceId from "../../lib/getDeviceId";
 
 const RegisterForm = () => {
     const [tel, setTel] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [countryCode, setCountryCode] = useState(null);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setTel("");
-        setPassword("");
-        setConfirmPassword("");
+        setTel(tel || "");
+        setPassword(password || "");
+        setConfirmPassword(confirmPassword || "");
+        setCountryCode(countryCode || null);
+        if (tel && password && countryCode && confirmPassword === password ) {
+            const dialCode = countries.find(country => country.name === countryCode?.value)?.dial_code;
+            AuthService.shared.signUp({mobileNumber: tel, password: password, countryCode: Number(dialCode), deviceToken: getDeviceId()}).then(
+                response => {
+                    if (response?.data?.data) {
+                        navigate("/phoneVerify");
+                    } else {
+                        console.log(response.data);
+                    }
+                },
+                error => {
+                    console.log(error);
+                }
+            );
+        }
     };
 
-    const [selectedOption, setSelectedOption] = useState(null);
     const reactCountries = countries.map(
         ({
              name,
@@ -61,11 +79,12 @@ const RegisterForm = () => {
             <form className={styles.loginForm} onSubmit={handleSubmit}>
                 <div className={styles.introLight}>Let’s go through a few simple steps</div>
                 <Select
-                    defaultValue={selectedOption}
-                    onChange={setSelectedOption}
+                    defaultValue={countryCode}
+                    onChange={setCountryCode}
                     components={{IndicatorSeparator}}
                     options={reactCountries}
                     styles={customStyles}
+                    id={countryCode}
                 />
                 <div className="inputIcons">
                     <i><Phone /></i>
@@ -101,16 +120,19 @@ const RegisterForm = () => {
                         minLength={8}
                         required
                         placeholder='Confirm Password'
-                        value={password}
+                        value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                     />
                 </div>
-                <button disabled={true} className={classNames("button large", styles.loginBtn)}>Log In</button>
-                <NavLink className={styles.link} to="/forgotPassword">Forgot password?</NavLink>
+                <button
+                    disabled={!countryCode || !password || !confirmPassword || !tel || confirmPassword !== password}
+                    className={classNames("button large", styles.loginBtn)}>
+                    Sign up
+                </button>
                 <div className={styles.signup}>
-                    Don't have an account?{" "}
-                    <NavLink to="/register" className={styles.link}>
-                        Sign up
+                    Do you have an account?{" "}
+                    <NavLink to="/login" className={styles.link}>
+                        Log in
                     </NavLink>
                 </div>
             </form>

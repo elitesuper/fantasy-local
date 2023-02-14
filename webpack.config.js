@@ -14,6 +14,23 @@ module.exports = {
     },
     devServer: {
         historyApiFallback: true,
+        headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+        },
+        proxy: {
+            '/common-api': {
+                target: 'https://stagingapifanchallenge.6lgx.com',
+                secure: false,
+                changeOrigin: true,
+            },
+            '/cricket-api': {
+                target: 'https://stagingapifanchallenge.6lgx.com/apicricket.fanchallengeapp.com',
+                secure: false,
+                changeOrigin: true,
+            }
+        },
+
     },
     mode: isDevelopment ? 'development' : 'production',
     output: {
@@ -127,6 +144,8 @@ module.exports = {
             files: ['**/*.{css,scss,sass}'],
         }),
         new ESLintPlugin(),
-        new Dotenv()
+        new Dotenv({
+            path: isDevelopment ? './.env.development' : './.env'
+        })
     ],
 };
