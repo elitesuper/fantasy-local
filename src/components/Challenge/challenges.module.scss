@@ -11,9 +11,10 @@
 .ball {
   flex: 0 0 60px;
 
-  img {
+  svg {
     width: 45px;
     height: 45px;
+    fill: $brand-color;
   }
 }
 
@@ -31,5 +32,116 @@
     color: $text-secondary;
     font-size: 14px;
     display: block;
+  }
+}
+
+.matchesList {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 15px;
+
+  a {
+    text-decoration: none;
+    color: $text-default;
+    flex-direction: column;
+  }
+}
+
+.challengeBox {
+  background: $background-light;
+  border-radius: 10px;
+  display: flex;
+  margin-top: 15px;
+}
+
+.match {
+  display: flex;
+  padding: 15px 20px 20px;
+  text-align: center;
+
+  .team {
+    flex: 1;
+  }
+
+  .teamLogo {
+    border: solid 1px $border-default;
+    border-radius: 100%;
+    width: 60px;
+    height: 60px;
+    margin: auto auto 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .time {
+    flex: 1;
+
+    strong {
+      display: block;
+      margin-bottom: 5px;
+      margin-top: 5px;
+    }
+
+    span {
+      color: $text-secondary;
+    }
+  }
+}
+
+.oddsWrap {
+  border-top: solid 1px $border-default;
+  display: flex;
+  padding: 15px;
+}
+
+.partnerLogo {
+  flex: 1;
+}
+
+.odds {
+  flex: 1;
+  margin-left: auto;
+  display: flex;
+  justify-content: space-between;
+
+  .item {
+    border-radius: 6px;
+    background: #F8F8F8;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    font-family: Interface-bold, sans-serif;
+
+    span {
+      color: $brand-color;
+      margin-left: 20px;
+    }
+  }
+}
+
+.tabs {
+  padding-bottom: 10px;
+}
+
+.tab {
+  font-family: Interface-bold, sans-serif;
+  font-size: 20px;
+  padding: 0 30px 5px;
+  cursor: pointer;
+
+  &.selected {
+    border-bottom: solid 3px $brand-color;
+  }
+}
+
+.backButton {
+  color: $brand-color;
+  font-family: InterFace, sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
   }
 }

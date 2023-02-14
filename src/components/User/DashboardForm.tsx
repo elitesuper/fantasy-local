@@ -63,7 +63,7 @@ const DashboardForm = (props: HeaderProps) => {
                 </div>
 
                 {props.page === 'findChallenges' &&  (
-                    <NavLink to="/createChallenge" className="button large">+ Create a Challenge</NavLink>
+                    <NavLink to="/createChallenge" className="button large mt10">+ Create a Challenge</NavLink>
                 )}
                 {props.page === 'chat' &&  <Ads/>}
             </div>

@@ -30,6 +30,10 @@ strong {
   font-family: Interface-bold, sans-serif;
 }
 
+.mt10 {
+  margin-top: 10px;
+}
+
 .button {
   background: $brand-color;
   border-radius: 50px;
@@ -49,7 +53,13 @@ strong {
   &.large {
     font-size: 24px;
     height: 60px;
+    line-height: 60px;
+    padding: 0 15px;
     border-radius: 10px;
+    text-decoration: none;
+    width: 100%;
+    display: block;
+    text-align: center;
   }
 
   &:disabled {

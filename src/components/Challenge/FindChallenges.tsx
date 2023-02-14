@@ -1,7 +1,8 @@
 import React from "react";
 
-import styles from './challenges.module';
 import classNames from "classnames";
+import {Cricket} from "../../images/Cricket";
+import styles from './challenges.module';
 
 const FindChallenges = () => {
     return (
@@ -17,7 +18,7 @@ const FindChallenges = () => {
             </div>
             <div className={styles.challenge}>
                 <div className={styles.ball}>
-                    cricket ball
+                    <Cricket/>
                 </div>
                 <div className={styles.info}>
                     <strong>India vs. Australia in India Test Series</strong>
