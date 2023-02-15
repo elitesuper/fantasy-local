@@ -23,8 +23,8 @@ const RegisterForm = () => {
         setConfirmPassword(confirmPassword || "");
         setCountryCode(countryCode || null);
         if (tel && password && countryCode && confirmPassword === password ) {
-            const dialCode = countries.find(country => country.name === countryCode?.value)?.dial_code;
-            AuthService.shared.signUp({mobileNumber: tel, password: password, countryCode: Number(dialCode), deviceToken: getDeviceId()}).then(
+            const dialCode: string | undefined = countries.find(country => country.name === countryCode?.value)?.dial_code;
+            AuthService.shared.signUp({mobileNumber: dialCode + tel.toString(), password: password, countryCode: Number(dialCode), deviceToken: getDeviceId()}).then(
                 response => {
                     if (response?.data?.data) {
                         navigate("/phoneVerify");
