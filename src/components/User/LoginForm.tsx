@@ -23,14 +23,25 @@ const LoginForm = () => {
         setTel(tel || "");
         setCountryCode(countryCode || null);
         if (tel && password && countryCode ) {
-            const dialCode = countries.find(country => country.name === countryCode?.value)?.dial_code;
-            AuthService.shared.logIn({mobileNumber: tel, password: password, countryCode: Number(dialCode), deviceToken: getDeviceId()}).then(
+            const dialCode: string | undefined = countries.find(country => country.name === countryCode?.value)?.dial_code;
+            AuthService.shared.logIn({mobileNumber: dialCode + tel.toString(), password: password, countryCode: Number(dialCode), deviceToken: getDeviceId()}).then(
                 response => {
                     if (response?.data?.data) {
                         AuthService.shared.setUser(response.data.data);
                         navigate("/dashboard");
                     } else {
                         console.log(response.data);
+                    }
+                },
+                error => {
+                    console.log(error);
+                }
+            );
+
+            AuthService.shared.getToken({mobileNumber: dialCode + tel.toString(), password: password}).then(
+                response => {
+                    if (response?.data?.data?.token) {
+                        AuthService.shared.setToken(response.data.data.token);
                     }
                 },
                 error => {

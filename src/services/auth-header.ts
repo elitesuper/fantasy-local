@@ -1,19 +1,15 @@
-export default function authHeader() {
-    const userStr = localStorage.getItem("user");
-    let user = null;
-    if (userStr)
-        user = JSON.parse(userStr);
+import {AuthService} from "./auth.service";
 
-    if (user && user.regisToken) {
-        return {
-            'Content-Type': 'application/json;charset=UTF-8',
-            Authorization: 'JWT ' + user.regisToken
-        };
-        // return { 'x-access-token': user.accessToken };       // for Node.js Express back-end
-    } else {
-        return {
-            'Content-Type': 'application/json;charset=UTF-8',
-            Authorization: ''
-        };
-    }
+export function authHeader() {
+    return {
+        'Content-Type': 'application/json;charset=UTF-8',
+        Authorization: AuthService.shared.getCurrentToken()
+    };
+    // return { 'x-access-token': AuthService.shared.getCurrentToken() };       // for Node.js Express back-end
+}
+
+export function headers() {
+    return {
+        'Content-Type': 'application/json;charset=UTF-8',
+    };
 }
