@@ -8,12 +8,13 @@ const axios = getAxiosInstance(process.env.COMMON_BASE_URL ?? '');
 export class AuthService {
     static readonly shared: AuthService = new AuthService();
 
-    logIn(user: User) {
-        return axios.post('/api/users/login', user, { headers: authHeader() });
+    async logIn(user: { password: string; mobileNumber: string; countryCode: string | undefined; deviceToken: string }) {
+        const headers = await authHeader();
+        return axios.post('/api/users/login', user, { headers: headers });
     }
 
     getToken(user: any) {
-        return axios.post('/token', user, { headers: headers() });
+        return axios.post('/token', user);
     }
 
     logout() {
@@ -21,8 +22,9 @@ export class AuthService {
         localStorage.removeItem("token");
     }
 
-    signUp(user: User) {
-        return axios.post('/api/users/register', user, { headers: headers() });
+    async signUp(user: User) {
+        const headers = await authHeader();
+        return axios.post('/api/users/register', user, { headers: headers });
     }
 
     getUser() {
