@@ -1,6 +1,6 @@
 export interface User {
     mobileNumber: string;
     deviceToken: string;
-    countryCode: number;
+    countryCode: string;
     password: string | undefined;
 }
