@@ -8,3 +8,10 @@
 /.idea
 yarn-debug.log*
 yarn-error.log*
+package-lock.json
+
+.DS_Store
+
+yarn.lock
+
+*.tgz

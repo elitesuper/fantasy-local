@@ -1,0 +1,25 @@
+name: Website
+
+on:
+  push:
+  release:
+    types:
+      - published
+
+jobs:
+  checkout:
+    runs-on: self-hosted
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+  build-prod:
+    # if: github.ref_type == 'tag'
+    uses: ./.github/workflows/build.yaml
+    needs: 
+      - checkout
+    with:
+      environment: prod
+    secrets:
+      REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
+      REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}

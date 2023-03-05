@@ -1,0 +1,12 @@
+---
+- hosts: fantasy-cricket
+  become: yes
+  collections:
+    - snapscore.common
+  roles:
+    - upgrade
+    - sysctl
+    - packages
+    - nginx    
+    - podman 
+    - fantasy-cricket

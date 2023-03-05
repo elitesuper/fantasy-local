@@ -1,0 +1,59 @@
+name: Build
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+    secrets:
+      REGISTRY_USERNAME:
+        required: true
+      REGISTRY_PASSWORD:
+        required: true
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          registry: registry.snapscore.dev
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+
+      - name: get current version
+        id: version
+        run: |
+          version=$(cat package.json | jq -r '.version')
+          echo "version=$version" >> $GITHUB_OUTPUT
+
+      - name: build container
+        run: podman build -t registry.snapscore.dev/proxy/fantasy-app:${{steps.version.outputs.version}} .
+
+      - name: push the container
+        run: podman push registry.snapscore.dev/proxy/fantasy-app:${{steps.version.outputs.version}}
+
+      - name: Use the SSH keys installed on the runner
+        uses: frankdejonge/use-ssh-agent@1.0.2
+
+      - name: Create file with registry credentials
+        run: |
+          echo '
+          ---
+          registry_username: "${{ secrets.REGISTRY_USERNAME }}"
+          registry_password: ${{ secrets.REGISTRY_PASSWORD }}
+          ' > registry_credentials.yaml
+      
+      - name: Run ansible playbook
+        uses: dawidd6/action-ansible-playbook@v2
+        with:
+          playbook: ansible/fantasy.yml
+          requirements: ansible/requirements.yml
+          options: |
+            -i /opt/ansible/environments/${{ inputs.environment }}/hosts
+            --user jenkins
+            -e version=${{ steps.version.outputs.version }}
+            -e workspace=${{ github.workspace }}
+            -e env=${{ inputs.environment }}
+            -e "@registry_credentials.yaml"

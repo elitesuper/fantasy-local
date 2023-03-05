@@ -1,0 +1,2 @@
+collections:
+  - name: git@github.com:snapscoregroup/ansible-galaxy.git#/common

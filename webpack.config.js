@@ -1,7 +1,7 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const isDevelopment = process.env.NODE_ENV !== 'production'
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
-const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin')
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
@@ -13,6 +13,7 @@ module.exports = {
         main: "./src/index.tsx",
     },
     devServer: {
+        hot: true,
         historyApiFallback: true,
         headers: {
             "Access-Control-Allow-Origin": "*",
@@ -128,7 +129,7 @@ module.exports = {
         extensions: [".js", ".jsx", ".ts", ".tsx", ".json", "css", ".scss", ".png", ".jpg", ".svg"],
     },
     plugins: [
-        isDevelopment && new ReactRefreshPlugin(),
+        isDevelopment && new ReactRefreshWebpackPlugin(),
         new CleanWebpackPlugin({
             cleanOnceBeforeBuildPatterns: [path.join(__dirname, "dist/**/*")],
         }),
@@ -147,5 +148,5 @@ module.exports = {
         new Dotenv({
             path: isDevelopment ? './.env.development' : './.env'
         })
-    ],
+    ].filter(Boolean),
 };

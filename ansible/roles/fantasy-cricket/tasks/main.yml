@@ -1,0 +1,31 @@
+# Pull image
+- name: Pull image
+  containers.podman.podman_image:
+    name: "registry.snapscore.dev/proxy/fantasy-app"
+    pull: true
+    force: true
+    tag: "{{ version }}"
+    username: "{{ registry_username }}"
+    password: "{{ registry_password }}"
+
+# Run container
+- name: Run container
+  containers.podman.podman_container:
+    name: "fantasy-app"
+    image: "registry.snapscore.dev/proxy/fantasy-app:{{ version }}"
+    state: created
+    detach: true
+    expose:
+      - "8080"
+    ports:
+      - "8080:80"    
+    generate_systemd:
+      path: /etc/systemd/user/
+
+# Enable the container service
+- name: Enable the container service
+  systemd:
+    name: "container-fantasy-app"
+    enabled: true
+    state: started
+    daemon_reload: true
