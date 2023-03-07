@@ -2,6 +2,7 @@ import {AuthService} from "./auth.service";
 
 export async function authHeader() {
     let tokenValue = AuthService.shared.getCurrentToken();
+    console.log("tokenValue", tokenValue);
     if (!tokenValue) {
         try {
             const token: any = await AuthService.shared.getToken({userName: 'IPhone', Password: 'I@S'});

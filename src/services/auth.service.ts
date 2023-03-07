@@ -32,7 +32,7 @@ export class AuthService {
     }
 
     getCurrentToken() {
-        return JSON.parse(localStorage.getItem('token'));
+        return JSON.parse(localStorage.getItem('token') || "{}");
     }
 
     setUser(user: UserData) {

@@ -11,12 +11,13 @@ import {AuthService} from "../../services/auth.service";
 import getDeviceId from "../../lib/getDeviceId";
 
 const RegisterForm = () => {
+    const navigate = useNavigate();
     const [tel, setTel] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [countryCode, setCountryCode] = useState(null);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e:any) => {
         e.preventDefault();
         setTel(tel || "");
         setPassword(password || "");
