@@ -19,7 +19,7 @@ const LoginForm = () => {
     const [password, setPassword] = useState("");
     const [tel, setTel] = useState("");
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
         setPassword(password || "");
         setTel(tel || "");

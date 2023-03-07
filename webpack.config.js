@@ -16,6 +16,7 @@ module.exports = {
     },
     devServer: {
         hot: true,
+        allowedHosts: 'all',
         historyApiFallback: true,
         headers: {
             "Access-Control-Allow-Origin": "*",
@@ -25,6 +26,7 @@ module.exports = {
         proxy: {
             '/common-api': {
                 target: 'https://stagingapifanchallenge.6lgx.com/fantasyway',
+                pathRewrite: {"^/common-api" : ""},
                 secure: false,
                 changeOrigin: true,
             },

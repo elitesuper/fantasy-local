@@ -6,8 +6,8 @@ import PhoneVerify from './pages/PhoneVerify';
 import Challenges from "./pages/Dashboard";
 import RecoverPassword from "./pages/RecoverPassword";
 import CreatePassword from "./pages/CreatePassword";
-import {AuthService} from "./services/auth.service";
-// import { AuthProvider, AuthRoute } from './contexts/AuthContext';
+import {AuthService, } from "./services/auth.service";
+import { AuthProvider, AuthRoute } from './contexts/AuthContext';
 
 const App = () => {
     const currentUser = AuthService.shared.checkAuthenticate();
