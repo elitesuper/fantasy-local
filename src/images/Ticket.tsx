@@ -1,0 +1,37 @@
+import React from "react";
+
+export const Ticket = () => {
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 45 45">
+            <g id="Group_16172" transform="translate(-521 -435)">
+                <g id="Group_16036" transform="translate(491 306)">
+                    <g id="Group_15948" transform="translate(0 -46)">
+                        <circle id="albert-dera-ILip77SbmOE-unsplash" cx="22.5" cy="22.5" r="22.5" transform="translate(30 175)" fill="#f9f9f9"/>
+                    </g>
+                </g>
+                <g id="tickets_1_" transform="translate(531.051 445.051)">
+                    <g id="Group_16046">
+                        <g id="Group_16045">
+                            <path id="Path_1223" d="M21.819,6.235l-.516.516A2.232,2.232,0,0,1,18.147,3.6l.516-.516L15.584,0,0,15.584l3.079,3.079.516-.516A2.232,2.232,0,0,1,6.751,21.3l-.516.516L9.315,24.9,24.9,9.315ZM8.248,21.768A3.692,3.692,0,0,0,3.13,16.65L2.063,15.584l13.52-13.52L16.65,3.13a3.692,3.692,0,0,0,5.118,5.118l1.067,1.066L9.315,22.835Z" fill="#008a1f"/>
+                        </g>
+                    </g>
+                    <g id="Group_16048" transform="translate(13.506 9.324)">
+                        <g id="Group_16047" transform="translate(0 0)">
+                            <rect id="Rectangle_2888" width="1.459" height="1.465" transform="translate(0 1.032) rotate(-45)" fill="#008a1f"/>
+                        </g>
+                    </g>
+                    <g id="Group_16050" transform="translate(11.435 7.252)">
+                        <g id="Group_16049" transform="translate(0 0)">
+                            <rect id="Rectangle_2889" width="1.459" height="1.465" transform="translate(0 1.032) rotate(-45)" fill="#008a1f"/>
+                        </g>
+                    </g>
+                    <g id="Group_16052" transform="translate(15.578 11.396)">
+                        <g id="Group_16051" transform="translate(0 0)">
+                            <rect id="Rectangle_2890" width="1.459" height="1.465" transform="translate(0 1.032) rotate(-45)" fill="#008a1f"/>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </svg>
+    )
+}

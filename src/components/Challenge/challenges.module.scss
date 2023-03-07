@@ -54,6 +54,28 @@
   margin-top: 15px;
 }
 
+.stakesBox {
+  padding: 15px;
+  margin-top: 0;
+  align-items: center;
+  font-size: 18px;
+  line-height: 22px;
+  border: solid 2px $background-light;
+
+  .icon {
+    flex: 0 0 60px;
+
+    svg {
+      display: block;
+    }
+  }
+
+  &:hover {
+    border: solid 2px $brand-color;
+    cursor: pointer;
+  }
+}
+
 .match {
   display: flex;
   padding: 15px 20px 20px;
