@@ -24,7 +24,7 @@ module.exports = {
         },
         proxy: {
             '/common-api': {
-                target: 'https://stagingapifanchallenge.6lgx.com/',
+                target: 'https://stagingapifanchallenge.6lgx.com/fantasyway',
                 secure: false,
                 changeOrigin: true,
             },

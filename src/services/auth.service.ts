@@ -28,7 +28,7 @@ export class AuthService {
     }
 
     getUser() {
-        return JSON.parse(localStorage.getItem('user'));
+        return JSON.parse(localStorage.getItem('user')||"{}");
     }
 
     getCurrentToken() {
