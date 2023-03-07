@@ -15,6 +15,9 @@ export async function authHeader() {
     AuthService.shared.setToken(tokenValue);
     return {
         'Content-Type': 'application/json;charset=UTF-8',
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "*",
+        "Access-Control-Allow-Methods": "POST, PUT, PATCH, GET, DELETE, OPTIONS",
         Authorization: tokenValue
     };
     // return { 'x-access-token': AuthService.shared.getCurrentToken() };       // for Node.js Express back-end
@@ -23,5 +26,8 @@ export async function authHeader() {
 export function headers() {
     return {
         'Content-Type': 'application/json;charset=UTF-8',
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "*",
+        "Access-Control-Allow-Methods": "POST, PUT, PATCH, GET, DELETE, OPTIONS",
     };
 }

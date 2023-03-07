@@ -107,7 +107,7 @@ const LoginForm = () => {
                         type='password'
                         name='password'
                         id='password'
-                        minLength={8}
+                        minLength={4}
                         required
                         placeholder='Password'
                         value={password}
