@@ -9,11 +9,22 @@ import {AuthService} from "../../services/auth.service";
 import {ChallengeData} from "../../models/challenge/challenge-data";
 
 const FindChallenges = () => {
-    const [challenges, setChallenges] = useState([])
-    const fetchData = async () => {
+    const [privateChallenges, setPrivateChallenges] = useState([]);
+    const [openChallenges, setOpenChallenges] = useState([]);
+    const fetchPrivateData = async () => {
+        ChallengesService.shared.findChallenge({userId: AuthService.shared.getUser()?.userInfo?.userID, challengePrivacy: true, pageSize: 10, pageIndex:1}).then(
+            response => {
+                setPrivateChallenges(response.data.data?.challenges??[]);
+            },
+            error => {
+                console.log(error)
+            }
+        );
+    }
+    const fetchOpenData = async () => {
         ChallengesService.shared.findChallenge({userId: AuthService.shared.getUser()?.userInfo?.userID, challengePrivacy: false, pageSize: 10, pageIndex:1}).then(
             response => {
-                setChallenges(response.data.data?.challenges??[]);
+                setOpenChallenges(response.data.data?.challenges??[]);
             },
             error => {
                 console.log(error)
@@ -21,7 +32,8 @@ const FindChallenges = () => {
         );
     }
     useEffect(() => {
-        fetchData()
+        fetchPrivateData();
+        fetchOpenData();
     }, [])
 
     return (
@@ -29,12 +41,13 @@ const FindChallenges = () => {
             <div className="box">
                 <div className="boxTitle">Find Challenges</div>
                 <TabList className="tabs">
-                    <Tab className="tab">Privat</Tab>
+                    <Tab className="tab">Private</Tab>
                     <Tab className="tab">Open</Tab>
                 </TabList>
             </div>
             <TabPanel>
-                {challenges.map((item:ChallengeData) =>
+                {!privateChallenges?.length ? <div className={styles.noChallenges}>There's no challenges available</div> : ''}
+                {privateChallenges.map((item:ChallengeData) =>
                     <div className={styles.challenge} key={item.userId}>
                         <div className={styles.ball}>
                             <Cricket/>
@@ -52,7 +65,23 @@ const FindChallenges = () => {
                 )}
             </TabPanel>
             <TabPanel>
-                <div className={styles.noChallenges}>There's no challenges available</div>
+                {!openChallenges?.length ? <div className={styles.noChallenges}>There's no challenges available</div> : ''}
+                {openChallenges.map((item:ChallengeData) =>
+                    <div className={styles.challenge} key={item.userId}>
+                        <div className={styles.ball}>
+                            <Cricket/>
+                        </div>
+                        <div className={styles.info}>
+                            <strong>{item.challengeName}</strong>
+                            <div>Participants:
+                                {item?.challengers?.map((challenger: any) =>
+                                    <span key={challenger?.userId}>{challenger?.userName}, </span>
+                                )}
+                            </div>
+                            <small>{item.challengeDateTime} | Create by: {item.creatorName}</small>
+                        </div>
+                    </div>
+                )}
             </TabPanel>
         </Tabs>
     );
