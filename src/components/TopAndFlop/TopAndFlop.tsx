@@ -4,22 +4,17 @@ import { TopandFlopService } from "../../services/topandflop.service";
 import styles from "./topAndFlop.module";
 
 const TopAndFlop = () => {
-    const apiKey = process.env.REACT_APP_COMMON_BASE_URL
 
     const [players, setPlayers] = useState([])
     const fetchData = async () => {
         TopandFlopService.shared.dataFetch({pageSize: 4, pageIndex:0, position:"Batsman"}).then(
             response => {
-                console.log(response.data.data);
                 setPlayers(response.data.data?.players??[]);
             },
             error => {
                 console.log(error)
             }
         );
-        // const data = await response.json()
-        // setUsers(data)
-
     }
     useEffect(() => {
         fetchData()

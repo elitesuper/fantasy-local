@@ -1,31 +1,55 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 
 import classNames from "classnames";
 import {Cricket} from "../../images/Cricket";
 import styles from './challenges.module';
+import {ChallengesService} from "../../services/challenges.service";
+import {AuthService} from "../../services/auth.service";
+import {ChallengeData} from "../../models/challenge/challenge-data";
 
 const FindChallenges = () => {
+    const [challenges, setChallenges] = useState([])
+    const fetchData = async () => {
+        ChallengesService.shared.findChallenge({userId: AuthService.shared.getUser()?.userInfo?.userID, challengePrivacy: false, pageSize: 10, pageIndex:1}).then(
+            response => {
+                setChallenges(response.data.data?.challenges??[]);
+            },
+            error => {
+                console.log(error)
+            }
+        );
+    }
+    useEffect(() => {
+        fetchData()
+    }, [])
+
     return (
         <>
             <div className="box">
                 <div className="boxTitle">Find Challenges</div>
                 <div className="boxContent">
                     <div className={styles.tabs}>
-                        <span className={classNames(styles.tab, styles.selected)}>Privat</span>
+                        <span className={classNames(styles.tab, styles.selected)}>Private</span>
                         <span className={styles.tab}>Open</span>
                     </div>
                 </div>
             </div>
-            <div className={styles.challenge}>
-                <div className={styles.ball}>
-                    <Cricket/>
+            {challenges.map((item:ChallengeData) =>
+                <div className={styles.challenge} key={item.userId}>
+                    <div className={styles.ball}>
+                        <Cricket/>
+                    </div>
+                    <div className={styles.info}>
+                        <strong>{item.challengeName}</strong>
+                        <div>Participants:
+                            {item?.challengers?.map((challenger: any) =>
+                                <span key={challenger?.userId}>{challenger?.userName}, </span>
+                            )}
+                        </div>
+                        <small>{item.challengeDateTime} | Create by: {item.creatorName}</small>
+                    </div>
                 </div>
-                <div className={styles.info}>
-                    <strong>India vs. Australia in India Test Series</strong>
-                    <div>Participants: Rene, Josip, Sandra, Thomas, …</div>
-                    <small>Thursday at 05:00 - 06:00 I Create by: You</small>
-                </div>
-            </div>
+            )}
         </>
     );
 };
