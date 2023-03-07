@@ -26,6 +26,7 @@ const App = () => {
                 <Route path="/topAndFlop" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'topAndFlop'} />} />
                 <Route path="/challenge" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'challenge'} />} />
                 <Route path="/findChallenges" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'findChallenges'} />} />
+                <Route path="/stakes" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'stakes'} />} />
                 <Route path="/createChallenge" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'createChallenge'} />} />
                 <Route path="/pickPlayers" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'pickPlayers'} />} />
                 <Route path="/phoneVerify" element={<PhoneVerify />} />

@@ -13,6 +13,7 @@ import Profile from "../User/Profile";
 import Challenge from "../Challenge/Challenge";
 import CreateChallenge from "../Challenge/CreateChallenge";
 import PickPlayers from "../Challenge/PickPlayers";
+import Stakes from "../Challenge/Stakes";
 import Ads from "../Ads/Ads";
 
 import {Trophy} from "../../images/Trophy";
@@ -81,6 +82,7 @@ const DashboardForm = (props: HeaderProps) => {
                 {props.page === 'findChallenges' && <FindChallenges/>}
                 {props.page === 'createChallenge' && <CreateChallenge/>}
                 {props.page === 'pickPlayers' && <PickPlayers />}
+                {props.page === 'stakes' && <Stakes />}
 
                 {props.page !== 'chat' &&  <Ads/>}
             </div>
