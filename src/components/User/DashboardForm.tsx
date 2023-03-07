@@ -50,9 +50,6 @@ const DashboardForm = (props: HeaderProps) => {
                 <div className={classNames(`box`, styles.menu)}>
                     <div className="boxTitle">Menu</div>
                     <div className={classNames(`boxContent`, styles.menuLinks)}>
-                        <NavLink className={classNames(styles.item, props.page === 'dashboard' ? styles.active : "")} to="/dashboard">
-                            Home
-                        </NavLink>
                         <NavLink className={classNames(styles.item, props.page === 'profile' ? styles.active : "")} to="/profile">
                             My profile
                         </NavLink>
