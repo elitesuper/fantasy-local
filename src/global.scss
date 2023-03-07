@@ -38,6 +38,46 @@ strong {
   margin-bottom: 15px;
 }
 
+.tabs {
+  padding: 20px 24px;
+  margin: 0;
+  display: flex;
+
+  .tab {
+    outline: none;
+    list-style: none;
+    font-family: Interface-bold, sans-serif;
+    font-size: 20px;
+    padding: 0 30px 3px;
+    cursor: pointer;
+
+    &.selected {
+      border-bottom: solid 3px $brand-color;
+    }
+  }
+}
+
+
+.tabsSimple {
+  display: flex;
+  padding: 10px 15px;
+  font-size: 20px;
+
+  .tab {
+    flex: 1;
+    text-align: center;
+    cursor: pointer;
+    list-style: none;
+    outline: none;
+
+    &.selected {
+      font-family: Interface-bold, sans-serif;
+      font-weight: bold;
+      color: $brand-color;
+    }
+  }
+}
+
 .button {
   background: $brand-color;
   border-radius: 50px;
