@@ -18,15 +18,16 @@
     position: relative;
     cursor: pointer;
 
-    &::before {
+    .icon {
       position: absolute;
-      content: '';
       width: 40px;
       height: 40px;
+      line-height: 54px;
       bottom: 10px;
       left: 80px;
       background: #5383D6;
       border-radius: 100%;
+      text-align: center;
     }
 
     img {
