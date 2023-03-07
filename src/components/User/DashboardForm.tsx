@@ -17,7 +17,8 @@ import Ads from "../Ads/Ads";
 
 import {Trophy} from "../../images/Trophy";
 import classNames from "classnames";
-import styles from './dashboard.module';
+import styles from "./dashboard.module";
+import { AuthService } from "../../services/auth.service";
 
 interface HeaderProps {
     page?: string;
@@ -34,8 +35,8 @@ const DashboardForm = (props: HeaderProps) => {
                             <img src="/images/user.png" alt=""/>
                         </div>
                         <div className={styles.info}>
-                            <div className={styles.name}>Christian Andersen</div>
-                            <div className={styles.email}>christian.andersen@sport.cc</div>
+                            <div className={styles.name}>{AuthService.shared.getUser()?.userInfo?.firstName + ' ' + AuthService.shared.getUser()?.userInfo?.lastName}</div>
+                            <div className={styles.email}>{AuthService.shared.getUser()?.userInfo?.email}</div>
                             <button className="button"><Trophy/> 10</button>
                             <button className="button buttonSecondary"><Trophy/> 0</button>
                         </div>
