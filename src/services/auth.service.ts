@@ -52,7 +52,6 @@ export class AuthService {
 
     checkAuthenticate() {
         const user = this.getUser();
-        console.log(user);
         return user?.userInfo?.userID || user?.userInfo?.userID === 0;
     }
 }

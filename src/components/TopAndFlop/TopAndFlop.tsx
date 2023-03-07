@@ -5,25 +5,40 @@ import styles from "./topAndFlop.module";
 import {Tab, TabList, TabPanel, Tabs} from "react-tabs";
 
 const TopAndFlop = () => {
-    const apiKey = process.env.REACT_APP_COMMON_BASE_URL
 
-    const [players, setPlayers] = useState([])
+    const [wkPlayers, setWKPlayers] = useState([]);
+    const [btPlayers, setBTPlayers] = useState([]);
+    const [bwPlayers, setBWPlayers] = useState([]);
+    const [arPlayers, setARPlayers] = useState([]);
     const fetchData = async () => {
-        TopandFlopService.shared.dataFetch({pageSize: 4, pageIndex:0, position:"Batsman"}).then(
-            response => {
-                console.log(response.data.data);
-                setPlayers(response.data.data?.players??[]);
-            },
-            error => {
-                console.log(error)
-            }
-        );
-        // const data = await response.json()
-        // setUsers(data)
+        const positions = ['Wicketkeeper', 'Bowler', 'Batsman', 'All rounder'];
+        positions.forEach((position) => {
+            TopandFlopService.shared.dataFetch({pageSize: 4, pageIndex:0, position: position}).then(
+                response => {
+                    switch (position) {
+                        case 'Bowler':
+                            setBTPlayers(response.data.data?.players??[]);
+                            break;
+                        case 'Batsman':
+                            setBWPlayers(response.data.data?.players??[]);
+                            break;
+                        case 'All rounder':
+                            setARPlayers(response.data.data?.players??[]);
+                            break;
+                        default:
+                            setWKPlayers(response.data.data?.players??[]);
+                            break;
+                    }
+                },
+                error => {
+                    console.log(error)
+                }
+            );
+        })
 
     }
     useEffect(() => {
-        fetchData()
+        fetchData();
     }, [])
 
     return (
@@ -38,8 +53,8 @@ const TopAndFlop = () => {
                 </TabList>
             </div>
             <TabPanel className={styles.list}>
-                {players.map((item:TopandFlopData) =>
-                    <div className={styles.item} key={`topandflop-${item?.playerId}`}>
+                {wkPlayers.map((item:TopandFlopData) =>
+                    <div className={styles.item} key={`topandflop-wk-${item?.playerId}`}>
                         <div className={styles.shirt}>
                             <img src={item?.shirtImageUri} alt=""/>
                         </div>
@@ -53,41 +68,57 @@ const TopAndFlop = () => {
                         </div>
                     </div>
                 )}
-                <div className={styles.item}>
-                    <div className={styles.shirt}>
-                        <img src="/images/shirt.png" alt=""/>
-                    </div>
-                    <div className={styles.info}>
-                        <div className={styles.name}>Chris Jordan</div>
-                        <div><span>WK</span> | Istanbul United</div>
-                    </div>
-                    <div className={styles.score}>
-                        <div>Season Points</div>
-                        <div className={styles.points}>2411.5</div>
-                    </div>
-                </div>
-                <div className={styles.item}>
-                    <div className={styles.shirt}>
-                        <img src="/images/shirt.png" alt=""/>
-                    </div>
-                    <div className={styles.info}>
-                        <div className={styles.name}>Chris Jordan</div>
-                        <div><span>WK</span> | Istanbul United</div>
-                    </div>
-                    <div className={styles.score}>
-                        <div>Season Points</div>
-                        <div className={styles.points}>2411.5</div>
-                    </div>
-                </div>
             </TabPanel>
             <TabPanel>
-                BW
+                {bwPlayers.map((item:TopandFlopData) =>
+                    <div className={styles.item} key={`topandflop-bw-${item?.playerId}`}>
+                        <div className={styles.shirt}>
+                            <img src={item?.shirtImageUri} alt=""/>
+                        </div>
+                        <div className={styles.info}>
+                            <div className={styles.name}>{item?.playerName}</div>
+                            <div><span>BW</span> | {item?.teamName}</div>
+                        </div>
+                        <div className={styles.score}>
+                            <div>Season Points</div>
+                            <div className={styles.points}>{item?.points}</div>
+                        </div>
+                    </div>
+                )}
             </TabPanel>
             <TabPanel>
-                BT
+                {btPlayers.map((item:TopandFlopData) =>
+                    <div className={styles.item} key={`topandflop-bt-${item?.playerId}`}>
+                        <div className={styles.shirt}>
+                            <img src={item?.shirtImageUri} alt=""/>
+                        </div>
+                        <div className={styles.info}>
+                            <div className={styles.name}>{item?.playerName}</div>
+                            <div><span>BT</span> | {item?.teamName}</div>
+                        </div>
+                        <div className={styles.score}>
+                            <div>Season Points</div>
+                            <div className={styles.points}>{item?.points}</div>
+                        </div>
+                    </div>
+                )}
             </TabPanel>
             <TabPanel>
-                AR
+                {arPlayers.map((item:TopandFlopData) =>
+                    <div className={styles.item} key={`topandflop-ar-${item?.playerId}`}>
+                        <div className={styles.shirt}>
+                            <img src={item?.shirtImageUri} alt=""/>
+                        </div>
+                        <div className={styles.info}>
+                            <div className={styles.name}>{item?.playerName}</div>
+                            <div><span>AR</span> | {item?.teamName}</div>
+                        </div>
+                        <div className={styles.score}>
+                            <div>Season Points</div>
+                            <div className={styles.points}>{item?.points}</div>
+                        </div>
+                    </div>
+                )}
             </TabPanel>
         </Tabs>
     );
