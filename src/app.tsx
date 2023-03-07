@@ -21,13 +21,13 @@ const App = () => {
                     <Route path="/register" element={<Register />} />
                     <Route path="/recoverPassword" element={<RecoverPassword />} />
                     <Route path="/createPassword" element={<CreatePassword />} />
-                    <Route 
-                        path="/dashboard" 
+                    <Route
+                        path="/dashboard"
                         element={
                             <ProtectedRoute>
                                 <Challenges page={'challenge'}/>
                             </ProtectedRoute>
-                        } 
+                        }
                     />
                     <Route path="/leaderboard" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'leaderboard'} />} />
                     <Route path="/friends" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'friends'} />} />
@@ -36,6 +36,7 @@ const App = () => {
                     <Route path="/challenge" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'challenge'} />} />
                     <Route path="/findChallenges" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'findChallenges'} />} />
                     <Route path="/stakes" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'stakes'} />} />
+                    <Route path="/selectRound" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'selectRound'} />} />
                     <Route path="/createChallenge" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'createChallenge'} />} />
                     <Route path="/pickPlayers" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'pickPlayers'} />} />
                     <Route path="/phoneVerify" element={<PhoneVerify />} />

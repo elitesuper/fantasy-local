@@ -90,18 +90,18 @@ const CreateChallenge = () => {
                 </NavLink>
             </TabPanel>
             <TabPanel className={styles.matchesList}>
-                <div className={classNames(styles.challengeBox, styles.stakesBox)}>
+                <NavLink to={'/selectRound'} className={classNames(styles.challengeBox, styles.stakesBox)}>
                     <div className={styles.icon}>Icon</div>
                     <div className={styles.text}><strong>Pakistan Super League</strong><br/>2023</div>
-                </div>
-                <div className={classNames(styles.challengeBox, styles.stakesBox)}>
+                </NavLink>
+                <NavLink to={'/selectRound'} className={classNames(styles.challengeBox, styles.stakesBox)}>
                     <div className={styles.icon}>Icon</div>
                     <div className={styles.text}><strong>Pakistan Super League</strong><br/>2023</div>
-                </div>
-                <div className={classNames(styles.challengeBox, styles.stakesBox)}>
+                </NavLink>
+                <NavLink to={'/selectRound'} className={classNames(styles.challengeBox, styles.stakesBox)}>
                     <div className={styles.icon}>Icon</div>
                     <div className={styles.text}><strong>Pakistan Super League</strong><br/>2023</div>
-                </div>
+                </NavLink>
             </TabPanel>
         </Tabs>
     );
