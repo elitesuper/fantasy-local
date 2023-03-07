@@ -11,7 +11,7 @@ import {ChallengeData} from "../../models/challenge/challenge-data";
 const FindChallenges = () => {
     const [privateChallenges, setPrivateChallenges] = useState([]);
     const [openChallenges, setOpenChallenges] = useState([]);
-    const fetchPrivateData = async () => {
+    const fetchData = async () => {
         ChallengesService.shared.findChallenge({userId: AuthService.shared.getUser()?.userInfo?.userID, challengePrivacy: true, pageSize: 10, pageIndex:1}).then(
             response => {
                 setPrivateChallenges(response.data.data?.challenges??[]);
@@ -20,8 +20,6 @@ const FindChallenges = () => {
                 console.log(error)
             }
         );
-    }
-    const fetchOpenData = async () => {
         ChallengesService.shared.findChallenge({userId: AuthService.shared.getUser()?.userInfo?.userID, challengePrivacy: false, pageSize: 10, pageIndex:1}).then(
             response => {
                 setOpenChallenges(response.data.data?.challenges??[]);
@@ -32,8 +30,7 @@ const FindChallenges = () => {
         );
     }
     useEffect(() => {
-        fetchPrivateData();
-        fetchOpenData();
+        fetchData();
     }, [])
 
     return (
@@ -56,7 +53,7 @@ const FindChallenges = () => {
                             <strong>{item.challengeName}</strong>
                             <div>Participants:
                                 {item?.challengers?.map((challenger: any) =>
-                                    <span key={challenger?.userId}>{challenger?.userName}, </span>
+                                    <span key={`challenger-private-${challenger?.userId}-${challenger?.challengerPosition}`}>{challenger?.userName}, </span>
                                 )}
                             </div>
                             <small>{item.challengeDateTime} | Create by: {item.creatorName}</small>
@@ -75,7 +72,7 @@ const FindChallenges = () => {
                             <strong>{item.challengeName}</strong>
                             <div>Participants:
                                 {item?.challengers?.map((challenger: any) =>
-                                    <span key={challenger?.userId}>{challenger?.userName}, </span>
+                                    <span key={`challenger-open-${challenger?.userId}-${challenger?.challengerPosition}`}>{challenger?.userName}, </span>
                                 )}
                             </div>
                             <small>{item.challengeDateTime} | Create by: {item.creatorName}</small>
