@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { TopandFlopData } from "src/models/topandflop/topandflop-data";
+import { TopandFlopData } from "src/models/topandflop/topandfloptype";
 import { TopandFlopService } from "../../services/topandflop.service";
 import styles from "./topAndFlop.module";
 import {Tab, TabList, TabPanel, Tabs} from "react-tabs";
