@@ -12,8 +12,10 @@ import {AuthService} from "../../services/auth.service";
 // import {getDeviceId, getDeviceRegistration} from "../../lib/getDeviceId";
 import getDeviceId from "../../lib/getDeviceId";
 import getDeviceRegistration from "../../lib/getDeviceRegistration";
+import { useAuth } from "../../contexts/AuthContext";
 
 const LoginForm = () => {
+    const auth = useAuth();
     const navigate = useNavigate();
     const [countryCode, setCountryCode] = useState(null);
     const [password, setPassword] = useState("");
@@ -29,10 +31,16 @@ const LoginForm = () => {
             const mobileNumber = dialCode + tel;
             AuthService.shared.logIn({mobileNumber: mobileNumber, password: password, deviceToken: getDeviceId(), deviceRegistration:getDeviceRegistration()}).then(
                 response => {
-                    console.log(response);
+                    const userData = response?.data
                     if (response?.data?.data) {
-                        AuthService.shared.setUser(response.data.data);
-                        navigate("/dashboard");
+                        if(!userData?.data?.userInfo){
+                            alert(userData?.message)
+                            return;
+                        }else{
+                            // AuthService.shared.setUser(response.data.data);
+                            auth.login(response.data.data);
+                            // navigate("/dashboard");
+                        }
                     }
                 },
                 error => {

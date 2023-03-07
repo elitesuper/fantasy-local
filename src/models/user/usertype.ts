@@ -20,3 +20,15 @@ export interface UserData {
     playStoreUrl: string | undefined;
     sportId: number | undefined;
 }
+
+export interface User {
+    mobileNumber: string;
+    deviceToken: string;
+    deviceRegistration: string;
+    password: string | undefined;
+}
+
+export interface PhoneVerify {
+    mobileNumber: string;
+    verificationCode: string;
+}

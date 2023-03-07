@@ -1,7 +1,6 @@
-import {User} from "../models/user/user";
 import getAxiosInstance from "../lib/getAxiosInstance";
 import {authHeader, headers} from "./auth-header";
-import {UserData} from "../models/user/user-data";
+import {PhoneVerify, User, UserData} from "../models/user/usertype";
 import axios from "axios";
 
 // const axios = getAxiosInstance(process.env.COMMON_BASE_URL ?? '');
@@ -23,9 +22,12 @@ export class AuthService {
         localStorage.removeItem("token");
     }
 
-    async signUp(user: User) {
-        const headers = await authHeader();
-        return axios.post('/api/users/register', user, { headers: headers });
+    async signUp(user : User) {
+        return axios.post('/common-api/api/users/register', user);
+    }
+
+    async phoneVerify(code : PhoneVerify){
+        return axios.post('./common-api/api/users/account-verification', code)
     }
 
     getUser() {
@@ -34,6 +36,10 @@ export class AuthService {
 
     getCurrentToken() {
         return JSON.parse(localStorage.getItem('token')??"");
+    }
+
+    getRegisterInfo() {
+        return JSON.parse(localStorage.getItem('register')||"{}");
     }
 
     setUser(user: UserData) {
