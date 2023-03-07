@@ -18,8 +18,11 @@ import Ads from "../Ads/Ads";
 
 import {Trophy} from "../../images/Trophy";
 import classNames from "classnames";
-import styles from "./dashboard.module";
 import { AuthService } from "../../services/auth.service";
+import SelectRound from "../Challenge/SelectRound";
+import {Edit} from "../../images/Edit";
+
+import styles from "./dashboard.module";
 
 interface HeaderProps {
     page?: string;
@@ -33,6 +36,7 @@ const DashboardForm = (props: HeaderProps) => {
                     <div className="boxTitle">My profile</div>
                     <div className={classNames(`boxContainer`, styles.user)}>
                         <div className={styles.avatar}>
+                            <span className={styles.icon}><Edit /></span>
                             <img src="/images/user.png" alt=""/>
                         </div>
                         <div className={styles.info}>
@@ -46,9 +50,6 @@ const DashboardForm = (props: HeaderProps) => {
                 <div className={classNames(`box`, styles.menu)}>
                     <div className="boxTitle">Menu</div>
                     <div className={classNames(`boxContent`, styles.menuLinks)}>
-                        <NavLink className={classNames(styles.item, props.page === 'dashboard' ? styles.active : "")} to="/dashboard">
-                            Home
-                        </NavLink>
                         <NavLink className={classNames(styles.item, props.page === 'profile' ? styles.active : "")} to="/profile">
                             My profile
                         </NavLink>
@@ -83,6 +84,7 @@ const DashboardForm = (props: HeaderProps) => {
                 {props.page === 'createChallenge' && <CreateChallenge/>}
                 {props.page === 'pickPlayers' && <PickPlayers />}
                 {props.page === 'stakes' && <Stakes />}
+                {props.page === 'selectRound' && <SelectRound />}
 
                 {props.page !== 'chat' &&  <Ads/>}
             </div>

@@ -78,10 +78,10 @@ const CreateChallenge = () => {
             </TabPanel>
             <TabPanel className={styles.matchesList}>
                 {leagues.map((item:LeaguesData) =>
-                    <div key={item.leagueId} className={classNames(styles.challengeBox, styles.stakesBox)}>
-                        <img src={item.leagueImageUri} alt=""/>
+                    <NavLink key={item.leagueId} to={'/selectRound'} className={classNames(styles.challengeBox, styles.stakesBox)}>
+                        <img className={styles.icon} src={item.leagueImageUri} alt=""/>
                         <div className={styles.text}><strong>{item.leagueName}</strong><br/>{item.season}</div>
-                    </div>
+                    </NavLink>
                 )}
             </TabPanel>
         </Tabs>
