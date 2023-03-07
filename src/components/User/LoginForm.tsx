@@ -9,7 +9,9 @@ import {Phone} from "../../images/Phone";
 import styles from "./user.module"
 import classNames from "classnames";
 import {AuthService} from "../../services/auth.service";
+// import {getDeviceId, getDeviceRegistration} from "../../lib/getDeviceId";
 import getDeviceId from "../../lib/getDeviceId";
+import getDeviceRegistration from "../../lib/getDeviceRegistration";
 
 const LoginForm = () => {
     const navigate = useNavigate();
@@ -24,7 +26,8 @@ const LoginForm = () => {
         setCountryCode(countryCode || null);
         if (tel && password && countryCode ) {
             const dialCode = countries.find(country => country.name === countryCode?.value)?.dial_code;
-            AuthService.shared.logIn({mobileNumber: tel, password: password, countryCode: dialCode, deviceToken: getDeviceId()}).then(
+            const mobileNumber = dialCode + tel;
+            AuthService.shared.logIn({mobileNumber: mobileNumber, password: password, deviceToken: getDeviceId(), deviceRegistration:getDeviceRegistration()}).then(
                 response => {
                     console.log(response);
                     if (response?.data?.data) {

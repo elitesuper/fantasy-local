@@ -8,9 +8,9 @@ const axios = getAxiosInstance(process.env.COMMON_BASE_URL ?? '');
 export class AuthService {
     static readonly shared: AuthService = new AuthService();
 
-    async logIn(user: { password: string; mobileNumber: string; countryCode: string | undefined; deviceToken: string }) {
+    async logIn(user: { password: string; mobileNumber: string; deviceToken: string; deviceRegistration: string }) {
         const headers = await authHeader();
-        return axios.post('/api/users/login', user, { headers: headers });
+        return axios.post('/fantasyway/api/users/login', user, {withCredentials: true, headers: headers });
     }
 
     getToken(user: any) {
@@ -24,7 +24,7 @@ export class AuthService {
 
     async signUp(user: User) {
         const headers = await authHeader();
-        return axios.post('/api/users/register', user, { headers: headers });
+        return axios.post('/fantasy/api/users/register', user, { headers: headers });
     }
 
     getUser() {
@@ -32,7 +32,7 @@ export class AuthService {
     }
 
     getCurrentToken() {
-        return JSON.parse(localStorage.getItem('token') || "{}");
+        return JSON.parse(localStorage.getItem('token')??"");
     }
 
     setUser(user: UserData) {
@@ -45,6 +45,7 @@ export class AuthService {
 
     checkAuthenticate() {
         const user = this.getUser();
-        return user?.uId || user?.uId === 0;
+        console.log(user);
+        return user?.userInfo?.userID || user?.userInfo?.userID === 0;
     }
 }
