@@ -37,7 +37,7 @@ const DashboardForm = (props: HeaderProps) => {
                     <div className={classNames(`boxContainer`, styles.user)}>
                         <div className={styles.avatar}>
                             <span className={styles.icon}><Edit /></span>
-                            <img src="/images/user.png" alt=""/>
+                            <img src="/images/missing.png" alt=""/>
                         </div>
                         <div className={styles.info}>
                             <div className={styles.name}>{AuthService.shared.getUser()?.firstName + ' ' + AuthService.shared.getUser()?.lastName}</div>
