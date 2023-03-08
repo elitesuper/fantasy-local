@@ -43,7 +43,10 @@ const Profile = () => {
             registrationToken: getDeviceId(),
         }).then(
             response=>{
-                console.log(response?.data?.data)
+                const data = response?.data?.data?.userInfo;
+                if(data){
+                    AuthService.shared.setUser(data)
+                }
             },
             error=>{
                 console.log(error);

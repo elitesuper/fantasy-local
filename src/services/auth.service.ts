@@ -53,7 +53,7 @@ export class AuthService {
     getRegisterInfo() {
         return JSON.parse(localStorage.getItem('register')||"{}");
     }
-    setUser(user: UserData) {
+    setUser(user: any) {
         return localStorage.setItem('user', JSON.stringify(user));
     }
 
