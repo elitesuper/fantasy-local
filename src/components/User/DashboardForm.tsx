@@ -23,11 +23,14 @@ import SelectRound from "../Challenge/SelectRound";
 import {Edit} from "../../images/Edit";
 
 import styles from "./dashboard.module";
+import { useAuth } from "../../contexts/AuthContext";
 
 interface HeaderProps {
     page?: string;
 }
 const DashboardForm = (props: HeaderProps) => {
+
+    const userData = useAuth();
 
     return (
         <div className={styles.dashboard}>
@@ -40,8 +43,8 @@ const DashboardForm = (props: HeaderProps) => {
                             <img src="/images/missing.png" alt=""/>
                         </div>
                         <div className={styles.info}>
-                            <div className={styles.name}>{AuthService.shared.getUser()?.firstName + ' ' + AuthService.shared.getUser()?.lastName}</div>
-                            <div className={styles.email}>{AuthService.shared.getUser()?.email}</div>
+                            <div className={styles.name}>{userData?.user?.firstName + ' ' + userData?.user?.lastName}</div>
+                            <div className={styles.email}>{userData?.user?.email}</div>
                             <button className="button"><Trophy/> 10</button>
                             <button className="button buttonSecondary"><Trophy/> 0</button>
                         </div>

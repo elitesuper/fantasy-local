@@ -18,7 +18,7 @@ const Profile = () => {
     const user = AuthService.shared.getUser();
     const [firstName, setFirstName] = useState<string>(user?.firstName??"");
     const [lastName, setLastName] = useState<string>(user?.lastName??"");
-    const [DOB, setDOB] = useState("");
+    const [DOB, setDOB] = useState(user?.dateOfBirth??"");
     const [email, setEmail] = useState<string>(user?.email??"");
     const [tel, setTel] = useState<string>(user?.mobileNumber);
     const [selectedCountry, setSelectedCountry] = useState(null);
@@ -36,7 +36,7 @@ const Profile = () => {
             email:email,
             country:dialCode?.name??"",
             countryCode: dialCode?.dial_code??"",
-            dob:"7/17/1971",
+            dob: DOB,
             preferredSportId: 0,
             sportId: 0,
             city:user?.city??"",
