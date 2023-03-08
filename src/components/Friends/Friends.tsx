@@ -1,9 +1,25 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 
 import styles from './friends.module';
 import {Magnifier} from "../../images/Magnifier";
+import {FriendsService} from "../../services/friends.service";
+import {AuthService} from "../../services/auth.service";
 
 const Friends = () => {
+    const [friends, setFriends] = useState([]);
+    const fetchData = async () => {
+        FriendsService.shared.getFriends({userId: AuthService.shared.getUser()?.userInfo?.userID, searchKey: ''}).then(
+            response => {
+                setFriends(response.data.data??[]);
+            },
+            error => {
+                console.log(error)
+            }
+        );
+    }
+    useEffect(() => {
+        fetchData();
+    }, [])
     return (
         <>
             <div className={styles.search}>
@@ -21,15 +37,18 @@ const Friends = () => {
                     />
                 </div>
             </div>
+            {!friends?.length ? <div className={styles.noFriend}>There's no friends</div> : ''}
+            {friends.map((friend:any) =>
             <div className={styles.item}>
                 <div className={styles.avatar}>
-                    <img src="/images/user.png" alt=""/>
+                    <img src={process.env.COMMON_BASE_URL + friend.picture} alt=""/>
                 </div>
                 <div className={styles.user}>
-                    <div className={styles.name}>Maja Svensk</div>
-                    <div>+45 28 55 88 74</div>
+                    <div className={styles.name}>{friend.firstName + ' ' + friend.lastName}</div>
+                    <div>{friend.mobileNumber}</div>
                 </div>
             </div>
+            )}
         </>
     );
 };
