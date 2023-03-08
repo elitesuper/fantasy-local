@@ -40,6 +40,7 @@ const App = () => {
                     <Route path="/createChallenge" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'createChallenge'} />} />
                     <Route path="/pickPlayers" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'pickPlayers'} />} />
                     <Route path="/phoneVerify" element={<PhoneVerify />} />
+                    <Route path="/forgotPassword"element={<RecoverPassword />} />
                     {/*<Route path="/contact" element={<Contact />} />*/}
                     <Route path="/about" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'about'} />} />
                     <Route path="/rules" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'rules'} />} />

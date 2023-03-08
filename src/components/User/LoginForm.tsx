@@ -13,6 +13,7 @@ import {AuthService} from "../../services/auth.service";
 import getDeviceId from "../../lib/getDeviceId";
 import getDeviceRegistration from "../../lib/getDeviceRegistration";
 import { useAuth } from "../../contexts/AuthContext";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 const LoginForm = () => {
     const auth = useAuth();
@@ -20,6 +21,7 @@ const LoginForm = () => {
     const [countryCode, setCountryCode] = useState(null);
     const [password, setPassword] = useState("");
     const [tel, setTel] = useState("");
+    const [userphone, setUserPhone] = useLocalStorage('userphone', null);
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
@@ -35,6 +37,7 @@ const LoginForm = () => {
                     if (response?.data?.data) {
                         if(!userData?.data?.userInfo){
                             alert(userData?.message)
+                            setUserPhone({mobileNumber:mobileNumber})
                             return;
                         }else{
                             // AuthService.shared.setUser(response.data.data);
@@ -130,7 +133,7 @@ const LoginForm = () => {
                     className={classNames("button large", styles.loginBtn)}>
                     Log In
                 </button>
-                <NavLink className={styles.link} to="/forgotPassword">Forgot password?</NavLink>
+                {userphone?.mobileNumber&&<NavLink className={styles.link} to="/forgotPassword">Forgot password?</NavLink>}
                 <div className={styles.signup}>
                     Don't have an account?{" "}
                     <NavLink to="/register" className={styles.link}>
