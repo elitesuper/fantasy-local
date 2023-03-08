@@ -7,15 +7,20 @@ import {AuthService} from "../../services/auth.service";
 
 const Friends = () => {
     const [friends, setFriends] = useState([]);
+    const [filteredFriends, setFilteredFriends] = useState([]);
     const fetchData = async () => {
-        FriendsService.shared.getFriends({userId: AuthService.shared.getUser()?.userInfo?.userID, searchKey: ''}).then(
+        FriendsService.shared.getFriends({userId: '4d45eed9-9c16-4ac7-9c7b-8efa8c815c3b', searchKey: ''}).then(
             response => {
                 setFriends(response.data.data??[]);
+                setFilteredFriends(response.data.data??[]);
             },
             error => {
                 console.log(error)
             }
         );
+    }
+    const filterFriends = (e: string) => {
+        setFilteredFriends(friends.filter((friend) => { return (friend?.firstName + '' + friend?.lastName).toLowerCase().indexOf(e.target.value) > -1}));
     }
     useEffect(() => {
         fetchData();
@@ -34,11 +39,12 @@ const Friends = () => {
                         name='search'
                         id='search'
                         placeholder='Search'
+                        onChange={filterFriends}
                     />
                 </div>
             </div>
-            {!friends?.length ? <div className={styles.noFriend}>There's no friends</div> : ''}
-            {friends.map((friend:any) =>
+            {!filteredFriends?.length ? <div className={styles.noFriend}>There's no friends</div> : ''}
+            {filteredFriends.map((friend:any) =>
             <div className={styles.item}>
                 <div className={styles.avatar}>
                     <img src={process.env.COMMON_BASE_URL + friend.picture} alt=""/>

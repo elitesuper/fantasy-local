@@ -56,7 +56,7 @@ const TopAndFlop = () => {
                 {wkPlayers.map((item:TopandFlopData) =>
                     <div className={styles.item} key={`topandflop-wk-${item?.playerId}`}>
                         <div className={styles.shirt}>
-                            <img src={process.env.COMMON_BASE_URL + item?.shirtImageUri} alt=""/>
+                            <img src={'process.env.COMMON_BASE_URL' + item?.shirtImageUri} alt=""/>
                         </div>
                         <div className={styles.info}>
                             <div className={styles.name}>{item?.playerName}</div>
