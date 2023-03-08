@@ -15,7 +15,7 @@ const Stakes = () => {
     const navigate = useNavigate();
     return (
         <>
-            <div className="box mb15">
+            <div className="box">
                 <div className="boxTitle">
                     What's at stake?
                     <div className={styles.backButton} onClick={() => navigate(-1)}>Back</div>

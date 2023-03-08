@@ -38,7 +38,7 @@
 .matchesList {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 15px;
+  grid-column-gap: 15px;
 
   a {
     text-decoration: none;
@@ -57,6 +57,13 @@
   display: flex;
   text-decoration: none;
   color: $text-default;
+  margin-top: 15px;
+  padding: 10px 15px;
+
+  .icon {
+    flex: 0 0 60px;
+    display: flex;
+  }
 }
 
 .noChallenges {
@@ -68,7 +75,6 @@
 
 .stakesBox {
   padding: 15px;
-  margin-top: 0;
   align-items: center;
   font-size: 18px;
   line-height: 22px;
@@ -112,7 +118,6 @@
 
 .match {
   display: flex;
-  padding: 15px 20px 20px;
   text-align: center;
 
   .team {
@@ -135,7 +140,7 @@
   }
 
   .time {
-    flex: 1;
+    flex: 0 0 150px;
 
     strong {
       display: block;
@@ -241,5 +246,25 @@
     line-height: 24px;
     color: $brand-color;
     font-weight: bold;
+  }
+}
+
+.newChallenge {
+  background: #000;
+  padding: 30px;
+  color: $text-light;
+  border-radius: 15px;
+  margin-bottom: 15px;
+  display: flex;
+  cursor: pointer;
+  font-weight: bold;
+
+  .icon {
+    flex: 0 0 120px;
+  }
+
+  .status {
+    font-weight: normal;
+    color: $text-secondary;
   }
 }
