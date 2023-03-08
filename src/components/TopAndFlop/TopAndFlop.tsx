@@ -5,7 +5,7 @@ import styles from "./topAndFlop.module";
 import {Tab, TabList, TabPanel, Tabs} from "react-tabs";
 
 const TopAndFlop = () => {
-
+    const baseUrl  = process.env.PROXY;
     const [wkPlayers, setWKPlayers] = useState([]);
     const [btPlayers, setBTPlayers] = useState([]);
     const [bwPlayers, setBWPlayers] = useState([]);
@@ -56,7 +56,7 @@ const TopAndFlop = () => {
                 {wkPlayers.map((item:TopandFlopData) =>
                     <div className={styles.item} key={`topandflop-wk-${item?.playerId}`}>
                         <div className={styles.shirt}>
-                            <img src={process.env.COMMON_BASE_URL + item?.shirtImageUri} alt=""/>
+                            <img src={baseUrl + item?.shirtImageUri} alt=""/>
                         </div>
                         <div className={styles.info}>
                             <div className={styles.name}>{item?.playerName}</div>
@@ -73,7 +73,7 @@ const TopAndFlop = () => {
                 {bwPlayers.map((item:TopandFlopData) =>
                     <div className={styles.item} key={`topandflop-bw-${item?.playerId}`}>
                         <div className={styles.shirt}>
-                            <img src={process.env.COMMON_BASE_URL + item?.shirtImageUri} alt=""/>
+                            <img src={baseUrl + item?.shirtImageUri} alt=""/>
                         </div>
                         <div className={styles.info}>
                             <div className={styles.name}>{item?.playerName}</div>
@@ -90,7 +90,7 @@ const TopAndFlop = () => {
                 {btPlayers.map((item:TopandFlopData) =>
                     <div className={styles.item} key={`topandflop-bt-${item?.playerId}`}>
                         <div className={styles.shirt}>
-                            <img src={process.env.COMMON_BASE_URL + item?.shirtImageUri} alt=""/>
+                            <img src={baseUrl + item?.shirtImageUri} alt=""/>
                         </div>
                         <div className={styles.info}>
                             <div className={styles.name}>{item?.playerName}</div>
@@ -107,7 +107,7 @@ const TopAndFlop = () => {
                 {arPlayers.map((item:TopandFlopData) =>
                     <div className={styles.item} key={`topandflop-ar-${item?.playerId}`}>
                         <div className={styles.shirt}>
-                            <img src={process.env.COMMON_BASE_URL + item?.shirtImageUri} alt=""/>
+                            <img src={baseUrl + item?.shirtImageUri} alt=""/>
                         </div>
                         <div className={styles.info}>
                             <div className={styles.name}>{item?.playerName}</div>

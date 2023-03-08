@@ -10,6 +10,7 @@ import {LeaguesData, MatchesData} from "../../models/challenge/challenge-data";
 import moment from "moment";
 
 const CreateChallenge = () => {
+    const baseUrl  = process.env.PROXY;
     const navigate = useNavigate();
     const [matches, setMatches] = useState([]);
     const [leagues, setLeagues] = useState([]);
@@ -56,7 +57,7 @@ const CreateChallenge = () => {
                         <div className={styles.match}>
                             <div className={styles.team}>
                                 <div className={styles.teamLogo}>
-                                    <img src={process.env.COMMON_BASE_URL + item.homeTeamImageUri} alt=""/>
+                                    <img src={baseUrl + item.homeTeamImageUri} alt=""/>
                                 </div>
                                 <div>{item.homeTeamName}</div>
                             </div>
@@ -66,7 +67,7 @@ const CreateChallenge = () => {
                             </div>
                             <div className={styles.team}>
                                 <div className={styles.teamLogo}>
-                                    <img src={process.env.COMMON_BASE_URL + item.awayTeamImageUri} alt=""/>
+                                    <img src={baseUrl + item.awayTeamImageUri} alt=""/>
                                 </div>
                                 <div>{item.awayTeamName}</div>
                             </div>
@@ -90,7 +91,7 @@ const CreateChallenge = () => {
             <TabPanel className={styles.matchesList}>
                 {leagues.map((item:LeaguesData) =>
                     <NavLink key={item.leagueId} to={'/selectRound'} className={classNames(styles.challengeBox, styles.stakesBox)}>
-                        <img className={styles.icon} src={item.leagueImageUri} alt=""/>
+                        <img className={styles.icon} src={baseUrl + item.leagueImageUri} alt=""/>
                         <div className={styles.text}><strong>{item.leagueName}</strong><br/>{item.season}</div>
                     </NavLink>
                 )}
