@@ -7,6 +7,7 @@ import styles from './challenges.module';
 import {ChallengesService} from "../../services/challenges.service";
 import {AuthService} from "../../services/auth.service";
 import {ChallengeData} from "../../models/challenge/challenge-data";
+import moment from "moment/moment";
 
 const FindChallenges = () => {
     const [privateChallenges, setPrivateChallenges] = useState([]);
@@ -56,7 +57,7 @@ const FindChallenges = () => {
                                     <span key={`challenger-private-${challenger?.userId}-${challenger?.challengerPosition}`}>{challenger?.userName}, </span>
                                 )}
                             </div>
-                            <small>{item.challengeDateTime} | Create by: {item.creatorName}</small>
+                            <small>{moment(item.challengeDateTime).format('DD/MM/YY hh:mm')} | Create by: {item.creatorName}</small>
                         </div>
                     </div>
                 )}
@@ -75,7 +76,7 @@ const FindChallenges = () => {
                                     <span key={`challenger-open-${challenger?.userId}-${challenger?.challengerPosition}`}>{challenger?.userName}, </span>
                                 )}
                             </div>
-                            <small>{item.challengeDateTime} | Create by: {item.creatorName}</small>
+                            <small>{moment(item.challengeDateTime).format('DD/MM/YY hh:mm')} | Create by: {item.creatorName}</small>
                         </div>
                     </div>
                 )}

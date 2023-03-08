@@ -7,6 +7,7 @@ import classNames from "classnames";
 import styles from './challenges.module';
 import {ChallengesService} from "../../services/challenges.service";
 import {LeaguesData, MatchesData} from "../../models/challenge/challenge-data";
+import moment from "moment";
 
 const CreateChallenge = () => {
     const navigate = useNavigate();
@@ -15,7 +16,6 @@ const CreateChallenge = () => {
     const fetchData = async () => {
         ChallengesService.shared.matchesDataNoPlayers().then(
             response => {
-                console.log(response.data);
                 setMatches(response.data.data?.topMatches??[]);
                 setLeagues(response.data.data?.leagues??[]);
             },
@@ -23,6 +23,17 @@ const CreateChallenge = () => {
                 console.log(error)
             }
         );
+    }
+    function getTimeDiff(matchDate: string) {
+        const startDate = moment(new Date());
+        const timeEnd = moment(new Date(matchDate));
+        const diff = timeEnd.diff(startDate);
+        const diffDuration = moment.duration(diff);
+        if (diffDuration.days() > 0) {
+            return moment(matchDate).format('DD/MM/YY');
+        } else {
+            return diffDuration.hours() + 'h  ' + diffDuration.minutes() + 'm';
+        }
     }
     useEffect(() => {
         fetchData();
@@ -51,7 +62,7 @@ const CreateChallenge = () => {
                             </div>
                             <div className={styles.time}>
                                 <strong>{item.matchStatus}</strong>
-                                <span>{item.matchDate}</span>
+                                <span>{getTimeDiff(item.matchDate)}</span>
                             </div>
                             <div className={styles.team}>
                                 <div className={styles.teamLogo}>
