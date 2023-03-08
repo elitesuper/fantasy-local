@@ -8,21 +8,49 @@ import {Phone} from "../../images/Phone";
 import styles from "./user.module"
 import countries from "./Countries";
 import classNames from "classnames";
+import { AuthService } from "../../services/auth.service";
+import { ProfileService } from "../../services/profile.service";
+import getDeviceId from "../../lib/getDeviceId";
 
 
 const Profile = () => {
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [DOB, setDOB] = useState("");
-    const [email, setEmail] = useState("");
-    const [tel, setTel] = useState("");
 
-    const handleSubmit = (e) => {
+    const user = AuthService.shared.getUser();
+    const [firstName, setFirstName] = useState<string>(user?.firstName??"");
+    const [lastName, setLastName] = useState<string>(user?.lastName??"");
+    const [DOB, setDOB] = useState("");
+    const [email, setEmail] = useState<string>(user?.email??"");
+    const [tel, setTel] = useState<string>(user?.mobileNumber);
+    const [selectedCountry, setSelectedCountry] = useState(null);
+
+
+    const handleSubmit = (e : any) => {
         e.preventDefault();
+        const dialCode = countries.find(country => country.name === selectedCountry?.value);
         setTel("");
+        ProfileService.shared.updateProfile({
+            userId: user?.userID??"",
+            mobileNumber: tel,
+            firstName: firstName,
+            lastName: lastName,
+            email:email,
+            country:dialCode?.name??"",
+            countryCode: dialCode?.dial_code??"",
+            dob:"7/17/1971",
+            preferredSportId: 0,
+            sportId: 0,
+            city:user?.city??"",
+            registrationToken: getDeviceId(),
+        }).then(
+            response=>{
+                console.log(response?.data?.data)
+            },
+            error=>{
+                console.log(error);
+            }
+        )
     };
 
-    const [selectedOption, setSelectedOption] = useState(null);
     const reactCountries = countries.map(
         ({
              name,
@@ -108,8 +136,8 @@ const Profile = () => {
                     />
                 </div>
                 <Select
-                    defaultValue={selectedOption}
-                    onChange={setSelectedOption}
+                    defaultValue={selectedCountry}
+                    onChange={setSelectedCountry}
                     components={{IndicatorSeparator}}
                     options={reactCountries}
                     styles={customStyles}

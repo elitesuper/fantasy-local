@@ -13,9 +13,9 @@ export async function authHeader() {
     // }
     // console.log(tokenValue);
     // AuthService.shared.setToken(tokenValue);
-    let UserData = AuthService.shared.getUser();
+    let TokenData = AuthService.shared.getCurrentToken();
 
-    let token = "Bearer " + UserData?.tokenInfo?.authToken
+    let token = "Bearer " + TokenData?.authToken;
     
     return {
         'Content-Type': 'application/json;charset=UTF-8',
