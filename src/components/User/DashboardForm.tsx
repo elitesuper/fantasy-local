@@ -22,12 +22,13 @@ import SelectRound from "../Challenge/SelectRound";
 import {Edit} from "../../images/Edit";
 
 import styles from "./dashboard.module";
-import { useAuth } from "../../contexts/AuthContext";
+import {useAuth} from "../../contexts/AuthContext";
 import PickPlayer from "../Challenge/PickPlayer";
 
 interface HeaderProps {
     page?: string;
 }
+
 const DashboardForm = (props: HeaderProps) => {
 
     const userData = useAuth();
@@ -39,7 +40,7 @@ const DashboardForm = (props: HeaderProps) => {
                     <div className="boxTitle">My profile</div>
                     <div className={classNames(`boxContainer`, styles.user)}>
                         <div className={styles.avatar}>
-                            <span className={styles.icon}><Edit /></span>
+                            <span className={styles.icon}><Edit/></span>
                             <img src="/images/missing.png" alt=""/>
                         </div>
                         <div className={styles.info}>
@@ -68,10 +69,10 @@ const DashboardForm = (props: HeaderProps) => {
                     </div>
                 </div>
 
-                {props.page === 'findChallenges' &&  (
+                {props.page === 'findChallenges' && (
                     <NavLink to="/createChallenge" className="button large mt10">+ Create a Challenge</NavLink>
                 )}
-                {props.page === 'chat' &&  <Ads/>}
+                {props.page === 'chat' && <Ads/>}
             </div>
             <div className={styles.body}>
                 {props.page === 'profile' && <Profile/>}
@@ -85,16 +86,15 @@ const DashboardForm = (props: HeaderProps) => {
                 {props.page === 'topAndFlop' && <TopAndFlop/>}
                 {props.page === 'findChallenges' && <FindChallenges/>}
                 {props.page === 'createChallenge' && <CreateChallenge/>}
-                {props.page === 'field' && <Field />}
-                {props.page === 'stakes' && <Stakes />}
-                {props.page === 'selectRound' && <SelectRound />}
-                {props.page === 'pickPlayer' && <PickPlayer />}
-
-                {props.page !== 'chat' &&  <Ads/>}
+                {props.page === 'field' && <Field/>}
+                {props.page === 'stakes' && <Stakes/>}
+                {props.page === 'selectRound' && <SelectRound/>}
+                {props.page === 'pickPlayer' && <PickPlayer/>}
+                {props.page !== 'chat' && <Ads/>}
             </div>
             <div className={styles.rightColumn}>
                 <div className={styles.box}>
-                    <TopAndFlop />
+                    <TopAndFlop/>
                 </div>
             </div>
         </div>

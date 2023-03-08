@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from "react";
-import {Navigate, NavLink} from "react-router-dom";
+import React, {useState} from "react";
+import {NavLink} from "react-router-dom";
 import Select, { IndicatorSeparatorProps } from 'react-select';
 import { useNavigate } from "react-router-dom";
 import countries from "./Countries";
@@ -9,7 +9,6 @@ import {Phone} from "../../images/Phone";
 import styles from "./user.module"
 import classNames from "classnames";
 import {AuthService} from "../../services/auth.service";
-// import {getDeviceId, getDeviceRegistration} from "../../lib/getDeviceId";
 import getDeviceId from "../../lib/getDeviceId";
 import getDeviceRegistration from "../../lib/getDeviceRegistration";
 import { useAuth } from "../../contexts/AuthContext";
@@ -21,7 +20,7 @@ const LoginForm = () => {
     const [countryCode, setCountryCode] = useState(null);
     const [password, setPassword] = useState("");
     const [tel, setTel] = useState("");
-    const [userphone, setUserPhone] = useLocalStorage('userphone', null);
+    const [setUserPhone] = useLocalStorage('userphone', null);
     const navigate = useNavigate();
 
 
@@ -42,7 +41,7 @@ const LoginForm = () => {
                             return;
                         }else{
                             // AuthService.shared.setUser(response.data.data);
-                            toast.success("Successfully logged In.");
+                            toast.success("Successfully logged In");
                             auth.login(response.data.data);
                         }
                     }
@@ -56,7 +55,7 @@ const LoginForm = () => {
 
     const recoverPassword = () =>{
         if(tel == ""){
-            toast.error("Please Input Phone Number!");
+            toast.error("Please enter phone number!");
             return;
         }
         setUserPhone({mobileNumber:tel})
@@ -143,7 +142,7 @@ const LoginForm = () => {
                     className={classNames("button large", styles.loginBtn)}>
                     Log In
                 </button>
-                <div 
+                <div
                     className={styles.link}
                     onClick={() => recoverPassword()}
                 >Forgot password?</div>

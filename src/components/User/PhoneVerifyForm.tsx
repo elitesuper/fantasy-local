@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {NavLink, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import VerificationInput from "react-verification-input";
 import { toast } from 'react-toastify';
 
@@ -35,9 +35,9 @@ const PhoneVerifyForm = () => {
                 navigate('/')
                 return;
             }
-            toast.error('Verify Code is incorrect!');
+            toast.error('Verification code is incorrect!');
         }else{
-            toast.error("Register Info is not correct! \n Please register again.");
+            toast.error("Register info is incorrect! \n Please register again!");
         }
     };
     return (

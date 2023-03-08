@@ -23,16 +23,16 @@ const RecoverPasswordForm = () => {
                     if(changed){
                         navigate('/createPassword');
                     }else{
-                        toast.error(`The password can't change.`);
+                        toast.error(`Password can't change.`);
                     }
                 },
                 error => {
-                    toast.error(`Something went Wrong.`);
+                    toast.error(`Something went wrong.`);
                 }
             )
         }
         else{
-            toast.error(`Verify Code doesn't match.`);
+            toast.error(`Verification code doesn't match!`);
         }
     };
 
@@ -40,12 +40,12 @@ const RecoverPasswordForm = () => {
         AuthService.shared.recoveryPassword({mobileNumber:phoneInfo.mobileNumber}).then(
             response => {
                 if(response?.data?.data?.code){
-    
+
                     setReceivedCode(response?.data?.data?.code)
                 }
             },
             error => {
-    
+
             }
         )
     },[])
