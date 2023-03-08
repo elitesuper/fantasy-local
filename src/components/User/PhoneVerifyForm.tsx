@@ -15,23 +15,29 @@ const PhoneVerifyForm = () => {
         e.preventDefault();
         const registerInfo = AuthService.shared.getRegisterInfo();
         if(registerInfo?.mobileNumber){
-            AuthService.shared.phoneVerify({mobileNumber:registerInfo?.mobileNumber, verificationCode: code}).then(
-                response => {
-                    console.log(response?.data)
-                    if(response?.data?.message){
-                        toast(response?.data?.message);
-                    }
-                    navigate('/')
-                },
-                error => {
-                    console.log(error);
-                    if(error?.response?.data?.title){
-                        toast.error(error?.response?.data?.title)
-                    }
-                }
-            )
+            // AuthService.shared.phoneVerify({mobileNumber:registerInfo?.mobileNumber, verificationCode: code}).then(
+            //     response => {
+            //         console.log(response?.data)
+            //         if(response?.data?.message){
+            //             toast(response?.data?.message);
+            //         }
+            //         navigate('/')
+            //     },
+            //     error => {
+            //         console.log(error);
+            //         if(error?.response?.data?.title){
+            //             toast.error(error?.response?.data?.title)
+            //         }
+            //     }
+            // )
+            if (code == registerInfo?.code){
+                toast.success("Successfully Registered!");
+                navigate('/')
+                return;
+            }
+            toast.error('Verify Code is incorrect!');
         }else{
-            toast.error("Register Info is not correct!");
+            toast.error("Register Info is not correct! \n Please register again.");
         }
     };
     return (
