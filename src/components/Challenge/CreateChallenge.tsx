@@ -40,7 +40,7 @@ const CreateChallenge = () => {
     }, [])
     return (
         <Tabs selectedTabClassName="selected">
-            <div className="box">
+            <div className="box mb15">
                 <div className="boxTitle">
                     Create a challenge
                     <div className={styles.backButton} onClick={() => navigate(-1)}>Back</div>
@@ -71,19 +71,19 @@ const CreateChallenge = () => {
                                 <div>{item.awayTeamName}</div>
                             </div>
                         </div>
-                        <div className={styles.oddsWrap}>
-                            <div className={styles.partnerLogo}>
-                                <img src="/images/betway.svg" alt="BetWay"/>
-                            </div>
-                            <div className={styles.odds}>
-                                <div className={styles.item}>
-                                    1 <span>3.48</span>
-                                </div>
-                                <div className={styles.item}>
-                                    2 <span>1.45</span>
-                                </div>
-                            </div>
-                        </div>
+                        {/*<div className={styles.oddsWrap}>*/}
+                        {/*    <div className={styles.partnerLogo}>*/}
+                        {/*        <img src="/images/betway.svg" alt="BetWay"/>*/}
+                        {/*    </div>*/}
+                        {/*    <div className={styles.odds}>*/}
+                        {/*        <div className={styles.item}>*/}
+                        {/*            1 <span>3.48</span>*/}
+                        {/*        </div>*/}
+                        {/*        <div className={styles.item}>*/}
+                        {/*            2 <span>1.45</span>*/}
+                        {/*        </div>*/}
+                        {/*    </div>*/}
+                        {/*</div>*/}
                     </NavLink>
                 )}
             </TabPanel>
