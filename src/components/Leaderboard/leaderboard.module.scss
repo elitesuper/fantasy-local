@@ -7,6 +7,8 @@
   display: flex;
   align-items: center;
   margin-top: 15px;
+  border: solid 2px $background-light;
+  cursor: pointer;
 }
 
 .avatar {
@@ -52,22 +54,7 @@
 }
 
 .selected {
-  background: $brand-color;
-  color: $text-light;
-
-  .user {
-    span {
-    color: $text-light;
-    }
-  }
-
-  .score {
-    color: $text-light;
-  }
-
-  .points {
-    color: $text-light;
-  }
+  border: solid 2px $brand-color;
 }
 
 .noChallenges {

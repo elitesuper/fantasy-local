@@ -29,7 +29,7 @@ const Leaderboard = () => {
             <div className="box">
                 <div className="boxTitle bn">Leaderboard</div>
             </div>
-            {challenges.length == 0 ?            
+            {challenges.length == 0 ?
                 <div className={styles.noChallenges}>
                     There's no challenges available
                 </div>:
@@ -41,7 +41,7 @@ const Leaderboard = () => {
                         <div className={styles.user}>
                             <div className={styles.name}>Maja Svensk</div>
                             <div>
-                                <span>01</span> | Win: 9 | Lost: 1
+                                <span>01</span>
                             </div>
                         </div>
                         <div className={styles.score}>
@@ -56,7 +56,7 @@ const Leaderboard = () => {
                         <div className={styles.user}>
                             <div className={styles.name}>You</div>
                             <div>
-                                <span>02</span> | Win: 9 | Lost: 1
+                                <span>02</span>
                             </div>
                         </div>
                         <div className={styles.score}>
@@ -71,7 +71,7 @@ const Leaderboard = () => {
                         <div className={styles.user}>
                             <div className={styles.name}>Thomas Andersen</div>
                             <div>
-                                <span>03</span> | Win: 9 | Lost: 1
+                                <span>03</span>
                             </div>
                         </div>
                         <div className={styles.score}>
