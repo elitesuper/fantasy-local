@@ -2,15 +2,16 @@ import {User} from "../models/user/user";
 import getAxiosInstance from "../lib/getAxiosInstance";
 import {authHeader, headers} from "./auth-header";
 import {UserData} from "../models/user/user-data";
+import axios from "axios";
 
-const axios = getAxiosInstance(process.env.COMMON_BASE_URL ?? '');
+// const axios = getAxiosInstance(process.env.COMMON_BASE_URL ?? '');
 
 export class AuthService {
     static readonly shared: AuthService = new AuthService();
 
     async logIn(user: { password: string; mobileNumber: string; deviceToken: string; deviceRegistration: string }) {
         const headers = await authHeader();
-        return axios.post('/api/users/login', user, {withCredentials: true, headers: headers });
+        return axios.post('/common-api/api/users/login', user, {withCredentials: true, headers: headers });
     }
 
     getToken(user: any) {
