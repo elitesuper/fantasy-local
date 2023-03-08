@@ -3,14 +3,14 @@ import {authHeader, headers} from "./auth-header";
 import {PhoneVerify, User, UserData} from "../models/user/usertype";
 import axios from "axios";
 
-// const axios = getAxiosInstance(process.env.COMMON_BASE_URL ?? '');
+const baseUrl  = process.env.COMMON_BASE_URL ?? `/common-api/`;
 
 export class AuthService {
     static readonly shared: AuthService = new AuthService();
 
     async logIn(user: { password: string; mobileNumber: string; deviceToken: string; deviceRegistration: string }) {
         const headers = await authHeader();
-        return axios.post('/common-api/api/users/login', user, {withCredentials: true, headers: headers });
+        return axios.post(`${baseUrl}/api/users/login`, user, {withCredentials: true, headers: headers });
     }
 
     getToken(user: any) {
@@ -23,11 +23,11 @@ export class AuthService {
     }
 
     async signUp(user : User) {
-        return axios.post('/common-api/api/users/register', user);
+        return axios.post(`${baseUrl}/api/users/register`, user);
     }
 
     async phoneVerify(code : PhoneVerify){
-        return axios.post('./common-api/api/users/account-verification', code)
+        return axios.post(`${baseUrl}/api/users/account-verification`, code)
     }
 
     getUser() {

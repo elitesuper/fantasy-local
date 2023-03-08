@@ -30,6 +30,7 @@ const PhoneVerifyForm = () => {
                 }
             )
         }
+        alert("You should register again");
         // navigate("/dashboard");
     };
     return (
