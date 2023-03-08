@@ -1,5 +1,5 @@
 import React from "react";
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 
 import Leaderboard from "../Leaderboard/Leaderboard";
 import Friends from "../Friends/Friends";
@@ -25,6 +25,7 @@ import styles from "./dashboard.module";
 import {useAuth} from "../../contexts/AuthContext";
 import PickPlayer from "../Challenge/PickPlayer";
 import OverviewChallenge from "../Challenge/OverviewChallenge";
+import getAvatar from "../../lib/getAvatar";
 
 interface HeaderProps {
     page?: string;
@@ -33,6 +34,8 @@ interface HeaderProps {
 const DashboardForm = (props: HeaderProps) => {
 
     const userData = useAuth();
+    const navigate = useNavigate();
+    const baseUrl:string  = process.env.PROXY ?? "";
 
     return (
         <div className={styles.dashboard}>
@@ -41,14 +44,14 @@ const DashboardForm = (props: HeaderProps) => {
                     <div className="boxTitle">My profile</div>
                     <div className={classNames(`boxContainer`, styles.user)}>
                         <div className={styles.avatar}>
-                            <span className={styles.icon}><Edit/></span>
-                            <img src="/images/missing.png" alt=""/>
+                            <span className={styles.icon} onClick={()=> navigate('/profile')}><Edit/></span>
+                            <img src={getAvatar(baseUrl, userData?.user?.picture, "/images/missing.png")} width={"120px"} height={"120px"} alt=""/>
                         </div>
                         <div className={styles.info}>
                             <div className={styles.name}>{userData?.user?.firstName + ' ' + userData?.user?.lastName}</div>
                             <div className={styles.email}>{userData?.user?.email}</div>
-                            <button className="button"><Trophy/> 10</button>
-                            <button className="button buttonSecondary"><Trophy/> 0</button>
+                            <button className="button"><Trophy/> {userData?.user?.totalWin}</button>
+                            <button className="button buttonSecondary"><Trophy/> {userData?.user?.totalLost}</button>
                         </div>
                     </div>
                 </div>
