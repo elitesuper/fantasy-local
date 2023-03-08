@@ -4,16 +4,33 @@ import VerificationInput from "react-verification-input";
 
 import styles from "./user.module";
 import classNames from "classnames";
+import { AuthService } from "../../services/auth.service";
 
 const PhoneVerifyForm = () => {
     const [code, setCode] = useState("");
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e:any) => {
         e.preventDefault();
-        console.log({code});
-        setCode("");
-        navigate("/dashboard");
+        const registerInfo = AuthService.shared.getRegisterInfo();
+        if(registerInfo?.mobileNumber){
+            AuthService.shared.phoneVerify({mobileNumber:registerInfo?.mobileNumber, verificationCode: code}).then(
+                response => {
+                    console.log(response?.data)
+                    if(response?.data?.message){
+                        alert(response?.data?.message);
+                    }
+                    navigate('/')
+                },
+                error => {
+                    console.log(error);
+                    if(error?.response?.data?.title){
+                        alert(error?.response?.data?.title)
+                    }
+                }
+            )
+        }
+        // navigate("/dashboard");
     };
     return (
         <div className={styles.loginContainer}>
@@ -30,8 +47,11 @@ const PhoneVerifyForm = () => {
                         characterInactive: styles.verCharInactive,
                         characterSelected: styles.verCharActive,
                     }}
+                    onChange= {(e:any) => {
+                        setCode(e);
+                    }}
                 />
-                <button disabled={true} className={classNames("button large", styles.loginBtn)}>Authenticate</button>
+                <button disabled={false} className={classNames("button large", styles.loginBtn)}>Authenticate</button>
             </form>
         </div>
     );
