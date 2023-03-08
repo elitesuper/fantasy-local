@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../components/Header/Header";
 import ChallengesForm from "../components/User/DashboardForm";
 import Layout from "../components/Layout/Layout";
+
 
 interface HeaderProps {
     page?: string;
