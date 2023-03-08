@@ -13,6 +13,14 @@ export class AuthService {
         return axios.post(`${baseUrl}/api/users/login`, user, {withCredentials: true, headers: headers });
     }
 
+    async recoveryPassword(phone:{mobileNumber:string}){
+        return axios.post(`${baseUrl}/api/users/forgot-password`, phone)
+    }
+
+    async sendNewPassword(data:{mobileNumber:string; newPassword:string}){
+        return axios.post(`${baseUrl}/api/users/change-password`, data)
+    }
+
     getToken(user: any) {
         return axios.post('/token', user);
     }
@@ -38,11 +46,15 @@ export class AuthService {
         return JSON.parse(localStorage.getItem('token')??"");
     }
 
+    getRecoveryPhoneNumber() {
+        return JSON.parse(localStorage.getItem('userphone')||'{}');
+    }
+
     getRegisterInfo() {
         return JSON.parse(localStorage.getItem('register')||"{}");
     }
-
     setUser(user: UserData) {
+
         return localStorage.setItem('user', JSON.stringify(user));
     }
 

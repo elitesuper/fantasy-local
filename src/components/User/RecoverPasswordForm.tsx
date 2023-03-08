@@ -1,14 +1,49 @@
-import React from "react";
-import {NavLink} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import {NavLink, useNavigate} from "react-router-dom";
 
 import styles from "./user.module"
 import classNames from "classnames";
 import VerificationInput from "react-verification-input";
+import { AuthService } from "../../services/auth.service";
 
 const RecoverPasswordForm = () => {
-    const handleSubmit = (e) => {
+    const [code, setCode] = useState('');
+    const [receivedCode, setReceivedCode] = useState('');
+    const navigate = useNavigate();
+    const phoneInfo = AuthService.shared.getRecoveryPhoneNumber();
+
+    const handleSubmit = (e: any) => {
         e.preventDefault();
+
+        if(code === receivedCode){
+            AuthService.shared.sendNewPassword({mobileNumber:phoneInfo.mobileNumber, newPassword:"123456"}).then(
+                response => {
+                    const changed = response?.data?.data?.isChangePassword ?? false
+                    if(changed){
+                        navigate('/');
+                    }
+                },
+                error => {
+        
+                }
+            )
+        }
+        else{alert("Wrong Code")}
     };
+
+    useEffect(()=>{
+        AuthService.shared.recoveryPassword({mobileNumber:phoneInfo.mobileNumber}).then(
+            response => {
+                if(response?.data?.data?.code){
+    
+                    setReceivedCode(response?.data?.data?.code)
+                }
+            },
+            error => {
+    
+            }
+        )
+    },[])
 
     return (
         <div className={styles.loginContainer}>
@@ -26,6 +61,9 @@ const RecoverPasswordForm = () => {
                         character: styles.verChar,
                         characterInactive: styles.verCharInactive,
                         characterSelected: styles.verCharActive,
+                    }}
+                    onChange={(e)=>{
+                        setCode(e);
                     }}
                 />
                 <button disabled={false} className={classNames("button large", styles.loginBtn)}>Continue</button>
