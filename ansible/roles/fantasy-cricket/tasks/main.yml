@@ -1,3 +1,8 @@
+- name: Copy the ngxin conf
+  copy: src=fantasy.conf dest=/etc/nginx/sites-enabled/ owner=root group=root mode=0644
+  notify:
+    - restart nginx
+
 # Pull image
 - name: Pull image
   containers.podman.podman_image:
