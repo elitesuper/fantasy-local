@@ -3,7 +3,7 @@ import {authHeader, headers} from "./auth-header";
 import { ProfileData } from "../models/profile/profile-type";
 import axios from "axios";
 
-const baseUrl  = process.env.COMMON_BASE_URL ?? `/common-api/`;
+const baseUrl  = process.env.PROXY ?? process.env.COMMON_BASE_URL;
 
 export class ProfileService {
     static readonly shared: ProfileService = new ProfileService();
