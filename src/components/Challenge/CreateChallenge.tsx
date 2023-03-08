@@ -52,7 +52,7 @@ const CreateChallenge = () => {
             </div>
             <TabPanel className={styles.matchesList}>
                 {matches.map((item:MatchesData) =>
-                    <NavLink to={'/pickPlayers'} className={styles.challengeBox} key={item.matchId}>
+                    <NavLink to={'/field'} className={styles.challengeBox} key={item.matchId}>
                         <div className={styles.match}>
                             <div className={styles.team}>
                                 <div className={styles.teamLogo}>

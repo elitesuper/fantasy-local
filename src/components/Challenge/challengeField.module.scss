@@ -153,6 +153,11 @@
   }
 }
 
+.playerWrap {
+  text-decoration: none;
+  color: $text-default;
+}
+
 .player {
   height: 63px;
   width: 63px;
@@ -172,8 +177,10 @@
 
 .playerName {
   background: $background-light;
-  border-radius: 6px;
-  padding: 10px;
+  border-radius: 50px;
+  padding: 5px 10px;
+  font-weight: bold;
+  margin-top: 5px;
 
   &:empty {
     display: none;

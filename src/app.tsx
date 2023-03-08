@@ -41,15 +41,16 @@ const App = () => {
                     <Route path="/stakes" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'stakes'} />} />
                     <Route path="/selectRound" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'selectRound'} />} />
                     <Route path="/createChallenge" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'createChallenge'} />} />
-                    <Route path="/pickPlayers" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'pickPlayers'} />} />
+                    <Route path="/field" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'field'} />} />
+                    <Route path="/pickPlayer" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'pickPlayer'} />} />
                     <Route path="/phoneVerify" element={<PhoneVerify />} />
                     <Route path="/forgotPassword"element={<RecoverPassword />} />
                     {/*<Route path="/contact" element={<Contact />} />*/}
                     <Route path="/about" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'about'} />} />
                     <Route path="/rules" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'rules'} />} />
-                    <Route 
-                        path="/profile" 
-                        element={                            
+                    <Route
+                        path="/profile"
+                        element={
                         <ProtectedRoute>
                             <Challenges page={'profile'}/>
                         </ProtectedRoute>} />
