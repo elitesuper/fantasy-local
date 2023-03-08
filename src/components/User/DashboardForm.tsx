@@ -40,8 +40,8 @@ const DashboardForm = (props: HeaderProps) => {
                             <img src="/images/user.png" alt=""/>
                         </div>
                         <div className={styles.info}>
-                            <div className={styles.name}>{AuthService.shared.getUser()?.userInfo?.firstName + ' ' + AuthService.shared.getUser()?.userInfo?.lastName}</div>
-                            <div className={styles.email}>{AuthService.shared.getUser()?.userInfo?.email}</div>
+                            <div className={styles.name}>{AuthService.shared.getUser()?.firstName + ' ' + AuthService.shared.getUser()?.lastName}</div>
+                            <div className={styles.email}>{AuthService.shared.getUser()?.email}</div>
                             <button className="button"><Trophy/> 10</button>
                             <button className="button buttonSecondary"><Trophy/> 0</button>
                         </div>
