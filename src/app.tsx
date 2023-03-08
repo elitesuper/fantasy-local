@@ -9,6 +9,9 @@ import CreatePassword from "./pages/CreatePassword";
 import {AuthService, } from "./services/auth.service";
 import { AuthProvider } from './contexts/AuthContext';
 import { ProtectedRoute } from './access/ProtectedRoute';
+import { ToastContainer, toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
     const currentUser = AuthService.shared.checkAuthenticate();
@@ -53,7 +56,7 @@ const App = () => {
                     <Route path="/terms" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'terms'} />} />
                 </Routes>
             </AuthProvider>
-
+            <ToastContainer />
         </>
     );
 };
