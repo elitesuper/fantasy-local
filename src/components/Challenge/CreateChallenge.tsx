@@ -41,7 +41,7 @@ const CreateChallenge = () => {
     }, [])
     return (
         <Tabs selectedTabClassName="selected">
-            <div className="box mb15">
+            <div className="box">
                 <div className="boxTitle">
                     Create a challenge
                     <div className={styles.backButton} onClick={() => navigate(-1)}>Back</div>

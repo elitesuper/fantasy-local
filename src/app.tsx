@@ -32,13 +32,13 @@ const App = () => {
                             </ProtectedRoute>
                         }
                     />
-                    <Route 
-                        path="/leaderboard" 
-                        element={                            
+                    <Route
+                        path="/leaderboard"
+                        element={
                         <ProtectedRoute>
                             <Challenges page={'leaderboard'}/>
                         </ProtectedRoute>
-                    } 
+                    }
                     />
                     <Route path="/friends" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'friends'} />} />
                     <Route path="/chat" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'chat'} />} />
@@ -48,6 +48,7 @@ const App = () => {
                     <Route path="/stakes" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'stakes'} />} />
                     <Route path="/selectRound" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'selectRound'} />} />
                     <Route path="/createChallenge" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'createChallenge'} />} />
+                    <Route path="/overviewChallenge" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'overviewChallenge'} />} />
                     <Route path="/field" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'field'} />} />
                     <Route path="/pickPlayer" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'pickPlayer'} />} />
                     <Route path="/phoneVerify" element={<PhoneVerify />} />
