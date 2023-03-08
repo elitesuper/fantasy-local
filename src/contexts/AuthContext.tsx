@@ -1,39 +1,40 @@
-import React, {useState, useContext, createContext, useLayoutEffect} from 'react';
-import {AuthService} from "../services/auth.service";
-import {Navigate, Route} from 'react-router-dom';
+import React, { createContext, useContext, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 const defaultState = {
-    authorized: false,
-};
-
-export const AuthContext = createContext(defaultState);
-export const AuthProvider = (props: { children: any; }) => {
-    const [authorize, setAuthorize] = useState(false);
-
-    const { children } = props;
-
-    useLayoutEffect(() => {
-        const auth = AuthService.shared.checkAuthenticate();
-        if (auth !== authorize) {
-            setAuthorize(auth);
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
-    return (
-        <AuthContext.Provider
-            value={{ authorized: authorize }}
-        >
-            {children}
-        </AuthContext.Provider>
-    );
+    user : null,
+    login: (data: any) => {},
+    logout: () => {},
 }
 
-// @ts-ignore
-export const AuthRoute = ({ element: Component, ...rest }) => (
-    <AuthContext.Consumer>
-        {
-            (authorize) => authorize.authorized?React.useContext(Component):<Navigate to="/" />
-        }
-    </AuthContext.Consumer>
-);
+const AuthContext = createContext(defaultState);
+
+export const AuthProvider = (props: { children:any }) => {
+  const [user, setUser] = useLocalStorage("user", null);
+  const navigate = useNavigate();
+    // call this function when you want to authenticate the user
+    const login = async (data:any) => {
+        setUser(data);
+        navigate("/dashboard");
+      };
+    
+    // call this function to sign out logged in user
+    const logout = async () => {
+        setUser(null);
+        navigate("/", { replace: true });
+    };
+  const value = useMemo(
+    () => ({
+      user,
+      login,
+      logout,
+    }),
+    [user]
+  );
+  return <AuthContext.Provider value={value}>{props.children}</AuthContext.Provider>;
+};
+
+export const useAuth = () => {
+  return useContext(AuthContext);
+};
