@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {NavLink, useNavigate} from "react-router-dom";
 import VerificationInput from "react-verification-input";
+import { toast } from 'react-toastify';
 
 import styles from "./user.module";
 import classNames from "classnames";
@@ -18,20 +19,20 @@ const PhoneVerifyForm = () => {
                 response => {
                     console.log(response?.data)
                     if(response?.data?.message){
-                        alert(response?.data?.message);
+                        toast(response?.data?.message);
                     }
                     navigate('/')
                 },
                 error => {
                     console.log(error);
                     if(error?.response?.data?.title){
-                        alert(error?.response?.data?.title)
+                        toast.error(error?.response?.data?.title)
                     }
                 }
             )
+        }else{
+            toast.error("Register Info is not correct!");
         }
-        alert("You should register again");
-        // navigate("/dashboard");
     };
     return (
         <div className={styles.loginContainer}>

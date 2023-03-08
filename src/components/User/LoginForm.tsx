@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {NavLink} from "react-router-dom";
+import {Navigate, NavLink} from "react-router-dom";
 import Select, { IndicatorSeparatorProps } from 'react-select';
 import { useNavigate } from "react-router-dom";
 import countries from "./Countries";
@@ -22,6 +22,8 @@ const LoginForm = () => {
     const [password, setPassword] = useState("");
     const [tel, setTel] = useState("");
     const [userphone, setUserPhone] = useLocalStorage('userphone', null);
+    const navigate = useNavigate();
+
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
@@ -37,13 +39,11 @@ const LoginForm = () => {
                     if (response?.data?.data) {
                         if(!userData?.data?.userInfo){
                             toast.error(userData?.message);
-                            setUserPhone({mobileNumber:mobileNumber})
                             return;
                         }else{
                             // AuthService.shared.setUser(response.data.data);
                             toast.success("Successfully logged In.");
                             auth.login(response.data.data);
-                            // navigate("/dashboard");
                         }
                     }
                 },
@@ -55,7 +55,12 @@ const LoginForm = () => {
     };
 
     const recoverPassword = () =>{
-
+        if(tel == ""){
+            toast.error("Please Input Phone Number!");
+            return;
+        }
+        setUserPhone({mobileNumber:tel})
+        navigate("/recoverPassword");
     }
 
     const reactCountries = countries.map(
