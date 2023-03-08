@@ -17,7 +17,6 @@ import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 const LoginForm = () => {
     const auth = useAuth();
-    const navigate = useNavigate();
     const [countryCode, setCountryCode] = useState(null);
     const [password, setPassword] = useState("");
     const [tel, setTel] = useState("");

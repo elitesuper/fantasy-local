@@ -1,6 +1,6 @@
 import getAxiosInstance from "../lib/getAxiosInstance";
 import {authHeader, headers} from "./auth-header";
-import {PhoneVerify, User, UserData} from "../models/user/usertype";
+import {PhoneVerify, User, UserData} from "../models/user/user-type";
 import axios from "axios";
 
 const baseUrl  = process.env.COMMON_BASE_URL ?? `/common-api/`;
@@ -43,7 +43,7 @@ export class AuthService {
     }
 
     getCurrentToken() {
-        return JSON.parse(localStorage.getItem('token')??"");
+        return JSON.parse(localStorage.getItem('token')??"{}");
     }
 
     getRecoveryPhoneNumber() {
@@ -54,7 +54,6 @@ export class AuthService {
         return JSON.parse(localStorage.getItem('register')||"{}");
     }
     setUser(user: UserData) {
-
         return localStorage.setItem('user', JSON.stringify(user));
     }
 
@@ -64,6 +63,6 @@ export class AuthService {
 
     checkAuthenticate() {
         const user = this.getUser();
-        return user?.userInfo?.userID || user?.userInfo?.userID === 0;
+        return user?.userID || user?.userID === 0;
     }
 }

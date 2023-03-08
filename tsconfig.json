@@ -19,7 +19,8 @@
     "isolatedModules": true,
     "noEmit": true,
     "baseUrl": ".",
-    "jsx": "react"
+    "jsx": "react",
+    "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
   "ts-node": {
     "compilerOptions": {
