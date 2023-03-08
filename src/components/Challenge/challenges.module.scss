@@ -189,3 +189,56 @@
     text-decoration: underline;
   }
 }
+
+.player {
+  background: $background-light;
+  border-radius: 10px;
+  margin-top: 10px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+
+  .shirt {
+    flex: 0 60px;
+    display: flex;
+
+    img {
+      border-radius: 100%;
+      width: 45px;
+      height: 45px;
+      border: solid 1px $border-default;
+    }
+  }
+
+  .info {
+    flex: 1;
+    font-size: 16px;
+    line-height: 24px;
+
+    .name {
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    span {
+      color: $brand-color;
+      font-weight: bold;
+    }
+  }
+
+
+  .score {
+    flex: 0 100px;
+    text-align: right;
+    font-size: 14px;
+    line-height: 24px;
+    color: #999;
+  }
+
+  .points {
+    font-size: 16px;
+    line-height: 24px;
+    color: $brand-color;
+    font-weight: bold;
+  }
+}

@@ -12,18 +12,18 @@ import Terms from "../StaticPages/Terms";
 import Profile from "../User/Profile";
 import Challenge from "../Challenge/Challenge";
 import CreateChallenge from "../Challenge/CreateChallenge";
-import PickPlayers from "../Challenge/PickPlayers";
+import Field from "../Challenge/Field";
 import Stakes from "../Challenge/Stakes";
 import Ads from "../Ads/Ads";
 
 import {Trophy} from "../../images/Trophy";
 import classNames from "classnames";
-import { AuthService } from "../../services/auth.service";
 import SelectRound from "../Challenge/SelectRound";
 import {Edit} from "../../images/Edit";
 
 import styles from "./dashboard.module";
 import { useAuth } from "../../contexts/AuthContext";
+import PickPlayer from "../Challenge/PickPlayer";
 
 interface HeaderProps {
     page?: string;
@@ -85,9 +85,10 @@ const DashboardForm = (props: HeaderProps) => {
                 {props.page === 'topAndFlop' && <TopAndFlop/>}
                 {props.page === 'findChallenges' && <FindChallenges/>}
                 {props.page === 'createChallenge' && <CreateChallenge/>}
-                {props.page === 'pickPlayers' && <PickPlayers />}
+                {props.page === 'field' && <Field />}
                 {props.page === 'stakes' && <Stakes />}
                 {props.page === 'selectRound' && <SelectRound />}
+                {props.page === 'pickPlayer' && <PickPlayer />}
 
                 {props.page !== 'chat' &&  <Ads/>}
             </div>
