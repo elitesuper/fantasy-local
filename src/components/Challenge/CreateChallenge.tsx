@@ -45,7 +45,7 @@ const CreateChallenge = () => {
                         <div className={styles.match}>
                             <div className={styles.team}>
                                 <div className={styles.teamLogo}>
-                                    <img src={item.homeTeamImageUri} alt=""/>
+                                    <img src={process.env.COMMON_BASE_URL + item.homeTeamImageUri} alt=""/>
                                 </div>
                                 <div>{item.homeTeamName}</div>
                             </div>
@@ -55,7 +55,7 @@ const CreateChallenge = () => {
                             </div>
                             <div className={styles.team}>
                                 <div className={styles.teamLogo}>
-                                    <img src={item.awayTeamImageUri} alt=""/>
+                                    <img src={process.env.COMMON_BASE_URL + item.awayTeamImageUri} alt=""/>
                                 </div>
                                 <div>{item.awayTeamName}</div>
                             </div>
