@@ -12,6 +12,7 @@ import { ProtectedRoute } from './access/ProtectedRoute';
 import { ToastContainer, toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
+import { AccessRoute } from './access/AccessRoute';
 
 const App = () => {
     const currentUser = AuthService.shared.checkAuthenticate();
@@ -19,11 +20,11 @@ const App = () => {
         <>
             <AuthProvider>
                 <Routes>
-                    <Route path="/" element={<Login />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/register" element={<Register />} />
-                    <Route path="/recoverPassword" element={<RecoverPassword />} />
-                    <Route path="/createPassword" element={<CreatePassword />} />
+                    <Route path="/" element={<AccessRoute><Login /></AccessRoute>} />
+                    <Route path="/login" element={<AccessRoute><Login /></AccessRoute>} />
+                    <Route path="/register" element={<AccessRoute><Register /></AccessRoute>} />
+                    <Route path="/recoverPassword" element={<AccessRoute><RecoverPassword /></AccessRoute>} />
+                    <Route path="/createPassword" element={<AccessRoute><CreatePassword /></AccessRoute>} />
                     <Route
                         path="/dashboard"
                         element={
@@ -32,13 +33,13 @@ const App = () => {
                             </ProtectedRoute>
                         }
                     />
-                    <Route
-                        path="/leaderboard"
-                        element={
+                    <Route 
+                        path="/leaderboard" 
+                        element={                            
                         <ProtectedRoute>
                             <Challenges page={'leaderboard'}/>
                         </ProtectedRoute>
-                    }
+                    } 
                     />
                     <Route path="/friends" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'friends'} />} />
                     <Route path="/inviteFriends" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'inviteFriends'} />} />
@@ -57,9 +58,9 @@ const App = () => {
                     {/*<Route path="/contact" element={<Contact />} />*/}
                     <Route path="/about" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'about'} />} />
                     <Route path="/rules" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'rules'} />} />
-                    <Route
-                        path="/profile"
-                        element={
+                    <Route 
+                        path="/profile" 
+                        element={                            
                         <ProtectedRoute>
                             <Challenges page={'profile'}/>
                         </ProtectedRoute>} />
