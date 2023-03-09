@@ -16,7 +16,6 @@
   .avatar {
     flex-basis: 140px;
     position: relative;
-    cursor: pointer;
 
     .icon {
       position: absolute;
@@ -28,6 +27,7 @@
       background: #5383D6;
       border-radius: 100%;
       text-align: center;
+      cursor: pointer;
     }
 
     img {
