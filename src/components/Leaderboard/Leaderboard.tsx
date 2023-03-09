@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from "react";
 
 import styles from './leaderboard.module';
-import classNames from "classnames";
 import { AuthService } from "../../services/auth.service";
 import { ChallengesService } from "../../services/challenges.service";
-import getAvatar from "../../lib/getAvatar";
 import { Trophy } from "../../images/Trophy";
 import { useAuth } from "../../contexts/AuthContext";
 
 const Leaderboard = () => {
-    const baseUrl  = process.env.PROXY ?? process.env.COMMON_BASE_URL ?? "";
-    const [leaderBoards, setLeaderBoards] = useState([]);
     const [challenges, setChallenges] = useState([]);
     const [selectedChallenge, setSelectedChallenge] = useState("");
     const {user} = useAuth();
@@ -120,8 +116,6 @@ const Leaderboard = () => {
                 </div>
             </>
             }
-           
-
         </>
     );
 };

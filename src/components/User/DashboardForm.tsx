@@ -112,8 +112,8 @@ const DashboardForm = (props: HeaderProps) => {
                         <div className={styles.info}>
                             <div className={styles.name}>{userData?.user?.firstName + ' ' + userData?.user?.lastName}</div>
                             <div className={styles.email}>{userData?.user?.email}</div>
-                            <button className="button"><Trophy/> {userData?.user?.totalWin}</button>
-                            <button className="button buttonSecondary"><Trophy/> {userData?.user?.totalLost}</button>
+                            <button className="button fake"><Trophy/> {userData?.user?.totalWin}</button>
+                            <button className="button buttonSecondary fake"><Trophy/> {userData?.user?.totalLost}</button>
                         </div>
                     </div>
                 </div>
