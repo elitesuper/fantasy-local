@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {NavLink, useNavigate} from "react-router-dom";
 import Select, {IndicatorSeparatorProps} from "react-select";
+import { toast } from 'react-toastify';
 
 import countries from "./Countries";
 import {Phone} from "../../images/Phone";
@@ -32,8 +33,13 @@ const RegisterForm = () => {
             AuthService.shared.signUp({mobileNumber: mobileNumber, password: password, deviceToken: getDeviceId(), deviceRegistration:getDeviceRegistration()}).then(
                 response => {
                     if (response?.data?.data) {
-                        setRegister(response?.data?.data)
-                        navigate("/phoneVerify");
+                        if(response?.data?.data.userId){
+                            setRegister(response?.data?.data)
+                            navigate("/phoneVerify");
+                        }
+                        else{
+                            toast.error(response?.data?.message);
+                        }
                     } else {
                         console.log(response.data);
                     }
