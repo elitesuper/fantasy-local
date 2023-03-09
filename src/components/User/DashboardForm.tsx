@@ -24,6 +24,7 @@ import {Edit} from "../../images/Edit";
 import styles from "./dashboard.module";
 import {useAuth} from "../../contexts/AuthContext";
 import PickPlayer from "../Challenge/PickPlayer";
+import getAvatar from "../../lib/getAvatar";
 
 interface HeaderProps {
     page?: string;
@@ -33,6 +34,7 @@ const DashboardForm = (props: HeaderProps) => {
 
     const userData = useAuth();
     const navigate = useNavigate();
+    const baseUrl:string  = process.env.PROXY ?? "";
 
     return (
         <div className={styles.dashboard}>
@@ -42,7 +44,7 @@ const DashboardForm = (props: HeaderProps) => {
                     <div className={classNames(`boxContainer`, styles.user)}>
                         <div className={styles.avatar}>
                             <span className={styles.icon} onClick={()=> navigate('/profile')}><Edit/></span>
-                            <img src="/images/missing.png" alt=""/>
+                            <img src={getAvatar(baseUrl, userData?.user?.picture, "/images/missing.png")} width={"120px"} height={"120px"} alt=""/>
                         </div>
                         <div className={styles.info}>
                             <div className={styles.name}>{userData?.user?.firstName + ' ' + userData?.user?.lastName}</div>
