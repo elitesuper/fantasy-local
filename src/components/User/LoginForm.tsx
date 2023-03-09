@@ -52,6 +52,10 @@ const LoginForm = () => {
         }
     };
 
+    const recoverPassword = () =>{
+
+    }
+
     const reactCountries = countries.map(
         ({
              name,
@@ -132,7 +136,10 @@ const LoginForm = () => {
                     className={classNames("button large", styles.loginBtn)}>
                     Log In
                 </button>
-                {userphone?.mobileNumber&&<NavLink className={styles.link} to="/forgotPassword">Forgot password?</NavLink>}
+                <div 
+                    className={styles.link}
+                    onClick={() => recoverPassword()}
+                >Forgot password?</div>
                 <div className={styles.signup}>
                     Don't have an account?{" "}
                     <NavLink to="/register" className={styles.link}>
