@@ -34,7 +34,7 @@ const InviteFriends = () => {
             <div className={styles.search}>
                 <div className={styles.text}>
                     <span className={styles.name}>Invite Friends</span>
-                    <a href="#" className={styles.backButton} onClick={() => navigate(-1)}>Back</a>
+                    <div className="backButton" onClick={() => navigate(-1)}>Back</div>
                 </div>
                 <div className={styles.field}>
                     <button><Magnifier /></button>

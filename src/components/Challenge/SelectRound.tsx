@@ -12,7 +12,7 @@ const SelectRound = () => {
             <div className="box mb15">
                 <div className="boxTitle">
                     Select a Round
-                    <div className={styles.backButton} onClick={() => navigate(-1)}>Back</div>
+                    <div className="backButton" onClick={() => navigate(-1)}>Back</div>
                 </div>
             </div>
             <NavLink to={'/field'} className={classNames(styles.challengeBox, styles.stakesBox, styles.fullBox)}>

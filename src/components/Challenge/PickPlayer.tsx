@@ -11,7 +11,7 @@ const PickPlayer = () => {
             <div className="box mb15">
                 <div className="boxTitle">
                     Wicketkeeper (WK)
-                    <div className={styles.backButton} onClick={() => navigate(-1)}>Back</div>
+                    <div className="backButton" onClick={() => navigate(-1)}>Back</div>
                 </div>
                 <TabList className="tabs">
                     <Tab className="tab">Top Players</Tab>

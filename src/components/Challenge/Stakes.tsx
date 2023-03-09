@@ -18,7 +18,7 @@ const Stakes = () => {
             <div className="box">
                 <div className="boxTitle">
                     What's at stake?
-                    <div className={styles.backButton} onClick={() => navigate(-1)}>Back</div>
+                    <div className="backButton" onClick={() => navigate(-1)}>Back</div>
                 </div>
             </div>
             <div className={styles.matchesList}>

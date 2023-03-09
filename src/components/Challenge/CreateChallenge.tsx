@@ -44,7 +44,7 @@ const CreateChallenge = () => {
             <div className="box">
                 <div className="boxTitle">
                     Create a challenge
-                    <div className={styles.backButton} onClick={() => navigate(-1)}>Back</div>
+                    <div className="backButton" onClick={() => navigate(-1)}>Back</div>
                 </div>
                 <TabList className="tabs">
                     <Tab className="tab">Matches</Tab>

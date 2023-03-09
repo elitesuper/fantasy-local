@@ -152,6 +152,17 @@ a {
   }
 }
 
+.backButton {
+  color: $brand-color;
+  font-family: InterFace, sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 .inputIcons {
   position: relative;
   margin-bottom: 10px;

@@ -17,7 +17,7 @@ const OverviewChallenge = () => {
             <div className="box mb15">
                 <div className="boxTitle">
                     Challenge Overview
-                    <div className={styles.backButton} onClick={() => navigate(-1)}>Back</div>
+                    <div className="backButton" onClick={() => navigate(-1)}>Back</div>
                 </div>
             </div>
             <div className={styles.newChallenge}>
