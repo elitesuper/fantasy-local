@@ -55,7 +55,7 @@ const InviteFriends = () => {
                         <div>{friend.mobileNumber}</div>
                     </div>
                     <div className={styles.avatar}>
-                        <button className="button">Send</button>
+                        <button className="button small">Send</button>
                     </div>
                 </div>
             )}
