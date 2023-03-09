@@ -1,11 +1,9 @@
 import {AuthService} from "./auth.service";
 
 export async function authHeader() {
-
     let TokenData = AuthService.shared.getCurrentToken();
-
     let token = "Bearer " + TokenData?.authToken;
-    
+
     return {
         'Content-Type': 'application/json;charset=UTF-8',
         "Access-Control-Allow-Origin": "*",

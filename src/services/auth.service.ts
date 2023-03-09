@@ -1,5 +1,4 @@
-import getAxiosInstance from "../lib/getAxiosInstance";
-import {authHeader, headers, uploadHeader} from "./auth-header";
+import {authHeader, uploadHeader} from "./auth-header";
 import {PhoneVerify, User, UserData} from "../models/user/user-type";
 import axios from "axios";
 

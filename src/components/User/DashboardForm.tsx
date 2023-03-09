@@ -27,6 +27,7 @@ import {Edit} from "../../images/Edit";
 import styles from "./dashboard.module";
 import {useAuth} from "../../contexts/AuthContext";
 import PickPlayer from "../Challenge/PickPlayer";
+import OverviewChallenge from "../Challenge/OverviewChallenge";
 import getAvatar from "../../lib/getAvatar";
 import { AuthService } from "../../services/auth.service";
 
@@ -142,6 +143,7 @@ const DashboardForm = (props: HeaderProps) => {
                 {props.page === 'topAndFlop' && <TopAndFlop/>}
                 {props.page === 'findChallenges' && <FindChallenges/>}
                 {props.page === 'createChallenge' && <CreateChallenge/>}
+                {props.page === 'overviewChallenge' && <OverviewChallenge/>}
                 {props.page === 'field' && <Field/>}
                 {props.page === 'stakes' && <Stakes/>}
                 {props.page === 'selectRound' && <SelectRound/>}

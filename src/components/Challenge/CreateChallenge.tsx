@@ -10,7 +10,7 @@ import {LeaguesData, MatchesData} from "../../models/challenge/challenge-data";
 import moment from "moment";
 
 const CreateChallenge = () => {
-    const baseUrl  = process.env.PROXY;
+    const baseUrl  = process.env.PROXY ?? process.env.COMMON_BASE_URL;
     const navigate = useNavigate();
     const [matches, setMatches] = useState([]);
     const [leagues, setLeagues] = useState([]);
@@ -41,7 +41,7 @@ const CreateChallenge = () => {
     }, [])
     return (
         <Tabs selectedTabClassName="selected">
-            <div className="box mb15">
+            <div className="box">
                 <div className="boxTitle">
                     Create a challenge
                     <div className={styles.backButton} onClick={() => navigate(-1)}>Back</div>

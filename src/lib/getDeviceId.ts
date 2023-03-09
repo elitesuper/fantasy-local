@@ -10,8 +10,4 @@ export const getDeviceId = (): string => {
     return "cUPg9mDJSfM:APA91bFiFSxHXOdQwJd4hTAskow3PmhxK3TNBkPkMhxcztDjBzeww8z0wh....";
 };
 
-// export const getDeviceRegistration = (): string =>{
-//     return "cUPg9mDJSfM"
-// }
-
 export default getDeviceId;
