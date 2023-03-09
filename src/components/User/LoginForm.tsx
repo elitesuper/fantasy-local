@@ -14,6 +14,7 @@ import getDeviceId from "../../lib/getDeviceId";
 import getDeviceRegistration from "../../lib/getDeviceRegistration";
 import { useAuth } from "../../contexts/AuthContext";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { toast } from 'react-toastify';
 
 const LoginForm = () => {
     const auth = useAuth();
@@ -35,18 +36,19 @@ const LoginForm = () => {
                     const userData = response?.data
                     if (response?.data?.data) {
                         if(!userData?.data?.userInfo){
-                            alert(userData?.message)
+                            toast.error(userData?.message);
                             setUserPhone({mobileNumber:mobileNumber})
                             return;
                         }else{
                             // AuthService.shared.setUser(response.data.data);
+                            toast.success("Successfully logged In.");
                             auth.login(response.data.data);
                             // navigate("/dashboard");
                         }
                     }
                 },
                 error => {
-                    console.log(error);
+                    toast.error("Something went wrong!");
                 }
             );
         }
