@@ -5,6 +5,7 @@ import classNames from "classnames";
 import { AuthService } from "../../services/auth.service";
 import { ChallengesService } from "../../services/challenges.service";
 import getAvatar from "../../lib/getAvatar";
+import { Trophy } from "../../images/Trophy";
 
 const Leaderboard = () => {
     const baseUrl  = process.env.PROXY ?? process.env.COMMON_BASE_URL ?? "";
@@ -37,21 +38,32 @@ const Leaderboard = () => {
                 </div>:
                 <>
                     {challenges.map((item:any)=>
-                        <div className={styles.item} key={`challengeId${item.challengeId}`}>
-                            <div className={styles.avatar}>
-                                <img src={getAvatar(baseUrl, item?.picture, "/images/user.png")} alt=""/>
-                            </div>
-                            <div className={styles.user}>
-                                <div className={styles.name}>{item.userName}</div>
-                                <div>
-                                    <span>{item.totalChallengers}</span>
-                                </div>
-                            </div>
-                            <div className={styles.score}>
-                                Season Points
-                                <div className={styles.points}>{item.points}</div>
-                            </div>
+                        // <div className={styles.item} key={`challengeId${item.challengeId}`}>
+                        //     <div className={styles.avatar}>
+                        //         <img src={getAvatar(baseUrl, item?.picture, "/images/user.png")} alt=""/>
+                        //     </div>
+                        //     <div className={styles.user}>
+                        //         <div className={styles.name}>{item.userName}</div>
+                        //         <div>
+                        //             <span>{item.totalChallengers}</span>
+                        //         </div>
+                        //     </div>
+                        //     <div className={styles.score}>
+                        //         Season Points
+                        //         <div className={styles.points}>{item.points}</div>
+                        //     </div>
+                        // </div>
+
+                    <div className={styles.challenge} key={`challengeId${item.challengeId}`}>
+                        <div className={styles.ball}>
+                            <Trophy/>
                         </div>
+                        <div className={styles.info}>
+                            <strong>India vs. Australia in India Test Series</strong>
+                            <div>Your current position: {item.position}</div>
+                            <small>Challenge points: {item.points}</small>
+                        </div>
+                    </div>
                     )}
                     {/* <div className={styles.item}>
                         <div className={styles.avatar}>
