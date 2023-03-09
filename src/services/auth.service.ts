@@ -3,7 +3,7 @@ import {authHeader, headers} from "./auth-header";
 import {PhoneVerify, User, UserData} from "../models/user/user-type";
 import axios from "axios";
 
-const baseUrl  = process.env.COMMON_BASE_URL ?? `/common-api/`;
+const baseUrl  = process.env.PROXY ?? process.env.COMMON_BASE_URL;
 
 export class AuthService {
     static readonly shared: AuthService = new AuthService();

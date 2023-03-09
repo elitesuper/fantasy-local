@@ -2,8 +2,10 @@ import React, { createContext, useContext, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
+const data:any = null;
+
 const defaultState = {
-    user : null,
+    user : data,
     login: (data: any) => {},
     logout: () => {},
 }

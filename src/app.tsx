@@ -44,7 +44,12 @@ const App = () => {
                     {/*<Route path="/contact" element={<Contact />} />*/}
                     <Route path="/about" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'about'} />} />
                     <Route path="/rules" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'rules'} />} />
-                    <Route path="/profile" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'profile'} />} />
+                    <Route 
+                        path="/profile" 
+                        element={                            
+                        <ProtectedRoute>
+                            <Challenges page={'profile'}/>
+                        </ProtectedRoute>} />
                     <Route path="/terms" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'terms'} />} />
                 </Routes>
             </AuthProvider>
