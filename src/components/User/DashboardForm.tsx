@@ -1,5 +1,8 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import { useDropzone } from "react-dropzone";
 import {NavLink, useNavigate} from "react-router-dom";
+import { toast } from 'react-toastify';
+
 
 import Leaderboard from "../Leaderboard/Leaderboard";
 import Friends from "../Friends/Friends";
@@ -26,16 +29,63 @@ import {useAuth} from "../../contexts/AuthContext";
 import PickPlayer from "../Challenge/PickPlayer";
 import OverviewChallenge from "../Challenge/OverviewChallenge";
 import getAvatar from "../../lib/getAvatar";
+import { AuthService } from "../../services/auth.service";
 
 interface HeaderProps {
     page?: string;
+}
+
+
+interface FileProp {
+    name: string
+    type: string
+    size: number
 }
 
 const DashboardForm = (props: HeaderProps) => {
 
     const userData = useAuth();
     const navigate = useNavigate();
+    const [files, setFiles] = useState<File[]>([]);
+
     const baseUrl:string  = process.env.PROXY ?? "";
+
+    const { getRootProps, getInputProps } = useDropzone({
+        multiple: false,
+        accept: {
+        'image/*': ['.png', '.jpg', '.jpeg', '.gif']
+        },
+        onDrop: (acceptedFiles) => {
+          setFiles(
+            acceptedFiles.map((file) =>
+              Object.assign(file, {
+                preview: URL.createObjectURL(file),
+              })
+            )
+          );
+        },
+    });
+
+    const img = files.map((file: FileProp) => (
+        <img key={file.name} alt={file.name} width={"120px"} height={"120px"} src={URL.createObjectURL(file as any)} />
+    ))
+
+    useEffect(() =>  {
+        files.forEach((file:File)=>{
+            const formData = new FormData();
+            formData.append("userId", userData?.user?.userID)
+            formData.append("pic", files[0]);
+            console.log(formData);
+            AuthService.shared.updateProfilePicture(formData).then(
+                response=>{
+                    console.log(response.data)
+                },
+                error=>{
+                    toast.error("Something went wrong!");
+                }
+            )
+        })
+    },[files])
 
     return (
         <div className={styles.dashboard}>
@@ -44,8 +94,11 @@ const DashboardForm = (props: HeaderProps) => {
                     <div className="boxTitle">My profile</div>
                     <div className={classNames(`boxContainer`, styles.user)}>
                         <div className={styles.avatar}>
-                            <span className={styles.icon} onClick={()=> navigate('/profile')}><Edit/></span>
-                            <img src={getAvatar(baseUrl, userData?.user?.picture, "/images/missing.png")} width={"120px"} height={"120px"} alt=""/>
+                            <div {...getRootProps()}>
+                                <input {...getInputProps()} />
+                                <span className={styles.icon}><Edit/></span>
+                            </div>
+                            {files.length?img:<img src={getAvatar(baseUrl, userData?.user?.picture, "/images/missing.png")} width={"120px"} height={"120px"} alt=""/>}
                         </div>
                         <div className={styles.info}>
                             <div className={styles.name}>{userData?.user?.firstName + ' ' + userData?.user?.lastName}</div>

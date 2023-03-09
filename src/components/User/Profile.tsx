@@ -11,14 +11,16 @@ import classNames from "classnames";
 import { AuthService } from "../../services/auth.service";
 import { ProfileService } from "../../services/profile.service";
 import getDeviceId from "../../lib/getDeviceId";
+import { useAuth } from "../../contexts/AuthContext";
+import getDate from "../../lib/getDate";
 
 
 const Profile = () => {
 
-    const user = AuthService.shared.getUser();
+    const {user} = useAuth();
     const [firstName, setFirstName] = useState<string>(user?.firstName??"");
     const [lastName, setLastName] = useState<string>(user?.lastName??"");
-    const [DOB, setDOB] = useState(user?.dateOfBirth??"");
+    const [DOB, setDOB] = useState(getDate(user?.dateOfBirth));
     const [email, setEmail] = useState<string>(user?.email??"");
     const [tel, setTel] = useState<string>(user?.mobileNumber);
     const [selectedCountry, setSelectedCountry] = useState(null);
@@ -27,7 +29,6 @@ const Profile = () => {
     const handleSubmit = (e : any) => {
         e.preventDefault();
         const dialCode = countries.find(country => country.name === selectedCountry?.value);
-        setTel("");
         ProfileService.shared.updateProfile({
             userId: user?.userID??"",
             mobileNumber: tel,
@@ -36,7 +37,7 @@ const Profile = () => {
             email:email,
             country:dialCode?.name??"",
             countryCode: dialCode?.dial_code??"",
-            dob: DOB,
+            dob: DOB.toString(),
             preferredSportId: 0,
             sportId: 0,
             city:user?.city??"",

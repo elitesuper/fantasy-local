@@ -1,5 +1,5 @@
-import {authHeader} from "./auth-header";
-import {PhoneVerify, User} from "../models/user/user-type";
+import {authHeader, uploadHeader} from "./auth-header";
+import {PhoneVerify, User, UserData} from "../models/user/user-type";
 import axios from "axios";
 
 const baseUrl  = process.env.PROXY ?? process.env.COMMON_BASE_URL;
@@ -18,6 +18,11 @@ export class AuthService {
 
     async sendNewPassword(data:{mobileNumber:string; newPassword:string}){
         return axios.post(`${baseUrl}/api/users/change-password`, data)
+    }
+
+    async updateProfilePicture(formData:any){
+        const headers = await uploadHeader();
+        return axios.post(`${baseUrl}/api/users/update-profile-picture`, formData, {headers: headers})
     }
 
     getToken(user: any) {
