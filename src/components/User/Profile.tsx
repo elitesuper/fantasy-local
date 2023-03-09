@@ -13,11 +13,12 @@ import { ProfileService } from "../../services/profile.service";
 import getDeviceId from "../../lib/getDeviceId";
 import { useAuth } from "../../contexts/AuthContext";
 import getDate from "../../lib/getDate";
+import { toast } from "react-toastify";
 
 
 const Profile = () => {
 
-    const {user} = useAuth();
+    const {user, update} = useAuth();
     const [firstName, setFirstName] = useState<string>(user?.firstName??"");
     const [lastName, setLastName] = useState<string>(user?.lastName??"");
     const [DOB, setDOB] = useState(getDate(user?.dateOfBirth));
@@ -46,11 +47,12 @@ const Profile = () => {
             response=>{
                 const data = response?.data?.data?.userInfo;
                 if(data){
-                    AuthService.shared.setUser(data)
+                    update(data);
+                    toast.success("Successfully updated!");
                 }
             },
             error=>{
-                console.log(error);
+                toast.error("Something went wrong!");
             }
         )
     };
