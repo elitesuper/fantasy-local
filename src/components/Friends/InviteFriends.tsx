@@ -50,12 +50,12 @@ const InviteFriends = () => {
             {!filteredFriends?.length ? <div className={styles.noFriend}>There's no friends</div> : ''}
             {filteredFriends.map((friend:any) =>
                 <div className={styles.item}>
-                    <div className={styles.avatar}>
-                        checkbox
-                    </div>
                     <div className={styles.user}>
                         <div className={styles.name}>{friend.firstName + ' ' + friend.lastName}</div>
                         <div>{friend.mobileNumber}</div>
+                    </div>
+                    <div className={styles.avatar}>
+                        <button className="button">Send</button>
                     </div>
                 </div>
             )}
