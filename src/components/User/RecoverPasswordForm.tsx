@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {NavLink, useNavigate} from "react-router-dom";
+import { toast } from 'react-toastify';
 
 import styles from "./user.module"
 import classNames from "classnames";
@@ -20,15 +21,19 @@ const RecoverPasswordForm = () => {
                 response => {
                     const changed = response?.data?.data?.isChangePassword ?? false
                     if(changed){
-                        navigate('/');
+                        navigate('/createPassword');
+                    }else{
+                        toast.error(`The password can't change.`);
                     }
                 },
                 error => {
-        
+                    toast.error(`Something went Wrong.`);
                 }
             )
         }
-        else{alert("Wrong Code")}
+        else{
+            toast.error(`Verify Code doesn't match.`);
+        }
     };
 
     useEffect(()=>{

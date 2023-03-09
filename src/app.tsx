@@ -32,7 +32,14 @@ const App = () => {
                             </ProtectedRoute>
                         }
                     />
-                    <Route path="/leaderboard" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'leaderboard'} />} />
+                    <Route 
+                        path="/leaderboard" 
+                        element={                            
+                        <ProtectedRoute>
+                            <Challenges page={'leaderboard'}/>
+                        </ProtectedRoute>
+                    } 
+                    />
                     <Route path="/friends" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'friends'} />} />
                     <Route path="/chat" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'chat'} />} />
                     <Route path="/topAndFlop" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'topAndFlop'} />} />

@@ -16,4 +16,14 @@ export class ChallengesService {
         const headers = await authHeader();
         return axios.post(baseUrl + '/api/matches-data-no-players', {}, { headers: headers });
     }
+
+    async getLeaderBoard(req: {UserId:string; PageIndex: string; PageSize:string }){
+        const headers = await authHeader();
+        return axios.post(baseUrl + '/api/leader-board', req, {headers: headers});
+    }
+
+    async getChallengeLeaderBoard(req:{UserId:string; Id:number }){
+        const headers = await authHeader();
+        return axios.post(baseUrl + '/api/challenge-leader-board', req, {headers: headers});
+    }
 }
