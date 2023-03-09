@@ -61,10 +61,6 @@ export class AuthService {
         return localStorage.setItem('user', JSON.stringify(user));
     }
 
-    setToken(token: string) {
-        return localStorage.setItem('token', token);
-    }
-
     checkAuthenticate() {
         const user = this.getUser();
         return user?.userID || user?.userID === 0;
