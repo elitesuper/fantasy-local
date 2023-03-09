@@ -29,10 +29,6 @@ export class AuthService {
         return axios.post(`${baseUrl}/api/users/update-profile-picture`, formData, {headers: headers})
     }
 
-    getToken(user: any) {
-        return axios.post('/token', user);
-    }
-
     logout() {
         localStorage.removeItem("user");
         localStorage.removeItem("token");

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import { useDropzone } from "react-dropzone";
-import {NavLink, useNavigate} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import { toast } from 'react-toastify';
 
 
@@ -30,6 +30,7 @@ import PickPlayer from "../Challenge/PickPlayer";
 import OverviewChallenge from "../Challenge/OverviewChallenge";
 import getAvatar from "../../lib/getAvatar";
 import { AuthService } from "../../services/auth.service";
+import InviteFriends from "../Friends/InviteFriends";
 
 interface HeaderProps {
     page?: string;
@@ -45,9 +46,7 @@ interface FileProp {
 const DashboardForm = (props: HeaderProps) => {
 
     const userData = useAuth();
-    const navigate = useNavigate();
     const [files, setFiles] = useState<File[]>([]);
-    // const [image, setImage] = useState(userData?.user?.picture)
 
     const baseUrl:string  = process.env.PROXY ?? "";
 
@@ -149,6 +148,7 @@ const DashboardForm = (props: HeaderProps) => {
                 {props.page === 'challenge' && <Challenge/>}
                 {props.page === 'leaderboard' && <Leaderboard/>}
                 {props.page === 'friends' && <Friends/>}
+                {props.page === 'inviteFriends' && <InviteFriends/>}
                 {props.page === 'chat' && <Chat/>}
                 {props.page === 'topAndFlop' && <TopAndFlop/>}
                 {props.page === 'findChallenges' && <FindChallenges/>}

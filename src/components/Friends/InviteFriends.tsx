@@ -4,10 +4,10 @@ import {Magnifier} from "../../images/Magnifier";
 import {FriendsService} from "../../services/friends.service";
 import styles from './friends.module';
 import {AuthService} from "../../services/auth.service";
-import {NavLink} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
-const Friends = () => {
-    const baseUrl  = process.env.PROXY ?? process.env.COMMON_BASE_URL;
+const InviteFriends = () => {
+    const navigate = useNavigate();
     const [friends, setFriends] = useState([]);
     const [filteredFriends, setFilteredFriends] = useState([]);
     const fetchData = async () => {
@@ -33,8 +33,8 @@ const Friends = () => {
         <>
             <div className={styles.search}>
                 <div className={styles.text}>
-                    <span className={styles.name}>Friends</span>
-                    <NavLink to="/inviteFriends">Invite friends</NavLink>
+                    <span className={styles.name}>Invite Friends</span>
+                    <a href="#" className={styles.backButton} onClick={() => navigate(-1)}>Back</a>
                 </div>
                 <div className={styles.field}>
                     <button><Magnifier /></button>
@@ -49,18 +49,18 @@ const Friends = () => {
             </div>
             {!filteredFriends?.length ? <div className={styles.noFriend}>There's no friends</div> : ''}
             {filteredFriends.map((friend:any) =>
-            <div className={styles.item}>
-                <div className={styles.avatar}>
-                    <img src={baseUrl + friend.picture} alt=""/>
+                <div className={styles.item}>
+                    <div className={styles.avatar}>
+                        checkbox
+                    </div>
+                    <div className={styles.user}>
+                        <div className={styles.name}>{friend.firstName + ' ' + friend.lastName}</div>
+                        <div>{friend.mobileNumber}</div>
+                    </div>
                 </div>
-                <div className={styles.user}>
-                    <div className={styles.name}>{friend.firstName + ' ' + friend.lastName}</div>
-                    <div>{friend.mobileNumber}</div>
-                </div>
-            </div>
             )}
         </>
     );
 };
 
-export default Friends;
+export default InviteFriends;

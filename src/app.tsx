@@ -41,6 +41,7 @@ const App = () => {
                     }
                     />
                     <Route path="/friends" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'friends'} />} />
+                    <Route path="/inviteFriends" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'inviteFriends'} />} />
                     <Route path="/chat" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'chat'} />} />
                     <Route path="/topAndFlop" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'topAndFlop'} />} />
                     <Route path="/challenge" element={!currentUser ? <Navigate to="/" /> : <Challenges page={'challenge'} />} />
