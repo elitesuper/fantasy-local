@@ -9,11 +9,15 @@ export class AuthService {
 
     async logIn(user: { password: string; mobileNumber: string; deviceToken: string; deviceRegistration: string }) {
         const headers = await authHeader();
-        return axios.post(`${baseUrl}/api/users/login`, user, {withCredentials: true, headers: headers });
+        return axios.post(`${baseUrl}/api/users/login`, user, { headers: headers });
     }
 
     async recoveryPassword(phone:{mobileNumber:string}){
         return axios.post(`${baseUrl}/api/users/forgot-password`, phone)
+    }
+
+    async resendCode(phone:{mobileNumber:string}){
+        return axios.post(`${baseUrl}/api/users/resend-code`, phone)
     }
 
     async sendNewPassword(data:{mobileNumber:string; newPassword:string}){
@@ -50,8 +54,8 @@ export class AuthService {
         return JSON.parse(localStorage.getItem('token')??"{}");
     }
 
-    getRecoveryPhoneNumber() {
-        return JSON.parse(localStorage.getItem('userphone')||'{}');
+    getRecoveryInfo() {
+        return JSON.parse(localStorage.getItem('recoverinfo')||'{}');
     }
 
     getRegisterInfo() {
