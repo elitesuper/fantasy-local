@@ -8,6 +8,8 @@ const defaultState = {
     user : data,
     login: (data: any) => {},
     logout: () => {},
+    update: (data: any) => {},
+
 }
 
 const AuthContext = createContext(defaultState);
@@ -22,7 +24,11 @@ export const AuthProvider = (props: { children:any }) => {
         setUser(data.userInfo);
         setToken(data.tokenInfo);
         navigate("/dashboard");
-      };
+    };
+
+    const update= async (data:any) =>{
+      setUser(data);
+    }
     
     // call this function to sign out logged in user
     const logout = async () => {
@@ -35,6 +41,7 @@ export const AuthProvider = (props: { children:any }) => {
       user,
       login,
       logout,
+      update,
     }),
     [user]
   );

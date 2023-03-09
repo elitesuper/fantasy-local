@@ -47,6 +47,7 @@ const DashboardForm = (props: HeaderProps) => {
     const userData = useAuth();
     const navigate = useNavigate();
     const [files, setFiles] = useState<File[]>([]);
+    // const [image, setImage] = useState(userData?.user?.picture)
 
     const baseUrl:string  = process.env.PROXY ?? "";
 
@@ -78,7 +79,16 @@ const DashboardForm = (props: HeaderProps) => {
             console.log(formData);
             AuthService.shared.updateProfilePicture(formData).then(
                 response=>{
-                    console.log(response.data)
+                    const newAvatar: string = response?.data?.data?.picture;
+                    if(newAvatar){
+                        // setImage(newAvatar);
+                        toast.success("Successfully uploaded!");
+                        let data = userData.user;
+                        data.picture = newAvatar;
+                        userData.update(data);
+                    }else(
+                        toast.error(response?.data?.message)
+                    )
                 },
                 error=>{
                     toast.error("Something went wrong!");
