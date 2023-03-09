@@ -20,7 +20,7 @@ const LoginForm = () => {
     const [countryCode, setCountryCode] = useState(null);
     const [password, setPassword] = useState("");
     const [tel, setTel] = useState("");
-    const [setUserPhone] = useLocalStorage('userphone', null);
+    const [userphone, setUserPhone] = useLocalStorage('recoverinfo', null);
     const navigate = useNavigate();
 
 
@@ -54,12 +54,28 @@ const LoginForm = () => {
     };
 
     const recoverPassword = () =>{
-        if(tel == ""){
-            toast.error("Please enter phone number!");
+        if(tel && countryCode){
+            const dialCode = countries.find(country => country.name === countryCode?.value)?.dial_code;
+            const mobileNumber = dialCode + tel;
+            AuthService.shared.recoveryPassword({mobileNumber:mobileNumber}).then(
+                response => {
+                    if(response?.data?.data?.code) {
+                        setUserPhone(response?.data?.data);
+                        navigate("/recoverPassword");
+                    }else{
+                        toast.error(response?.data?.message);
+                    }
+                },
+                error => {
+                    toast.error("Something went wrong!");
+                }
+            )
+        }
+        else{
+            toast.error("Please enter phone number and select country code!");
             return;
         }
-        setUserPhone({mobileNumber:tel})
-        navigate("/recoverPassword");
+        
     }
 
     const reactCountries = countries.map(

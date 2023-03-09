@@ -9,27 +9,15 @@ import { AuthService } from "../../services/auth.service";
 
 const RecoverPasswordForm = () => {
     const [code, setCode] = useState('');
-    const [receivedCode, setReceivedCode] = useState('');
     const navigate = useNavigate();
-    const phoneInfo = AuthService.shared.getRecoveryPhoneNumber();
+    const recoverInfo = AuthService.shared.getRecoveryInfo();
+    const [receivedCode, setReceivedCode] = useState(recoverInfo.code);
+
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
 
         if(code === receivedCode){
-            // AuthService.shared.sendNewPassword({mobileNumber:phoneInfo.mobileNumber, newPassword:"123456"}).then(
-            //     response => {
-            //         const changed = response?.data?.data?.isChangePassword ?? false
-            //         if(changed){
-            //             navigate('/createPassword');
-            //         }else{
-            //             toast.error(`Password can't change.`);
-            //         }
-            //     },
-            //     error => {
-            //         toast.error(`Something went wrong.`);
-            //     }
-            // )
             navigate('/createPassword');
         }
         else{
@@ -37,22 +25,18 @@ const RecoverPasswordForm = () => {
         }
     };
 
-    useEffect(()=>{
-        AuthService.shared.recoveryPassword({mobileNumber:phoneInfo.mobileNumber}).then(
+    const resendCode = () => {
+        AuthService.shared.resendCode({mobileNumber:recoverInfo.mobileNumber}).then(
             response => {
                 if(response?.data?.data?.code){
-
                     setReceivedCode(response?.data?.data?.code)
+                    toast.success('Successfully sended!');
                 }
             },
             error => {
-
+                toast.error('Something went wrong!');
             }
         )
-    },[])
-
-    const resendCode = () => {
-
     }
     return (
         <div className={styles.loginContainer}>
