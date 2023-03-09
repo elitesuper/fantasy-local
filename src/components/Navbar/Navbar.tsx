@@ -9,34 +9,38 @@ import {NavLink} from "react-router-dom";
 import classNames from "classnames";
 
 import styles from './navbar.module'
+import Hamburger from "../Menu/Hamburger";
 
 interface HeaderProps {
     page?: string;
 }
 const NavBar = (props: HeaderProps) => {
     return (
-        <div className={styles.nav}>
-            <NavLink className={classNames(styles.item, props.page === 'challenge' ? styles.active : "")} to="/dashboard">
-                <Challenges/>
-                Challenges
-            </NavLink>
-            <NavLink className={classNames(styles.item, props.page === 'leaderboard' ? styles.active : "")} to="/leaderboard">
-                <Trophy/>
-                Leaderboard
-            </NavLink>
-            <NavLink className={classNames(styles.item, props.page === 'friends' ? styles.active : "")} to="/friends">
-                <Friends/>
-                Friends
-            </NavLink>
-            <NavLink className={classNames(styles.item, props.page === 'chat' ? styles.active : "")} to="/chat">
-                <Chat/>
-                Chat
-            </NavLink>
-            <NavLink className={classNames(styles.item, props.page === 'findChallenges' ? styles.active : "")} to="/findChallenges">
-                <Magnifier/>
-                Find Challenges
-            </NavLink>
-        </div>
+        <>
+            {/*<Hamburger/>*/}
+            <div className={styles.nav}>
+                <NavLink className={classNames(styles.item, props.page === 'challenge' ? styles.active : "")} to="/dashboard">
+                    <Challenges/>
+                    Challenges
+                </NavLink>
+                <NavLink className={classNames(styles.item, props.page === 'leaderboard' ? styles.active : "")} to="/leaderboard">
+                    <Trophy/>
+                    Leaderboard
+                </NavLink>
+                <NavLink className={classNames(styles.item, props.page === 'friends' ? styles.active : "")} to="/friends">
+                    <Friends/>
+                    Friends
+                </NavLink>
+                <NavLink className={classNames(styles.item, props.page === 'chat' ? styles.active : "")} to="/chat">
+                    <Chat/>
+                    Chat
+                </NavLink>
+                <NavLink className={classNames(styles.item, props.page === 'findChallenges' ? styles.active : "")} to="/findChallenges">
+                    <Magnifier/>
+                    Find Challenges
+                </NavLink>
+            </div>
+        </>
     );
 };
 
