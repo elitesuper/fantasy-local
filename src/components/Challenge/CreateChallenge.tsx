@@ -10,7 +10,7 @@ import {LeaguesData, MatchesData} from "../../models/challenge/challenge-data";
 import moment from "moment";
 
 const CreateChallenge = () => {
-    const baseUrl  = process.env.PROXY;
+    const baseUrl  = process.env.PROXY ?? process.env.COMMON_BASE_URL;
     const navigate = useNavigate();
     const [matches, setMatches] = useState([]);
     const [leagues, setLeagues] = useState([]);

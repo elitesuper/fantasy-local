@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react";
 
-import styles from './friends.module';
 import {Magnifier} from "../../images/Magnifier";
 import {FriendsService} from "../../services/friends.service";
-import {AuthService} from "../../services/auth.service";
+import styles from './friends.module';
 
 const Friends = () => {
+    const baseUrl  = process.env.PROXY ?? process.env.COMMON_BASE_URL;
     const [friends, setFriends] = useState([]);
     const [filteredFriends, setFilteredFriends] = useState([]);
     const fetchData = async () => {
@@ -47,7 +47,7 @@ const Friends = () => {
             {filteredFriends.map((friend:any) =>
             <div className={styles.item}>
                 <div className={styles.avatar}>
-                    <img src={process.env.COMMON_BASE_URL + friend.picture} alt=""/>
+                    <img src={baseUrl + friend.picture} alt=""/>
                 </div>
                 <div className={styles.user}>
                     <div className={styles.name}>{friend.firstName + ' ' + friend.lastName}</div>

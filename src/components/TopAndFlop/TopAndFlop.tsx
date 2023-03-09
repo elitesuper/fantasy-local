@@ -5,7 +5,7 @@ import styles from "./topAndFlop.module";
 import {Tab, TabList, TabPanel, Tabs} from "react-tabs";
 
 const TopAndFlop = () => {
-    const baseUrl  = process.env.PROXY;
+    const baseUrl  = process.env.PROXY ?? process.env.COMMON_BASE_URL;
     const [wkPlayers, setWKPlayers] = useState([]);
     const [btPlayers, setBTPlayers] = useState([]);
     const [bwPlayers, setBWPlayers] = useState([]);
