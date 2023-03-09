@@ -1,5 +1,5 @@
 import getAxiosInstance from "../lib/getAxiosInstance";
-import {authHeader, headers} from "./auth-header";
+import {authHeader, headers, uploadHeader} from "./auth-header";
 import {PhoneVerify, User, UserData} from "../models/user/user-type";
 import axios from "axios";
 
@@ -19,6 +19,11 @@ export class AuthService {
 
     async sendNewPassword(data:{mobileNumber:string; newPassword:string}){
         return axios.post(`${baseUrl}/api/users/change-password`, data)
+    }
+
+    async updateProfilePicture(formData:any){
+        const headers = await uploadHeader();
+        return axios.post(`${baseUrl}/api/users/update-profile-picture`, formData, {headers: headers})
     }
 
     getToken(user: any) {

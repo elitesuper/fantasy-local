@@ -17,19 +17,20 @@ const RecoverPasswordForm = () => {
         e.preventDefault();
 
         if(code === receivedCode){
-            AuthService.shared.sendNewPassword({mobileNumber:phoneInfo.mobileNumber, newPassword:"123456"}).then(
-                response => {
-                    const changed = response?.data?.data?.isChangePassword ?? false
-                    if(changed){
-                        navigate('/createPassword');
-                    }else{
-                        toast.error(`Password can't change.`);
-                    }
-                },
-                error => {
-                    toast.error(`Something went wrong.`);
-                }
-            )
+            // AuthService.shared.sendNewPassword({mobileNumber:phoneInfo.mobileNumber, newPassword:"123456"}).then(
+            //     response => {
+            //         const changed = response?.data?.data?.isChangePassword ?? false
+            //         if(changed){
+            //             navigate('/createPassword');
+            //         }else{
+            //             toast.error(`Password can't change.`);
+            //         }
+            //     },
+            //     error => {
+            //         toast.error(`Something went wrong.`);
+            //     }
+            // )
+            navigate('/createPassword');
         }
         else{
             toast.error(`Verification code doesn't match!`);
@@ -50,6 +51,9 @@ const RecoverPasswordForm = () => {
         )
     },[])
 
+    const resendCode = () => {
+
+    }
     return (
         <div className={styles.loginContainer}>
             <h2 className={styles.title}><strong>Recover password</strong></h2>
@@ -74,9 +78,9 @@ const RecoverPasswordForm = () => {
                 <button disabled={false} className={classNames("button large", styles.loginBtn)}>Continue</button>
                 <div className={styles.signup}>
                     Didn't get the code?{" "}
-                    <NavLink to="/" className={styles.link}>
+                    <div className={styles.link} onClick={()=>resendCode()}>
                         Resend code
-                    </NavLink>
+                    </div>
                 </div>
             </form>
         </div>
