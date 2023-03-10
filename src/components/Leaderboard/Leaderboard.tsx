@@ -4,8 +4,10 @@ import styles from './leaderboard.module';
 import classNames from "classnames";
 import { AuthService } from "../../services/auth.service";
 import { ChallengesService } from "../../services/challenges.service";
+import getAvatar from "../../lib/getAvatar";
 
 const Leaderboard = () => {
+    const baseUrl  = process.env.PROXY ?? process.env.COMMON_BASE_URL ?? "";
     const [leaderBoards, setLeaderBoards] = useState([]);
     const [challenges, setChallenges] = useState([]);
 
@@ -34,7 +36,24 @@ const Leaderboard = () => {
                     There's no challenges available
                 </div>:
                 <>
-                    <div className={styles.item}>
+                    {challenges.map((item:any)=>
+                        <div className={styles.item} key={`challengeId${item.challengeId}`}>
+                            <div className={styles.avatar}>
+                                <img src={getAvatar(baseUrl, item?.picture, "/images/user.png")} alt=""/>
+                            </div>
+                            <div className={styles.user}>
+                                <div className={styles.name}>{item.userName}</div>
+                                <div>
+                                    <span>{item.totalChallengers}</span>
+                                </div>
+                            </div>
+                            <div className={styles.score}>
+                                Season Points
+                                <div className={styles.points}>{item.points}</div>
+                            </div>
+                        </div>
+                    )}
+                    {/* <div className={styles.item}>
                         <div className={styles.avatar}>
                             <img src="/images/user.png" alt=""/>
                         </div>
@@ -78,7 +97,7 @@ const Leaderboard = () => {
                             Season Points
                             <div className={styles.points}>2305.0</div>
                         </div>
-                    </div>
+                    </div> */}
                 </>
             }
 
