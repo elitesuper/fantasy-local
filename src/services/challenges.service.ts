@@ -22,7 +22,7 @@ export class ChallengesService {
         return axios.post(baseUrl + '/api/leader-board', req, {headers: headers});
     }
 
-    async getChallengeLeaderBoard(req:{UserId:string; Id:number }){
+    async getChallengeLeaderBoard(req:{UserId:string; Id:string }){
         const headers = await authHeader();
         return axios.post(baseUrl + '/api/challenge-leader-board', req, {headers: headers});
     }
