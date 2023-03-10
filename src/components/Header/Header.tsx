@@ -20,7 +20,7 @@ const Header = (props: HeaderProps) => {
     return (
         <>
             <div className={classNames(styles.container, `${styles[props.position]}`)}>
-                <NavLink to={(user)?"/dashboard":"/"} className={styles.logo} style={props.hasMenu ? {width: '398px'} : {}}>
+                <NavLink to={(user)?"/dashboard":"/"} className={styles.logo}>
                     <Logo/>
                 </NavLink>
                 {props.hasMenu && (

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import { Challenges } from '../../images/Challenges';
 import { Trophy } from '../../images/Trophy';
@@ -9,16 +9,23 @@ import {NavLink} from "react-router-dom";
 import classNames from "classnames";
 
 import styles from './navbar.module'
-import Hamburger from "../Menu/Hamburger";
 
 interface HeaderProps {
     page?: string;
 }
 const NavBar = (props: HeaderProps) => {
+    const [hamburgerOpen, setHamburgerOpen] = useState(false);
+    const toggleHamburger = () => {
+        setHamburgerOpen(!hamburgerOpen)
+    }
     return (
         <>
-            {/*<Hamburger/>*/}
-            <div className={styles.nav}>
+            <div onClick={toggleHamburger} className={classNames(styles.hamburger, hamburgerOpen ? styles.isOpen : '')}>
+                <div className={classNames(styles.burger, styles.burger1)}/>
+                <div className={classNames(styles.burger, styles.burger2)}/>
+                <div className={classNames(styles.burger, styles.burger3)}/>
+            </div>
+            <div className={classNames(styles.nav, hamburgerOpen ? styles.showMenu : styles.hideMenu)}>
                 <NavLink className={classNames(styles.item, props.page === 'challenge' ? styles.active : "")} to="/dashboard">
                     <Challenges/>
                     Challenges

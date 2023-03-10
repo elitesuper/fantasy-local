@@ -86,11 +86,10 @@
 .dashboard {
   display: flex;
   justify-content: space-around;
-  padding: 60px 0;
+  padding: 60px 20px;
 
   @media (max-width: $tablet-width) {
     flex-direction: column;
-    padding: 50px 20px;
   }
 }
 
