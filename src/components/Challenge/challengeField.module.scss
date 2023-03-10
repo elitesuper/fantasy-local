@@ -23,26 +23,26 @@
     &:first-child {
       display: block;
       top: -14px;
-      left: 96px;
+      left: 66px;
     }
   }
 
   &.team4 {
     .playerPos:nth-child(2) {
       display: block;
-      left: 96px;
+      left: 66px;
       top: 113px;
     }
 
     .playerPos:nth-child(6) {
       display: block;
-      left: 96px;
+      left: 66px;
       top: 241px;
     }
 
     .playerPos:nth-child(10) {
       display: block;
-      left: 96px;
+      left: 66px;
       top: 364px;
     }
   }
@@ -50,43 +50,43 @@
   &.team8 {
     .playerPos:nth-child(2) {
       display: block;
-      left: 33px;
+      left: 3px;
       top: 115px;
     }
 
     .playerPos:nth-child(3) {
       display: block;
-      left: 157px;
+      left: 127px;
       top: 115px;
     }
 
     .playerPos:nth-child(6) {
       display: block;
-      left: 33px;
+      left: 3px;
       top: 241px;
     }
 
     .playerPos:nth-child(7) {
       display: block;
-      left: 157px;
+      left: 127px;
       top: 241px;
     }
 
     .playerPos:nth-child(10) {
       display: block;
-      left: -7px;
+      left: -37px;
       top: 367px;
     }
 
     .playerPos:nth-child(11) {
       display: block;
-      left: 96px;
+      left: 66px;
       top: 367px;
     }
 
     .playerPos:nth-child(12) {
       display: block;
-      left: 199px;
+      left: 169px;
       top: 367px;
     }
   }
@@ -94,61 +94,61 @@
   &.team11 {
     .playerPos:nth-child(2) {
       display: block;
-      left: -36px;
+      left: -66px;
       top: 118px;
     }
 
     .playerPos:nth-child(3) {
       display: block;
-      left: 53px;
+      left: 23px;
       top: 118px;
     }
 
     .playerPos:nth-child(4) {
       display: block;
-      left: 142px;
+      left: 112px;
       top: 118px;
     }
 
     .playerPos:nth-child(5) {
       display: block;
-      left: 230px;
+      left: 200px;
       top: 118px;
     }
 
     .playerPos:nth-child(6) {
       display: block;
-      left: -36px;
+      left: -66px;
       top: 220px;
     }
 
     .playerPos:nth-child(7) {
       display: block;
-      left: 53px;
+      left: 23px;
       top: 220px;
     }
 
     .playerPos:nth-child(8) {
       display: block;
-      left: 142px;
+      left: 112px;
       top: 220px;
     }
 
     .playerPos:nth-child(9) {
       display: block;
-      left: 230px;
+      left: 200px;
       top: 220px;
     }
 
     .playerPos:nth-child(10) {
       display: block;
-      left: 35px;
+      left: 5px;
       top: 367px;
     }
 
     .playerPos:nth-child(11) {
       display: block;
-      left: 159px;
+      left: 129px;
       top: 367px;
     }
   }
@@ -157,6 +157,10 @@
 .playerWrap {
   text-decoration: none;
   color: $text-default;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 130px;
 }
 
 .player {
@@ -184,9 +188,14 @@
 .playerName {
   background: $background-light;
   border-radius: 50px;
-  padding: 5px 10px;
+  padding: 4px 8px;
   font-weight: bold;
   margin-top: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 130px;
+  font-size: 14px;
 }
 
 
@@ -219,4 +228,12 @@
   position: absolute;
   bottom: 20px;
   left: 20px;
+  background: $background-default;
+  color: $text-light;
+  font-size: 16px;
+  padding: 15px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-family: Interface-bold, sans-serif;
 }

@@ -83,7 +83,7 @@ const Challenge = () => {
                     <Player position="AR" index={2} player={formationData?.ar2}/>
                 </div>
             </div>
-            <button className={classNames(styles.autoFillButton, "button")}>Auto fill players</button>
+            <button className={styles.autoFillButton}>Auto fill players</button>
         </div>
     );
 };
