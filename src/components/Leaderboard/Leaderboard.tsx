@@ -94,7 +94,7 @@ const Leaderboard = () => {
                             </div>
                             <div className={styles.score}>
                                 Season Points
-                                <div className={styles.points}>{item.point}</div>
+                                <div className={styles.points}>{item.points}</div>
                             </div>
                         </div>
                     )}
