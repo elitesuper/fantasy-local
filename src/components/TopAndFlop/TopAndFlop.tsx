@@ -1,45 +1,12 @@
-import React, {useEffect, useState} from "react";
-import { TopandFlopData } from "src/models/topandflop/topandflop-type";
-import { TopandFlopService } from "../../services/topandflop.service";
+import React from "react";
 import styles from "./topAndFlop.module";
-import {Tab, TabList, TabPanel, Tabs} from "react-tabs";
+import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
+import { useAppSelector } from "../../redux/hooks/hooks";
+import {Player} from "../../redux/slices/players/playersSlice";
 
 const TopAndFlop = () => {
     const baseUrl  = process.env.PROXY ?? process.env.COMMON_BASE_URL;
-    const [wkPlayers, setWKPlayers] = useState([]);
-    const [btPlayers, setBTPlayers] = useState([]);
-    const [bwPlayers, setBWPlayers] = useState([]);
-    const [arPlayers, setARPlayers] = useState([]);
-    const fetchData = async () => {
-        const positions = ['Wicketkeeper', 'Bowler', 'Batsman', 'All rounder'];
-        positions.forEach((position) => {
-            TopandFlopService.shared.dataFetch({pageSize: 4, pageIndex:0, position: position}).then(
-                response => {
-                    switch (position) {
-                        case 'Bowler':
-                            setBTPlayers(response.data.data?.players??[]);
-                            break;
-                        case 'Batsman':
-                            setBWPlayers(response.data.data?.players??[]);
-                            break;
-                        case 'All rounder':
-                            setARPlayers(response.data.data?.players??[]);
-                            break;
-                        default:
-                            setWKPlayers(response.data.data?.players??[]);
-                            break;
-                    }
-                },
-                error => {
-                    console.log(error)
-                }
-            );
-        })
-
-    }
-    useEffect(() => {
-        fetchData();
-    }, [])
+    const { wkPlayers, btPlayers, arPlayers, bwPlayers } = useAppSelector((state: { players: any; }) => state.players);
 
     return (
         <Tabs selectedTabClassName="selected">
@@ -53,7 +20,7 @@ const TopAndFlop = () => {
                 </TabList>
             </div>
             <TabPanel className={styles.list}>
-                {wkPlayers.map((item:TopandFlopData) =>
+                {wkPlayers.map((item:Player) =>
                     <div className={styles.item} key={`topandflop-wk-${item?.playerId}`}>
                         <div className={styles.shirt}>
                             <img src={baseUrl + item?.shirtImageUri} alt=""/>
@@ -70,7 +37,7 @@ const TopAndFlop = () => {
                 )}
             </TabPanel>
             <TabPanel>
-                {bwPlayers.map((item:TopandFlopData) =>
+                {bwPlayers.map((item:Player) =>
                     <div className={styles.item} key={`topandflop-bw-${item?.playerId}`}>
                         <div className={styles.shirt}>
                             <img src={baseUrl + item?.shirtImageUri} alt=""/>
@@ -87,7 +54,7 @@ const TopAndFlop = () => {
                 )}
             </TabPanel>
             <TabPanel>
-                {btPlayers.map((item:TopandFlopData) =>
+                {btPlayers.map((item:Player) =>
                     <div className={styles.item} key={`topandflop-bt-${item?.playerId}`}>
                         <div className={styles.shirt}>
                             <img src={baseUrl + item?.shirtImageUri} alt=""/>
@@ -104,7 +71,7 @@ const TopAndFlop = () => {
                 )}
             </TabPanel>
             <TabPanel>
-                {arPlayers.map((item:TopandFlopData) =>
+                {arPlayers.map((item:Player) =>
                     <div className={styles.item} key={`topandflop-ar-${item?.playerId}`}>
                         <div className={styles.shirt}>
                             <img src={baseUrl + item?.shirtImageUri} alt=""/>
