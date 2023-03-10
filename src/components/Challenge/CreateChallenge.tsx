@@ -5,25 +5,26 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import classNames from "classnames";
 
 import styles from './challenges.module';
-import {ChallengesService} from "../../services/challenges.service";
 import {LeaguesData, MatchesData} from "../../models/challenge/challenge-data";
 import moment from "moment";
+import {useAppDispatch, useAppSelector} from "../../redux/hooks/hooks";
+import {getMatchesDataNoPlayers} from "../../redux/slices/matches/matchesActionCreation";
+import {
+    Formation, Match, updateSelectedFormationData,
+    updateSelectedLeague,
+    updateSelectedMatch,
+} from "../../redux/slices/matches/matchesSlice";
+import {isElement} from "react-dom/test-utils";
 
 const CreateChallenge = () => {
     const baseUrl  = process.env.PROXY ?? process.env.COMMON_BASE_URL;
     const navigate = useNavigate();
-    const [matches, setMatches] = useState([]);
-    const [leagues, setLeagues] = useState([]);
+    const dispatch = useAppDispatch();
+    const { topMatches, leagues, formation } = useAppSelector((state: { matches: any; }) => state.matches);
     const fetchData = async () => {
-        ChallengesService.shared.matchesDataNoPlayers().then(
-            response => {
-                setMatches(response.data.data?.topMatches??[]);
-                setLeagues(response.data.data?.leagues??[]);
-            },
-            error => {
-                console.log(error)
-            }
-        );
+        if (!topMatches.length && !leagues.length) {
+            dispatch(getMatchesDataNoPlayers())
+        }
     }
     function getTimeDiff(matchDate: string) {
         const startDate = moment(new Date());
@@ -36,9 +37,41 @@ const CreateChallenge = () => {
             return diffDuration.hours() + 'h  ' + diffDuration.minutes() + 'm';
         }
     }
+    function handleMatchClick(matchId: any) {
+        let formationData = formation?.find((data: Formation) => data.matchId === matchId );
+        if (!formationData?.matchId) {
+            formationData = {
+                matchId: matchId,
+                leagueId: 0,
+                roundId: 0,
+                teamSize: 4,
+                wk0: null,
+                bw0: null,
+                bt0: null,
+                ar0: null,
+                bw1: null,
+                bt1: null,
+                ar1: null,
+                bw2: null,
+                bt2: null,
+                ar2: null,
+                bw3: null,
+                bt3: null,
+            }
+        }
+        dispatch(updateSelectedFormationData(formationData))
+        dispatch(updateSelectedMatch(topMatches.find((v: Match) => v.matchId === matchId)));
+        navigate('/field');
+    }
+
+    function handleLeagueClick(leagueId: any) {
+        dispatch(updateSelectedLeague(leagues.find((v: Match) => v.leagueId === leagueId)));
+        navigate('/selectRound');
+    }
+
     useEffect(() => {
         fetchData();
-    }, [])
+    }, [topMatches, leagues])
     return (
         <Tabs selectedTabClassName="selected">
             <div className="box">
@@ -52,8 +85,8 @@ const CreateChallenge = () => {
                 </TabList>
             </div>
             <TabPanel className={styles.matchesList}>
-                {matches.map((item:MatchesData) =>
-                    <NavLink to={'/field'} className={styles.challengeBox} key={item.matchId}>
+                {topMatches.map((item:MatchesData) =>
+                    <div className={styles.challengeBox} key={item.matchId} onClick={() => handleMatchClick(item.matchId)}>
                         <div className={styles.match}>
                             <div className={styles.team}>
                                 <div className={styles.teamLogo}>
@@ -85,15 +118,15 @@ const CreateChallenge = () => {
                         {/*        </div>*/}
                         {/*    </div>*/}
                         {/*</div>*/}
-                    </NavLink>
+                    </div>
                 )}
             </TabPanel>
             <TabPanel className={styles.matchesList}>
                 {leagues.map((item:LeaguesData) =>
-                    <NavLink key={item.leagueId} to={'/selectRound'} className={classNames(styles.challengeBox, styles.stakesBox)}>
+                    <div key={item.leagueId} onClick={() => handleLeagueClick(item.leagueId)} className={classNames(styles.challengeBox, styles.stakesBox)}>
                         <img className={styles.icon} src={baseUrl + item.leagueImageUri} alt=""/>
                         <div className={styles.text}><strong>{item.leagueName}</strong><br/>{item.season}</div>
-                    </NavLink>
+                    </div>
                 )}
             </TabPanel>
         </Tabs>

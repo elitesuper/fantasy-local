@@ -6,6 +6,7 @@
   height: 692px;
   border-radius: 15px;
   padding: 100px 20px 20px;
+  position: relative;
 }
 
 .field {
@@ -173,6 +174,11 @@
     font-size: 26px;
     line-height: 17px;
   }
+
+  img {
+    width: 100%;
+    margin-top: -14px;
+  }
 }
 
 .playerName {
@@ -181,10 +187,6 @@
   padding: 5px 10px;
   font-weight: bold;
   margin-top: 5px;
-
-  &:empty {
-    display: none;
-  }
 }
 
 
@@ -211,4 +213,10 @@
       color: $text-default;
     }
   }
+}
+
+.autoFillButton {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
 }
