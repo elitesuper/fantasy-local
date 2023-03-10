@@ -5,9 +5,12 @@ import { AuthService } from "../../services/auth.service";
 import { ChallengesService } from "../../services/challenges.service";
 import { Trophy } from "../../images/Trophy";
 import { useAuth } from "../../contexts/AuthContext";
+import classNames from "classnames";
 
 const Leaderboard = () => {
     const [challenges, setChallenges] = useState([]);
+    const [leaderBoards, setLeaderBoards] = useState([]);
+
     const [selectedChallenge, setSelectedChallenge] = useState("");
     const {user} = useAuth();
 
