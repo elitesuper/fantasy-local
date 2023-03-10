@@ -132,6 +132,9 @@ const DashboardForm = (props: HeaderProps) => {
                         <NavLink className={classNames(styles.item, props.page === 'terms' ? styles.active : "")} to="/terms">
                             Terms & Conditions
                         </NavLink>
+                        <div className={styles.item} onClick={()=>userData.logout()}>
+                            Log out
+                        </div>
                     </div>
                 </div>
 
