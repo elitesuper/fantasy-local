@@ -5,6 +5,7 @@ import {NavLink} from "react-router-dom";
 
 import { Logo } from '../../images/Logo';
 import styles from './header.module';
+import { useAuth } from "../../contexts/AuthContext";
 
 interface HeaderProps {
     position?: string;
@@ -13,10 +14,13 @@ interface HeaderProps {
 }
 
 const Header = (props: HeaderProps) => {
+
+    const {user} = useAuth();
+
     return (
         <>
             <div className={classNames(styles.container, `${styles[props.position]}`)}>
-                <NavLink to="/" className={styles.logo} style={props.hasMenu ? {width: '398px'} : {}}>
+                <NavLink to={(user.userID)?"/dashboard":"/"} className={styles.logo} style={props.hasMenu ? {width: '398px'} : {}}>
                     <Logo/>
                 </NavLink>
                 {props.hasMenu && (
