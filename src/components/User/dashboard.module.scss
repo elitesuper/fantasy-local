@@ -63,26 +63,6 @@
   }
 }
 
-.menuLinks {
-  .item {
-    text-decoration: none;
-    font-size: 20px;
-    color: $text-default;
-    display: block;
-    margin-bottom: 15px;
-    cursor: pointer;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-
-    &.active {
-      font-family: Interface-bold, sans-serif;
-      color: $brand-color;
-    }
-  }
-}
-
 .dashboard {
   display: flex;
   justify-content: space-around;

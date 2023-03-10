@@ -9,6 +9,7 @@ import {NavLink} from "react-router-dom";
 import classNames from "classnames";
 
 import styles from './navbar.module'
+import Menu from "./Menu";
 
 interface HeaderProps {
     page?: string;
@@ -25,7 +26,10 @@ const NavBar = (props: HeaderProps) => {
                 <div className={classNames(styles.burger, styles.burger2)}/>
                 <div className={classNames(styles.burger, styles.burger3)}/>
             </div>
-            <div className={classNames(styles.nav, hamburgerOpen ? styles.showMenu : styles.hideMenu)}>
+            <div className={classNames('isMobile', styles.nav, hamburgerOpen ? styles.showMenu : styles.hideMenu)} onClick={toggleHamburger}>
+                <Menu/>
+            </div>
+            <div className={classNames(styles.nav, 'isDesktop')}>
                 <NavLink className={classNames(styles.item, props.page === 'challenge' ? styles.active : "")} to="/dashboard">
                     <Challenges/>
                     Challenges

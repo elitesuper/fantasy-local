@@ -17,11 +17,16 @@
     top: 90px;
     align-items: start;
 
-    .item {
+    .menuLinks {
       width: 100%;
-      text-align: left;
-      justify-content: flex-start;
-      padding: 0 20px;
+
+      .menuItem {
+        color: $text-light;
+        padding: 15px 18px;
+        border-bottom: solid 1px #2A2A2A;
+        width: 100%;
+        margin-bottom: 0;
+      }
     }
 
     &.showMenu {
@@ -103,7 +108,25 @@
       transform: rotate(-45deg);
     }
   }
-
 }
 
+.menuLinks {
+  .menuItem {
+    text-decoration: none;
+    font-size: 20px;
+    color: $text-default;
+    display: block;
+    margin-bottom: 15px;
+    cursor: pointer;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &.active {
+      font-family: Interface-bold, sans-serif;
+      color: $brand-color;
+    }
+  }
+}
 

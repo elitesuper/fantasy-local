@@ -61,7 +61,6 @@ a {
   }
 }
 
-
 .tabsSimple {
   display: flex;
   padding: 10px 15px;
@@ -186,5 +185,17 @@ a {
     border-radius: 10px;
     outline: none;
     font-family: InterFace, sans-serif;
+  }
+}
+
+.isMobile {
+  @media (min-width: $tablet-width) {
+    display: none;
+  }
+}
+
+.isDesktop {
+  @media (max-width: $tablet-width) {
+    display: none;
   }
 }

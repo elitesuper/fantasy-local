@@ -31,6 +31,7 @@ import OverviewChallenge from "../Challenge/OverviewChallenge";
 import getAvatar from "../../lib/getAvatar";
 import { AuthService } from "../../services/auth.service";
 import InviteFriends from "../Friends/InviteFriends";
+import Menu from "../Navbar/Menu";
 
 interface HeaderProps {
     page?: string;
@@ -98,7 +99,7 @@ const DashboardForm = (props: HeaderProps) => {
 
     return (
         <div className={styles.dashboard}>
-            <div className={styles.leftColumn}>
+            <div className={classNames(styles.leftColumn, 'isDesktop')}>
                 <div className={classNames(`box`, styles.profile)}>
                     <div className="boxTitle">My profile</div>
                     <div className={classNames(`boxContainer`, styles.user)}>
@@ -119,23 +120,7 @@ const DashboardForm = (props: HeaderProps) => {
                 </div>
                 <div className={classNames(`box`, styles.menu)}>
                     <div className="boxTitle">Menu</div>
-                    <div className={classNames(`boxContent`, styles.menuLinks)}>
-                        <NavLink className={classNames(styles.item, props.page === 'profile' ? styles.active : "")} to="/profile">
-                            My profile
-                        </NavLink>
-                        <NavLink className={classNames(styles.item, props.page === 'rules' ? styles.active : "")} to="/rules">
-                            Point system
-                        </NavLink>
-                        <NavLink className={classNames(styles.item, props.page === 'about' ? styles.active : "")} to="/about">
-                            About
-                        </NavLink>
-                        <NavLink className={classNames(styles.item, props.page === 'terms' ? styles.active : "")} to="/terms">
-                            Terms & Conditions
-                        </NavLink>
-                        <div className={styles.item} onClick={()=>userData.logout()}>
-                            Log out
-                        </div>
-                    </div>
+                    <Menu/>
                 </div>
 
                 {props.page === 'findChallenges' && (
@@ -163,7 +148,7 @@ const DashboardForm = (props: HeaderProps) => {
                 {props.page === 'pickPlayer' && <PickPlayer/>}
                 {props.page !== 'chat' && <Ads/>}
             </div>
-            <div className={styles.rightColumn}>
+            <div className={classNames(styles.rightColumn, 'isDesktop')}>
                 <div className={styles.box}>
                     <TopAndFlop/>
                 </div>
