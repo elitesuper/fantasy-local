@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {NavLink} from "react-router-dom";
 import Select, { IndicatorSeparatorProps } from 'react-select';
 import { useNavigate } from "react-router-dom";
@@ -9,17 +9,22 @@ import {Phone} from "../../images/Phone";
 import styles from "./user.module"
 import classNames from "classnames";
 import {AuthService} from "../../services/auth.service";
-// import {getDeviceId, getDeviceRegistration} from "../../lib/getDeviceId";
 import getDeviceId from "../../lib/getDeviceId";
 import getDeviceRegistration from "../../lib/getDeviceRegistration";
+import { useAuth } from "../../contexts/AuthContext";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { toast } from 'react-toastify';
 
 const LoginForm = () => {
-    const navigate = useNavigate();
+    const auth = useAuth();
     const [countryCode, setCountryCode] = useState(null);
     const [password, setPassword] = useState("");
     const [tel, setTel] = useState("");
+    const [userphone, setUserPhone] = useLocalStorage('recoverinfo', null);
+    const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
+
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
         setPassword(password || "");
         setTel(tel || "");
@@ -29,18 +34,49 @@ const LoginForm = () => {
             const mobileNumber = dialCode + tel;
             AuthService.shared.logIn({mobileNumber: mobileNumber, password: password, deviceToken: getDeviceId(), deviceRegistration:getDeviceRegistration()}).then(
                 response => {
-                    console.log(response);
+                    const userData = response?.data
                     if (response?.data?.data) {
-                        AuthService.shared.setUser(response.data.data);
-                        navigate("/dashboard");
+                        if(!userData?.data?.userInfo){
+                            toast.error(userData?.message);
+                            return;
+                        }else{
+                            // AuthService.shared.setUser(response.data.data);
+                            toast.success("Successfully logged In");
+                            auth.login(response.data.data);
+                        }
                     }
                 },
                 error => {
-                    console.log(error);
+                    toast.error("Something went wrong!");
                 }
             );
         }
     };
+
+    const recoverPassword = () =>{
+        if(tel && countryCode){
+            const dialCode = countries.find(country => country.name === countryCode?.value)?.dial_code;
+            const mobileNumber = dialCode + tel;
+            AuthService.shared.recoveryPassword({mobileNumber:mobileNumber}).then(
+                response => {
+                    if(response?.data?.data?.code) {
+                        setUserPhone(response?.data?.data);
+                        navigate("/recoverPassword");
+                    }else{
+                        toast.error(response?.data?.message);
+                    }
+                },
+                error => {
+                    toast.error("Something went wrong!");
+                }
+            )
+        }
+        else{
+            toast.error("Please enter phone number and select country code!");
+            return;
+        }
+        
+    }
 
     const reactCountries = countries.map(
         ({
@@ -122,7 +158,10 @@ const LoginForm = () => {
                     className={classNames("button large", styles.loginBtn)}>
                     Log In
                 </button>
-                <NavLink className={styles.link} to="/forgotPassword">Forgot password?</NavLink>
+                <div
+                    className={styles.link}
+                    onClick={() => recoverPassword()}
+                >Forgot password?</div>
                 <div className={styles.signup}>
                     Don't have an account?{" "}
                     <NavLink to="/register" className={styles.link}>

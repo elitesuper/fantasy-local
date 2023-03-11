@@ -1,5 +1,8 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import { useDropzone } from "react-dropzone";
 import {NavLink} from "react-router-dom";
+import { toast } from 'react-toastify';
+
 
 import Leaderboard from "../Leaderboard/Leaderboard";
 import Friends from "../Friends/Friends";
@@ -12,61 +15,118 @@ import Terms from "../StaticPages/Terms";
 import Profile from "../User/Profile";
 import Challenge from "../Challenge/Challenge";
 import CreateChallenge from "../Challenge/CreateChallenge";
-import PickPlayers from "../Challenge/PickPlayers";
+import Field from "../Challenge/Field";
+import Stakes from "../Challenge/Stakes";
 import Ads from "../Ads/Ads";
 
 import {Trophy} from "../../images/Trophy";
 import classNames from "classnames";
+import SelectRound from "../Challenge/SelectRound";
+import {Edit} from "../../images/Edit";
+
 import styles from "./dashboard.module";
+import {useAuth} from "../../contexts/AuthContext";
+import PickPlayer from "../Challenge/PickPlayer";
+import OverviewChallenge from "../Challenge/OverviewChallenge";
+import getAvatar from "../../lib/getAvatar";
 import { AuthService } from "../../services/auth.service";
+import InviteFriends from "../Friends/InviteFriends";
+import Menu from "../Navbar/Menu";
 
 interface HeaderProps {
     page?: string;
 }
+
+
+interface FileProp {
+    name: string
+    type: string
+    size: number
+}
+
 const DashboardForm = (props: HeaderProps) => {
+
+    const userData = useAuth();
+    const [files, setFiles] = useState<File[]>([]);
+
+    const baseUrl:string  = process.env.PROXY ?? "";
+
+    const { getRootProps, getInputProps } = useDropzone({
+        multiple: false,
+        accept: {
+        'image/*': ['.png', '.jpg', '.jpeg', '.gif']
+        },
+        onDrop: (acceptedFiles) => {
+          setFiles(
+            acceptedFiles.map((file) =>
+              Object.assign(file, {
+                preview: URL.createObjectURL(file),
+              })
+            )
+          );
+        },
+    });
+
+    const img = files.map((file: FileProp) => (
+        <img key={file.name} alt={file.name} width={"120px"} height={"120px"} src={URL.createObjectURL(file as any)} />
+    ))
+
+    useEffect(() =>  {
+        files.forEach((file:File)=>{
+            const formData = new FormData();
+            formData.append("userId", userData?.user?.userID)
+            formData.append("pic", files[0]);
+            console.log(formData);
+            AuthService.shared.updateProfilePicture(formData).then(
+                response=>{
+                    const newAvatar: string = response?.data?.data?.picture;
+                    if(newAvatar){
+                        // setImage(newAvatar);
+                        toast.success("Successfully uploaded!");
+                        let data = userData.user;
+                        data.picture = newAvatar;
+                        userData.update(data);
+                    }else(
+                        toast.error(response?.data?.message)
+                    )
+                },
+                error=>{
+                    toast.error("Something went wrong!");
+                }
+            )
+        })
+    },[files])
 
     return (
         <div className={styles.dashboard}>
-            <div className={styles.leftColumn}>
+            <div className={classNames(styles.leftColumn, 'isDesktop')}>
                 <div className={classNames(`box`, styles.profile)}>
                     <div className="boxTitle">My profile</div>
                     <div className={classNames(`boxContainer`, styles.user)}>
                         <div className={styles.avatar}>
-                            <img src="/images/user.png" alt=""/>
+                            <div {...getRootProps()}>
+                                <input {...getInputProps()} />
+                                <span className={styles.icon}><Edit/></span>
+                            </div>
+                            {files.length?img:<img src={getAvatar(baseUrl, userData?.user?.picture, "/images/missing.png")} width={"120px"} height={"120px"} alt=""/>}
                         </div>
                         <div className={styles.info}>
-                            <div className={styles.name}>{AuthService.shared.getUser()?.userInfo?.firstName + ' ' + AuthService.shared.getUser()?.userInfo?.lastName}</div>
-                            <div className={styles.email}>{AuthService.shared.getUser()?.userInfo?.email}</div>
-                            <button className="button"><Trophy/> 10</button>
-                            <button className="button buttonSecondary"><Trophy/> 0</button>
+                            <div className={styles.name}>{userData?.user?.firstName + ' ' + userData?.user?.lastName}</div>
+                            <div className={styles.email}>{userData?.user?.email}</div>
+                            <button className="button fake"><Trophy/> {userData?.user?.totalWin}</button>
+                            <button className="button buttonSecondary fake"><Trophy/> {userData?.user?.totalLost}</button>
                         </div>
                     </div>
                 </div>
                 <div className={classNames(`box`, styles.menu)}>
                     <div className="boxTitle">Menu</div>
-                    <div className={classNames(`boxContent`, styles.menuLinks)}>
-                        <NavLink className={classNames(styles.item, props.page === 'dashboard' ? styles.active : "")} to="/dashboard">
-                            Home
-                        </NavLink>
-                        <NavLink className={classNames(styles.item, props.page === 'profile' ? styles.active : "")} to="/profile">
-                            My profile
-                        </NavLink>
-                        <NavLink className={classNames(styles.item, props.page === 'rules' ? styles.active : "")} to="/rules">
-                            Point system
-                        </NavLink>
-                        <NavLink className={classNames(styles.item, props.page === 'about' ? styles.active : "")} to="/about">
-                            About
-                        </NavLink>
-                        <NavLink className={classNames(styles.item, props.page === 'terms' ? styles.active : "")} to="/terms">
-                            Terms & Conditions
-                        </NavLink>
-                    </div>
+                    <Menu/>
                 </div>
 
-                {props.page === 'findChallenges' &&  (
+                {props.page === 'findChallenges' && (
                     <NavLink to="/createChallenge" className="button large mt10">+ Create a Challenge</NavLink>
                 )}
-                {props.page === 'chat' &&  <Ads/>}
+                {props.page === 'chat' && <Ads/>}
             </div>
             <div className={styles.body}>
                 {props.page === 'profile' && <Profile/>}
@@ -76,17 +136,21 @@ const DashboardForm = (props: HeaderProps) => {
                 {props.page === 'challenge' && <Challenge/>}
                 {props.page === 'leaderboard' && <Leaderboard/>}
                 {props.page === 'friends' && <Friends/>}
+                {props.page === 'inviteFriends' && <InviteFriends/>}
                 {props.page === 'chat' && <Chat/>}
                 {props.page === 'topAndFlop' && <TopAndFlop/>}
                 {props.page === 'findChallenges' && <FindChallenges/>}
                 {props.page === 'createChallenge' && <CreateChallenge/>}
-                {props.page === 'pickPlayers' && <PickPlayers />}
-
-                {props.page !== 'chat' &&  <Ads/>}
+                {props.page === 'overviewChallenge' && <OverviewChallenge/>}
+                {props.page === 'field' && <Field/>}
+                {props.page === 'stakes' && <Stakes/>}
+                {props.page === 'selectRound' && <SelectRound/>}
+                {props.page === 'pickPlayer' && <PickPlayer/>}
+                {props.page !== 'chat' && <Ads/>}
             </div>
-            <div className={styles.rightColumn}>
+            <div className={classNames(styles.rightColumn, 'isDesktop')}>
                 <div className={styles.box}>
-                    <TopAndFlop />
+                    <TopAndFlop/>
                 </div>
             </div>
         </div>

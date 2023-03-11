@@ -1,47 +1,53 @@
-import React, {useState, useEffect, createContext, useLayoutEffect} from 'react';
-import {AuthService} from "../services/auth.service";
-import {Navigate, Route} from 'react-router-dom';
+import React, { createContext, useContext, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
+import { useLocalStorage } from "../hooks/useLocalStorage";
+
+const data:any = null;
 
 const defaultState = {
-    authorized: false,
+    user : data,
+    login: (data: any) => {},
+    logout: () => {},
+    update: (data: any) => {},
+
+}
+
+const AuthContext = createContext(defaultState);
+
+export const AuthProvider = (props: { children:any }) => {
+  const [user, setUser] = useLocalStorage("user", null);
+  const [token, setToken] = useLocalStorage("token", null);
+
+  const navigate = useNavigate();
+    // call this function when you want to authenticate the user
+    const login = async (data:any) => {
+        setUser(data.userInfo);
+        setToken(data.tokenInfo);
+        navigate("/dashboard");
+    };
+
+    const update= async (data:any) =>{
+      setUser(data);
+    }
+    
+    // call this function to sign out logged in user
+    const logout = async () => {
+        setUser(null);
+        setToken(null);
+        navigate("/", { replace: true });
+    };
+  const value = useMemo(
+    () => ({
+      user,
+      login,
+      logout,
+      update,
+    }),
+    [user]
+  );
+  return <AuthContext.Provider value={value}>{props.children}</AuthContext.Provider>;
 };
 
-export const AuthContext = createContext(defaultState);
-// export const AuthProvider = (props: { children: any; }) => {
-//     const [authorize, setAuthorize] = useState(false);
-//
-//     const { children } = props;
-//
-//     useLayoutEffect(() => {
-//         const auth = AuthService.shared.checkAuthenticate();
-//         if (auth !== authorize) {
-//             setAuthorize(auth);
-//         }
-//         // eslint-disable-next-line react-hooks/exhaustive-deps
-//     }, []);
-//
-//     return (
-//         <AuthContext.Provider
-//             value={{ authorized: authorize }}
-//         >
-//             {children}
-//         </AuthContext.Provider>
-//     );
-// }
-//
-// // @ts-ignore
-// export const AuthRoute = ({ element: Component, ...rest }) => (
-//     <AuthContext.Consumer>
-//         {(authorize) => {
-//             let content;
-//
-//             if (authorize) {
-//                 content = React.useContext(Component);
-//             } else {
-//                 console.log('You must be login')
-//                 content = <Navigate to="/" />;
-//             }
-//             return content;
-//         }}
-//     </AuthContext.Consumer>
-// );
+export const useAuth = () => {
+  return useContext(AuthContext);
+};

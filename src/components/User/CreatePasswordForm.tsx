@@ -3,15 +3,35 @@ import React, {useState} from "react";
 import {Lock} from "../../images/Lock";
 import styles from "./user.module"
 import classNames from "classnames";
+import { toast } from "react-toastify";
+import { AuthService } from "../../services/auth.service";
+import { useNavigate } from "react-router-dom";
 
 const CreatePasswordForm = () => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const recoverInfo = AuthService.shared.getRecoveryInfo();
+    const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+
+    const handleSubmit = (e:any) => {
         e.preventDefault();
-        setPassword("");
-        setConfirmPassword("");
+        if(password != confirmPassword){
+            toast.error("Password doesn't match!")
+            return;
+        }
+        AuthService.shared.sendNewPassword({mobileNumber:recoverInfo.mobileNumber, newPassword:password}).then(
+            response =>{
+                const changed = response?.data?.data.isChangePassword;
+                if(changed){
+                    toast.success("Successfully changed!")
+                    navigate('/');
+                } 
+            },
+            error =>{
+                toast.error("Something went wrong!");
+            }
+        )
     };
 
     return (
@@ -47,7 +67,7 @@ const CreatePasswordForm = () => {
                         onChange={(e) => setConfirmPassword(e.target.value)}
                     />
                 </div>
-                <button disabled={true} className={classNames("button large", styles.loginBtn)}>Save new password</button>
+                <button disabled={!password || !confirmPassword} className={classNames("button large", styles.loginBtn)}>Save new password</button>
             </form>
         </div>
     );

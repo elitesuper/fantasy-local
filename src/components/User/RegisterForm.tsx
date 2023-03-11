@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {NavLink, useNavigate} from "react-router-dom";
 import Select, {IndicatorSeparatorProps} from "react-select";
+import { toast } from 'react-toastify';
 
 import countries from "./Countries";
 import {Phone} from "../../images/Phone";
@@ -9,8 +10,11 @@ import styles from "./user.module";
 import classNames from "classnames";
 import {AuthService} from "../../services/auth.service";
 import getDeviceId from "../../lib/getDeviceId";
+import getDeviceRegistration from "../../lib/getDeviceRegistration";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 const RegisterForm = () => {
+    const [register, setRegister] = useLocalStorage("register", null);
     const navigate = useNavigate();
     const [tel, setTel] = useState("");
     const [password, setPassword] = useState("");
@@ -25,10 +29,17 @@ const RegisterForm = () => {
         setCountryCode(countryCode || null);
         if (tel && password && countryCode && confirmPassword === password ) {
             const dialCode: string | undefined = countries.find(country => country.name === countryCode?.value)?.dial_code;
-            AuthService.shared.signUp({mobileNumber: tel, password: password, countryCode: dialCode, deviceToken: getDeviceId()}).then(
+            const mobileNumber = dialCode + tel;
+            AuthService.shared.signUp({mobileNumber: mobileNumber, password: password, deviceToken: getDeviceId(), deviceRegistration:getDeviceRegistration()}).then(
                 response => {
                     if (response?.data?.data) {
-                        navigate("/phoneVerify");
+                        if(response?.data?.data.userId){
+                            setRegister(response?.data?.data)
+                            navigate("/phoneVerify");
+                        }
+                        else{
+                            toast.error(response?.data?.message);
+                        }
                     } else {
                         console.log(response.data);
                     }

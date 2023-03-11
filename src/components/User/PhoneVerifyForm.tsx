@@ -1,19 +1,44 @@
 import React, {useState} from "react";
-import {NavLink, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import VerificationInput from "react-verification-input";
+import { toast } from 'react-toastify';
 
 import styles from "./user.module";
 import classNames from "classnames";
+import { AuthService } from "../../services/auth.service";
 
 const PhoneVerifyForm = () => {
     const [code, setCode] = useState("");
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e:any) => {
         e.preventDefault();
-        console.log({code});
-        setCode("");
-        navigate("/dashboard");
+        const registerInfo = AuthService.shared.getRegisterInfo();
+        if(registerInfo?.mobileNumber){
+            // AuthService.shared.phoneVerify({mobileNumber:registerInfo?.mobileNumber, verificationCode: code}).then(
+            //     response => {
+            //         console.log(response?.data)
+            //         if(response?.data?.message){
+            //             toast(response?.data?.message);
+            //         }
+            //         navigate('/')
+            //     },
+            //     error => {
+            //         console.log(error);
+            //         if(error?.response?.data?.title){
+            //             toast.error(error?.response?.data?.title)
+            //         }
+            //     }
+            // )
+            if (code == registerInfo?.code){
+                toast.success("Successfully Registered!");
+                navigate('/')
+                return;
+            }
+            toast.error('Verification code is incorrect!');
+        }else{
+            toast.error("Register info is incorrect! \n Please register again!");
+        }
     };
     return (
         <div className={styles.loginContainer}>
@@ -30,8 +55,11 @@ const PhoneVerifyForm = () => {
                         characterInactive: styles.verCharInactive,
                         characterSelected: styles.verCharActive,
                     }}
+                    onChange= {(e:any) => {
+                        setCode(e);
+                    }}
                 />
-                <button disabled={true} className={classNames("button large", styles.loginBtn)}>Authenticate</button>
+                <button disabled={false} className={classNames("button large", styles.loginBtn)}>Authenticate</button>
             </form>
         </div>
     );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import { Challenges } from '../../images/Challenges';
 import { Trophy } from '../../images/Trophy';
@@ -9,34 +9,49 @@ import {NavLink} from "react-router-dom";
 import classNames from "classnames";
 
 import styles from './navbar.module'
+import Menu from "./Menu";
 
 interface HeaderProps {
     page?: string;
 }
 const NavBar = (props: HeaderProps) => {
+    const [hamburgerOpen, setHamburgerOpen] = useState(false);
+    const toggleHamburger = () => {
+        setHamburgerOpen(!hamburgerOpen)
+    }
     return (
-        <div className={styles.nav}>
-            <NavLink className={classNames(styles.item, props.page === 'challenge' ? styles.active : "")} to="/dashboard">
-                <Challenges/>
-                Challenges
-            </NavLink>
-            <NavLink className={classNames(styles.item, props.page === 'leaderboard' ? styles.active : "")} to="/leaderboard">
-                <Trophy/>
-                Leaderboard
-            </NavLink>
-            <NavLink className={classNames(styles.item, props.page === 'friends' ? styles.active : "")} to="/friends">
-                <Friends/>
-                Friends
-            </NavLink>
-            <NavLink className={classNames(styles.item, props.page === 'chat' ? styles.active : "")} to="/chat">
-                <Chat/>
-                Chat
-            </NavLink>
-            <NavLink className={classNames(styles.item, props.page === 'findChallenges' ? styles.active : "")} to="/findChallenges">
-                <Magnifier/>
-                Find Challenges
-            </NavLink>
-        </div>
+        <>
+            <div onClick={toggleHamburger} className={classNames(styles.hamburger, hamburgerOpen ? styles.isOpen : '')}>
+                <div className={classNames(styles.burger, styles.burger1)}/>
+                <div className={classNames(styles.burger, styles.burger2)}/>
+                <div className={classNames(styles.burger, styles.burger3)}/>
+            </div>
+            <div className={classNames('isMobile', styles.nav, hamburgerOpen ? styles.showMenu : styles.hideMenu)} onClick={toggleHamburger}>
+                <Menu/>
+            </div>
+            <div className={classNames(styles.nav, 'isDesktop')}>
+                <NavLink className={classNames(styles.item, props.page === 'challenge' ? styles.active : "")} to="/dashboard">
+                    <Challenges/>
+                    Challenges
+                </NavLink>
+                <NavLink className={classNames(styles.item, props.page === 'leaderboard' ? styles.active : "")} to="/leaderboard">
+                    <Trophy/>
+                    Leaderboard
+                </NavLink>
+                <NavLink className={classNames(styles.item, props.page === 'friends' ? styles.active : "")} to="/friends">
+                    <Friends/>
+                    Friends
+                </NavLink>
+                <NavLink className={classNames(styles.item, props.page === 'chat' ? styles.active : "")} to="/chat">
+                    <Chat/>
+                    Chat
+                </NavLink>
+                <NavLink className={classNames(styles.item, props.page === 'findChallenges' ? styles.active : "")} to="/findChallenges">
+                    <Magnifier/>
+                    Find Challenges
+                </NavLink>
+            </div>
+        </>
     );
 };
 

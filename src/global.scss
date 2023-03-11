@@ -30,8 +30,55 @@ strong {
   font-family: Interface-bold, sans-serif;
 }
 
+a {
+  color: $brand-color;
+}
+
 .mt10 {
   margin-top: 10px;
+}
+
+.mb15 {
+  margin-bottom: 15px;
+}
+
+.tabs {
+  padding: 20px 24px;
+  margin: 0;
+  display: flex;
+
+  .tab {
+    outline: none;
+    list-style: none;
+    font-family: Interface-bold, sans-serif;
+    font-size: 20px;
+    padding: 0 30px 3px;
+    cursor: pointer;
+
+    &.selected {
+      border-bottom: solid 3px $brand-color;
+    }
+  }
+}
+
+.tabsSimple {
+  display: flex;
+  padding: 10px 15px;
+  font-size: 20px;
+
+  .tab {
+    flex: 1;
+    text-align: center;
+    cursor: pointer;
+    list-style: none;
+    outline: none;
+
+    &.selected {
+      font-family: Interface-bold, sans-serif;
+      font-weight: bold;
+      color: $brand-color;
+    }
+  }
 }
 
 .button {
@@ -60,6 +107,14 @@ strong {
     width: 100%;
     display: block;
     text-align: center;
+  }
+
+  &.small {
+    height: auto;
+  }
+
+  &.fake {
+    cursor: default;
   }
 
   &:disabled {
@@ -96,6 +151,17 @@ strong {
   }
 }
 
+.backButton {
+  color: $brand-color;
+  font-family: InterFace, sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 .inputIcons {
   position: relative;
   margin-bottom: 10px;
@@ -119,5 +185,17 @@ strong {
     border-radius: 10px;
     outline: none;
     font-family: InterFace, sans-serif;
+  }
+}
+
+.isMobile {
+  @media (min-width: $tablet-width) {
+    display: none;
+  }
+}
+
+.isDesktop {
+  @media (max-width: $tablet-width) {
+    display: none;
   }
 }

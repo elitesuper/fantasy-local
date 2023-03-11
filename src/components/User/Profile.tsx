@@ -8,21 +8,55 @@ import {Phone} from "../../images/Phone";
 import styles from "./user.module"
 import countries from "./Countries";
 import classNames from "classnames";
+import { AuthService } from "../../services/auth.service";
+import { ProfileService } from "../../services/profile.service";
+import getDeviceId from "../../lib/getDeviceId";
+import { useAuth } from "../../contexts/AuthContext";
+import getDate from "../../lib/getDate";
+import { toast } from "react-toastify";
 
 
 const Profile = () => {
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [DOB, setDOB] = useState("");
-    const [email, setEmail] = useState("");
-    const [tel, setTel] = useState("");
 
-    const handleSubmit = (e) => {
+    const {user, update} = useAuth();
+    const [firstName, setFirstName] = useState<string>(user?.firstName??"");
+    const [lastName, setLastName] = useState<string>(user?.lastName??"");
+    const [DOB, setDOB] = useState(getDate(user?.dateOfBirth));
+    const [email, setEmail] = useState<string>(user?.email??"");
+    const [tel, setTel] = useState<string>(user?.mobileNumber);
+    const [selectedCountry, setSelectedCountry] = useState(null);
+
+
+    const handleSubmit = (e : any) => {
         e.preventDefault();
-        setTel("");
+        const dialCode = countries.find(country => country.name === selectedCountry?.value);
+        ProfileService.shared.updateProfile({
+            userId: user?.userID??"",
+            mobileNumber: tel,
+            firstName: firstName,
+            lastName: lastName,
+            email:email,
+            country:dialCode?.name??"",
+            countryCode: dialCode?.dial_code??"",
+            dob: DOB.toString(),
+            preferredSportId: 0,
+            sportId: 0,
+            city:user?.city??"",
+            registrationToken: getDeviceId(),
+        }).then(
+            response=>{
+                const data = response?.data?.data?.userInfo;
+                if(data){
+                    update(data);
+                    toast.success("Successfully updated!");
+                }
+            },
+            error=>{
+                toast.error("Something went wrong!");
+            }
+        )
     };
 
-    const [selectedOption, setSelectedOption] = useState(null);
     const reactCountries = countries.map(
         ({
              name,
@@ -108,8 +142,8 @@ const Profile = () => {
                     />
                 </div>
                 <Select
-                    defaultValue={selectedOption}
-                    onChange={setSelectedOption}
+                    defaultValue={selectedCountry}
+                    onChange={setSelectedCountry}
                     components={{IndicatorSeparator}}
                     options={reactCountries}
                     styles={customStyles}

@@ -60,6 +60,7 @@
 
 .link {
   color: $brand-color;
+  cursor: pointer;
   text-decoration: none;
   font-size: 20px;
 }
@@ -88,6 +89,7 @@
 .verChar {
   border-radius: 10px;
   height: 92px;
+  line-height: 92px;
   border-color: $border-default;
   border-width: 1.5px;
   background-color: $background-light;

@@ -1,20 +1,32 @@
-import {User} from "../models/user/user";
-import getAxiosInstance from "../lib/getAxiosInstance";
-import {authHeader, headers} from "./auth-header";
-import {UserData} from "../models/user/user-data";
+import {authHeader, uploadHeader} from "./auth-header";
+import {PhoneVerify, User, UserData} from "../models/user/user-type";
+import axios from "axios";
 
-const axios = getAxiosInstance(process.env.COMMON_BASE_URL ?? '');
+const baseUrl  = process.env.PROXY ?? process.env.COMMON_BASE_URL;
 
 export class AuthService {
     static readonly shared: AuthService = new AuthService();
 
     async logIn(user: { password: string; mobileNumber: string; deviceToken: string; deviceRegistration: string }) {
         const headers = await authHeader();
-        return axios.post('/api/users/login', user, {withCredentials: true, headers: headers });
+        return axios.post(`${baseUrl}/api/users/login`, user, { headers: headers });
     }
 
-    getToken(user: any) {
-        return axios.post('/token', user);
+    async recoveryPassword(phone:{mobileNumber:string}){
+        return axios.post(`${baseUrl}/api/users/forgot-password`, phone)
+    }
+
+    async resendCode(phone:{mobileNumber:string}){
+        return axios.post(`${baseUrl}/api/users/resend-code`, phone)
+    }
+
+    async sendNewPassword(data:{mobileNumber:string; newPassword:string}){
+        return axios.post(`${baseUrl}/api/users/change-password`, data)
+    }
+
+    async updateProfilePicture(formData:any){
+        const headers = await uploadHeader();
+        return axios.post(`${baseUrl}/api/users/update-profile-picture`, formData, {headers: headers})
     }
 
     logout() {
@@ -22,9 +34,12 @@ export class AuthService {
         localStorage.removeItem("token");
     }
 
-    async signUp(user: User) {
-        const headers = await authHeader();
-        return axios.post('/api/users/register', user, { headers: headers });
+    async signUp(user : User) {
+        return axios.post(`${baseUrl}/api/users/register`, user);
+    }
+
+    async phoneVerify(code : PhoneVerify){
+        return axios.post(`${baseUrl}/api/users/account-verification`, code)
     }
 
     getUser() {
@@ -32,20 +47,22 @@ export class AuthService {
     }
 
     getCurrentToken() {
-        return JSON.parse(localStorage.getItem('token')??"");
+        return JSON.parse(localStorage.getItem('token')??"{}");
     }
 
-    setUser(user: UserData) {
+    getRecoveryInfo() {
+        return JSON.parse(localStorage.getItem('recoverinfo')||'{}');
+    }
+
+    getRegisterInfo() {
+        return JSON.parse(localStorage.getItem('register')||"{}");
+    }
+    setUser(user: any) {
         return localStorage.setItem('user', JSON.stringify(user));
-    }
-
-    setToken(token: string) {
-        return localStorage.setItem('token', token);
     }
 
     checkAuthenticate() {
         const user = this.getUser();
-        console.log(user);
-        return user?.userInfo?.userID || user?.userInfo?.userID === 0;
+        return user?.userID || user?.userID === 0;
     }
 }

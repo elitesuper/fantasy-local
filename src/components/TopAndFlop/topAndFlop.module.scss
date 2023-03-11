@@ -1,23 +1,5 @@
 @import './src/variables';
 
-.tabs {
-  display: flex;
-  padding: 10px 15px;
-  font-size: 20px;
-
-  > div {
-    flex: 1;
-    text-align: center;
-    cursor: pointer;
-  }
-
-  .active {
-    font-family: Interface-bold, sans-serif;
-    font-weight: bold;
-    color: $brand-color;
-  }
-}
-
 .item {
   background: $background-light;
   border-radius: 10px;
@@ -30,6 +12,13 @@
 .shirt {
   flex: 0 60px;
   display: flex;
+
+  img {
+    border-radius: 100%;
+    width: 45px;
+    height: 45px;
+    border: solid 1px $border-default;
+  }
 }
 
 .info {
